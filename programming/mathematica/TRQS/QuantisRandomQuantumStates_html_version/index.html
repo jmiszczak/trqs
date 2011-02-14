@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN"
+        "HTMLFiles/xhtml-math11-f.dtd">
+
+<!-- Created by Wolfram Mathematica 7.0 : www.wolfram.com -->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+ <title>
+  QuantisRandomQuantumStates
+ </title>
+ <link href="HTMLFiles/Default.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body style="font-size: 125%;">
+
+<p class="Section">
+ Generating random quantum states with Quantis
+</p>
+
+
+
+<p class="Text">
+ In this tutorial we show how the Quantis random number generator can be used within <span style='font-style: italic;'>Mathematica</span> to generate random quantum states. We use <span style='font-style: italic;'>MathLink</span>, a standard interface for interprogram communication provided by <span style='font-style: italic;'>Mathematica</span>.&nbsp;&nbsp;We assume that the reader has the basic knowledge of GNU/Linux system and programming in C language.
+</p>
+
+
+
+<p class="Subtitle">
+ Introduction
+</p>
+
+
+
+<p class="Text">
+ Quantis is a hardware random number generator, developed by ID Quantique, that works using elementary quantum optics. It is available in three versions: as a USB device, as a PCI and as a PCI express card. For more details see <span style='color: #0000FF;'><span><a href="http://www.idquantique.com/true-random-number-generator/products-overview.html"><span class="HyperlinkInline">product overview page</span></a></span></span>. For the purpose of this tutorial we will use a USB version of the device.
+</p>
+
+
+
+<p class="Subtitle">
+ Using <span style='font-style: italic;'>MathLink </span>
+</p>
+
+
+
+<p class="Text">
+ <span style='font-style: italic;'>MathLink</span> is a <span style='font-style: italic;'>Mathematica</span> standard for interprogram communication. It allows external programs to be called from <span style='font-style: italic;'>Mathematica</span> and vice versa. For the purpose of this tutorial we have developed a small <span style='font-style: italic;'>MathLink</span> program using libQuantis. This library is provided by ID Quantique for accessing Quantis true random number generator.
+</p>
+
+
+
+<p class="Text">
+ The following instructions assume that one has a working <span style='font-style: italic;'>Mathematica</span> installation. One should also take care of installing drivers required to communicate with Quantis device. More information about the driver installation procedure can be found in <span style='color: #0000FF;'><span><a href="http://www.idquantique.com/images/stories/PDF/quantis-random-generator/quantis-user-manual.pdf"><span class="HyperlinkInline">Installation &amp; User guide</span></a></span></span> at the ID Quantique web page.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</p>
+
+
+
+<p class="Subsubtitle">
+ Communication with a device
+</p>
+
+
+
+<p class="Text">
+ ID Quantique provides drivers and a library for accessing Quantis devices on the most popular operating systems. The software package for using Quantis, including some examples of how libQuantis library can be used, is available from <span style='color: #0000FF;'><span><a href="http://www.idquantique.com/support/quantis-trng.html"><span class="HyperlinkInline">ID Quantique support page</span></a></span></span>.
+</p>
+
+
+
+<p class="Text">
+ In order to use libQuantis library within Mathematica one needs to make sure that libQuantis installation directory is included in the loader search path. For example, assuming that libQuantis.so was installed in /usr/local/IDQ/Quantis/lib, on a typical GNU/Linux installation one should add this directory to /etc/ld.so.conf file or some file included by this file.
+</p>
+
+
+
+<p class="Subsubtitle">
+ Compilation of source files
+</p>
+
+
+
+<p class="Text">
+ <span style='font-style: italic;'>MathLink</span> source files usually have .tm extension. They are compiled using mcc tool, which accepts most options accepted by the GNU C compiler. In order to compile <span style='font-style: italic;'>MathLink</span> source file one has to execute the following command 
+</p>
+
+
+
+<p class="Program">
+ mcc quantis_random_real.tm -o quantis_random_real -I/usr/local/IDQ/Quantis/include -L/usr/local/IDQ/Quantis/lib -lQuantis
+</p>
+
+
+
+<p class="Text">
+ We assume that header files are installed in /usr/local/IDQ/Quantis/include and libraries in /usr/local/IDQ/Quantis/lib.
+</p>
+
+
+
+<p class="Text">
+ For example, the function for reading a random real number within the range [0,1] can be implemented in C programming language as
+</p>
+
+
+
+<p class='Code' style='font-size: 10px;background-color: #FFFFFF;'>
+ <img src="HTMLFiles/index_1.gif" alt="index_1.gif" width="626" height="525" style="vertical-align:middle" />
+</p>
+
+<p class="Text">
+ Macrodefinitions QUANTIS_DEVICE _TYPE and QUANTIS_DEVICE _ID define the type and the id of the used Quantis device. In this case we are using USB device number 0.
+</p>
+
+
+
+<p class="Text">
+ In what follows we assume that the above source code was saved in $HOME/Quantis/quantis_random_real.tm file and that the resulting file quantis_random_real was saved in $HOME/Quantis directory.
+</p>
+
+
+
+<p class="Text">
+ Note that even without a Quantis device installed you can compile and test the following code by linking it against libQuantis-NoHw library
+</p>
+
+
+
+<p class="Program">
+ mcc quantis_random_real.tm -o quantis_random_real -I/usr/local/IDQ/Quantis/include -L/usr/local/IDQ/Quantis/lib -lQuantis-NoHw
+</p>
+
+
+
+<p class="Subsubtitle">
+ Installation of external procedures
+</p>
+
+
+
+<p class="Text">
+ After a successsful compilation of the above source code, the resulting function can be installed within <span style='font-style: italic;'>Mathematica</span> using the Install built-in function.
+</p>
+
+
+
+<p class="Input">
+ <img src="HTMLFiles/index_2.gif" alt="index_2.gif" width="619" height="21" style="vertical-align:middle" />
+</p>
+
+<p class="Text">
+ Assuming that everything goes as expected, it should be now possible to read a random real number generated by Quantis device.
+</p>
+
+
+
+<p class="Input">
+ <img src="HTMLFiles/index_3.gif" alt="index_3.gif" width="190" height="21" style="vertical-align:middle" />
+</p>
+
+<p class="Output">
+ <img src="HTMLFiles/index_4.gif" alt="index_4.gif" width="80" height="21" style="vertical-align:middle" />
+</p>
+
+<p class="Subtitle">
+ Generating random quantum states
+</p>
+
+
+
+<p class="Text">
+ The problem of generating random quantum states (density matrices) is of a great interest from the quantum information theory point of view. In this tutorial we use only one method and we generate density matrices from the Hilbert-Schmidt ensamble.&nbsp;&nbsp;The description of other methods for generating random density matrices can be found in the recent preprint by K. Zyczkowski, K. A. Penson, I. Nechita and B. Collins, <span style='font-style: italic;'>Generating random density matrices</span>, <span style='color: #0000FF;'><span><a href="http://arxiv.org/abs/1010.3570"><span class="HyperlinkInline">arXiv:1010:3570</span></a></span></span> (2010).
+</p>
+
+
+
+<p class="Text">
+ Each metric on the space of quantum states can be used to define a probability measure. Here we use the Hilbert-Schmidt metric, which is commonly used to describe a metric structure of the set of quantum states. In particular, it introduces Euclidean geometry in the space of density matrices. In the special case of one-qubit density matrices, the space has the form of Bloch ball.
+</p>
+
+
+
+<p class="Text">
+ In order to generate a random density matrix, we need to generate a Ginebre matrix, which is defined as <span style='font-style: italic;'>m</span>&times;<span style='font-style: italic;'>n </span>complex<span style='font-style: italic;'> </span>matrix with elemens having real and imaginary parts distributed independently with N[0,1].
+</p>
+
+
+
+<p class="Text">
+ As libQuantis provides us with uniform samples only, one needs to take care of obtaining the required distribution from this sample. To achieve this we use a standard method of inverting the cumulative distribution function.
+</p>
+
+
+
+<p class="Input">
+ <img src="HTMLFiles/index_5.gif" alt="index_5.gif" width="829" height="21" style="vertical-align:middle" />
+</p>
+
+<p class="Text">
+ Using this function one can easily obtain a Gaussian sample of 5000 real random numbers
+</p>
+
+
+
+<p class="Input">
+ <img src="HTMLFiles/index_6.gif" alt="index_6.gif" width="522" height="21" style="vertical-align:middle" />
+</p>
+
+<p class="Text">
+ and it is easy to verify that the numbers are indeed distributed according to the normal distribution.
+</p>
+
+
+
+<p class="Input">
+ <img src="HTMLFiles/index_7.gif" alt="index_7.gif" width="790" height="21" style="vertical-align:middle" />
+</p>
+
+<p class="Output">
+ <img src="HTMLFiles/index_8.gif" alt="index_8.gif" width="450" height="287" style="vertical-align:middle;" usemap="#map_8" />
+<map name="map_8">
+<area shape="rect" coords="433,265,440,263" title="0.0032" nohref  />
+<area shape="rect" coords="397,265,404,262" title="0.0048" nohref  />
+<area shape="rect" coords="390,265,397,257" title="0.0144" nohref  />
+<area shape="rect" coords="382,265,390,260" title="0.008" nohref  />
+<area shape="rect" coords="375,265,382,254" title="0.0192" nohref  />
+<area shape="rect" coords="368,265,375,262" title="0.0048" nohref  />
+<area shape="rect" coords="361,265,368,252" title="0.0224" nohref  />
+<area shape="rect" coords="353,265,361,248" title="0.0304" nohref  />
+<area shape="rect" coords="346,265,353,237" title="0.0496" nohref  />
+<area shape="rect" coords="339,265,346,232" title="0.0592" nohref  />
+<area shape="rect" coords="332,265,339,230" title="0.0624" nohref  />
+<area shape="rect" coords="324,265,332,207" title="0.1024" nohref  />
+<area shape="rect" coords="317,265,324,209" title="0.0992" nohref  />
+<area shape="rect" coords="310,265,317,174" title="0.1616" nohref  />
+<area shape="rect" coords="303,265,310,160" title="0.1872" nohref  />
+<area shape="rect" coords="296,265,303,148" title="0.208" nohref  />
+<area shape="rect" coords="288,265,296,135" title="0.232" nohref  />
+<area shape="rect" coords="281,265,288,128" title="0.2448" nohref  />
+<area shape="rect" coords="274,265,281,113" title="0.2704" nohref  />
+<area shape="rect" coords="267,265,274,64" title="0.3584" nohref  />
+<area shape="rect" coords="259,265,267,48" title="0.3872" nohref  />
+<area shape="rect" coords="252,265,259,65" title="0.3568" nohref  />
+<area shape="rect" coords="245,265,252,59" title="0.368" nohref  />
+<area shape="rect" coords="238,265,245,29" title="0.4208" nohref  />
+<area shape="rect" coords="230,265,238,27" title="0.424" nohref  />
+<area shape="rect" coords="223,265,230,60" title="0.3648" nohref  />
+<area shape="rect" coords="216,265,223,55" title="0.3744" nohref  />
+<area shape="rect" coords="209,265,216,50" title="0.384" nohref  />
+<area shape="rect" coords="202,265,209,52" title="0.3792" nohref  />
+<area shape="rect" coords="194,265,202,59" title="0.3664" nohref  />
+<area shape="rect" coords="187,265,194,100" title="0.2944" nohref  />
+<area shape="rect" coords="180,265,187,115" title="0.2672" nohref  />
+<area shape="rect" coords="173,265,180,136" title="0.2304" nohref  />
+<area shape="rect" coords="165,265,173,147" title="0.2096" nohref  />
+<area shape="rect" coords="158,265,165,164" title="0.1792" nohref  />
+<area shape="rect" coords="151,265,158,176" title="0.1584" nohref  />
+<area shape="rect" coords="144,265,151,171" title="0.1664" nohref  />
+<area shape="rect" coords="136,265,144,202" title="0.112" nohref  />
+<area shape="rect" coords="129,265,136,206" title="0.104" nohref  />
+<area shape="rect" coords="122,265,129,219" title="0.0816" nohref  />
+<area shape="rect" coords="115,265,122,239" title="0.0464" nohref  />
+<area shape="rect" coords="108,265,115,230" title="0.0624" nohref  />
+<area shape="rect" coords="100,265,108,244" title="0.0368" nohref  />
+<area shape="rect" coords="93,265,100,252" title="0.0224" nohref  />
+<area shape="rect" coords="86,265,93,256" title="0.016" nohref  />
+<area shape="rect" coords="79,265,86,258" title="0.0128" nohref  />
+<area shape="rect" coords="71,265,79,258" title="0.0112" nohref  />
+<area shape="rect" coords="64,265,71,263" title="0.0032" nohref  />
+<area shape="rect" coords="57,265,64,261" title="0.0064" nohref  />
+<area shape="rect" coords="50,265,57,263" title="0.0032" nohref  />
+<area shape="rect" coords="42,265,50,264" title="0.0016" nohref  />
+<area shape="rect" coords="35,265,42,263" title="0.0032" nohref  />
+<area shape="rect" coords="28,265,35,264" title="0.0016" nohref  />
+<area shape="rect" coords="21,265,28,264" title="0.0016" nohref  />
+</map>
+</p>
+
+<p class="Text">
+ Using QuantisRandomRealNormal function we can now define a function for generating Ginibre matrix as
+</p>
+
+
+
+<p class="Input">
+ <img src="HTMLFiles/index_9.gif" alt="index_9.gif" width="772" height="47" style="vertical-align:middle" />
+</p>
+
+<p class="Text">
+ The function for generating a random density matrix distributed uniformly with respect to probability mesure induced by Hilbert-Schmidt metric reads
+</p>
+
+
+
+<p class="Input">
+ <img src="HTMLFiles/index_10.gif" alt="index_10.gif" width="377" height="122" style="vertical-align:middle" />
+</p>
+
+<p class="Text">
+ One can easily check that the resulting objects are indeed density matrices.
+</p>
+
+
+
+<p class="Input">
+ <img src="HTMLFiles/index_11.gif" alt="index_11.gif" width="270" height="47" style="vertical-align:middle" />
+</p>
+
+<p class="Output">
+ <img src="HTMLFiles/index_12.gif" alt="index_12.gif" width="425" height="33" style="vertical-align:middle" />
+</p>
+
+<p class="Input">
+ <img src="HTMLFiles/index_13.gif" alt="index_13.gif" width="536" height="21" style="vertical-align:middle" />
+</p>
+
+<p class="Output">
+ <img src="HTMLFiles/index_14.gif" alt="index_14.gif" width="40" height="21" style="vertical-align:middle" />
+</p>
+
+<p class="Subtitle">
+ Final remarks
+</p>
+
+
+
+<p class="Text">
+ We have shown how Quantis true random number generator can be used along <span style='font-style: italic;'>Mathematica</span> to generate random density matrices. Random quantum states can be used to test various proprietis of the space of quantum states and the described method relies on a very good source of randomness.
+</p>
+
+
+
+
+
+
+<div style="font-family:Helvetica; font-size:11px; width:100%; border:1px none #999999; border-top-style:solid; padding-top:2px; margin-top:20px;">
+ <a href="http://www.wolfram.com/products/mathematica/" style="color:#000; text-decoration:none;">
+  <img src="HTMLFiles/spikeyIcon.jpg" alt="Spikey" width="20" height="21" style="padding-right:2px; border:0px solid white; vertical-align:middle;" />
+  <span style="color:#555555">Created with</span> Wolfram <span style="font-style: italic;">Mathematica</span> 7.0
+ </a>
+</div>
+</body>
+
+</html>

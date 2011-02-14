@@ -1,0 +1,25 @@
+TRQS is a package for Mathematica computing system. This is a preliminary README
+file and contains only a minimal compilation and installation instructions.
+
+(c) 2011 Jaroslaw Miszczak
+
+* Configuration
+The MathLink source files must be configure prior to the compilation. Edit
+TRQS.h file to define QUANTIS_DEVICE_TYPE (QUANTIS_DEVICE_USB or
+QUANTIS_DEVICE_PCI) and QUANTIS_DEVICE_ID (eg. 0) according to your hardware
+configuration.
+
+* Compilation
+
+In order to compile *.tm source files one should note that
+- A working Mathematica installation is required.
+- We assume that header files are installed in /usr/local/IDQ/Quantis/include
+  and libraries in /usr/local/IDQ/Quantis/lib. Modify QUANTIS_HOME in the
+  Makefile if this is not the case.
+
+* Instalation
+- Copy TRQS.m to $HOME/.Mathematica/Applications director
+- Copy compiled files to $HOME/.Mathematica/Applications/TRQS_Quantis directory
+
+* Examples
+Notebook TRQSTest.nb contains some examples.
