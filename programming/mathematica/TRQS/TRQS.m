@@ -7,7 +7,7 @@
 (* File: QI.m *)
 (* Description: Mathematica package for generating truly random quantum states using quantum random number generator *)
 (* Author: Jaroslaw Miszczak <miszczak@iitis.pl> *)
-(* Version: 0.0.6 (14/02/2011) *)
+(* Version: 0.0.7 (15/02/2011) *)
 (* License: GPLv3 *)
 
 
@@ -17,10 +17,10 @@ BeginPackage["TRQS`"];
 Begin["`Private`"];
 
 
-trqsVersion = "0.0.6";
+trqsVersion = "0.0.7";
 
 
-trqsLastModification = "February 14, 2011";
+trqsLastModification = "February 15, 2011";
 
 
 trqsHistory = {
@@ -29,7 +29,8 @@ trqsHistory = {
 	{"0.0.3", "06/02/2011", "Jarek", "External functions for integer numbers."},
 	{"0.0.4", "07/02/2011", "Jarek", "External functions for double numbers. normal distribution."},
 	{"0.0.5", "13/02/2011", "Jarek", "Some configuration related functions."},
-	{"0.0.6", "14/02/2011", "Jarek", "Induced measures."}
+	{"0.0.6", "14/02/2011", "Jarek", "Induced measures."},
+	{"0.0.7", "15/02/2011", "Jarek", "Help messages updated."}
 };
 
 
@@ -100,10 +101,13 @@ TrueRandomUnitary::usage = "";
 (*Mixed states*)
 
 
-TrueRandomStateHS::usage = "TrueRandomStateHS[d]";
+TrueRandomStateHS::usage = "TrueRandomStateHS[d] random state of dimension d, generated uniformly with respect to the Hilbert-Schmidt measure. This is equivalent to TrueRandomStateInduced[d,d].";
 
 
-TrueRandomStateBures::usage = "TrueRandomStateBures[d]";
+TrueRandomStateBures::usage = "TrueRandomStateBures[d] random state of dimension d, generated uniformly with respect to the Bures measure.";
+
+
+TrueRandomStateInduced::usage = "TrueRandomStateInduced[d,exK] random state of dimension d, generated uniformly with respect to the induced measure with the external system of dimension exK."
 
 
 (* ::Subsection:: *)
@@ -203,7 +207,7 @@ TrueRandomStateInduced[d_,exK_]:=Block[{A},
 		A=(A.ConjugateTranspose[A]);
 		A=Chop[A/Tr[A]],
 		Message[TrueRandomStateInduced::argerr,exK]
-	];
+	]
 ];
 TrueRandomStateInduced::argerr = "The second argument should be larger or equal to the first one.";
 

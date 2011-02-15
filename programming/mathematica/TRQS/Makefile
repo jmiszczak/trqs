@@ -6,7 +6,7 @@ BINS = $(SRCS:%.tm=%)
 TRQSV = 0.0.5	
 
 QUANTIS_HOME = /usr/local/IDQ/Quantis
-QUANTIS_LIB = $(QUANTIS_HOME)/lib
+QUANTIS_LIB = $(QUANTIS_HOME)/lib64
 QUANTIS_INC = $(QUANTIS_HOME)/include
 
 CCFLAGS = -lQuantis
