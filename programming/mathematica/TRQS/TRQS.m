@@ -7,7 +7,7 @@
 (* File: QI.m *)
 (* Description: Mathematica package for generating truly random quantum states using quantum random number generator *)
 (* Author: Jaroslaw Miszczak <miszczak@iitis.pl> *)
-(* Version: 0.0.5 (13/02/2011) *)
+(* Version: 0.0.6 (14/02/2011) *)
 (* License: GPLv3 *)
 
 
@@ -17,10 +17,10 @@ BeginPackage["TRQS`"];
 Begin["`Private`"];
 
 
-trqsVersion = "0.0.5";
+trqsVersion = "0.0.6";
 
 
-trqsLastModification = "February 13, 2011";
+trqsLastModification = "February 14, 2011";
 
 
 trqsHistory = {
@@ -28,13 +28,14 @@ trqsHistory = {
 	{"0.0.2", "31/01/2011", "Jarek", "Some cleanups in functions."},
 	{"0.0.3", "06/02/2011", "Jarek", "External functions for integer numbers."},
 	{"0.0.4", "07/02/2011", "Jarek", "External functions for double numbers. normal distribution."},
-	{"0.0.5", "13/02/2011", "Jarek", "Some configuration related functions."}
+	{"0.0.5", "13/02/2011", "Jarek", "Some configuration related functions."},
+	{"0.0.6", "14/02/2011", "Jarek", "Induced measures."}
 };
 
 
 trqsNames = {"TrueRandomInteger", "TrueRandomReal", "TrueRandomRealNormal", "TrueGinibreMatrix", "TrueRandomSimplex"};
 trqsNames = Append[trqsNames, {"TrueRandomKet", "TrueRandomUnitary"}];
-trqsNames = Append[trqsNames, {"TrueRandomStateHS", "TrueRandomStateBures"}];
+trqsNames = Append[trqsNames, {"TrueRandomStateHS", "TrueRandomStateBures", "TrueRandomStateInduced"}];
 trqsNames = Append[trqsNames, {"QuantisGetLibVersion", "QuantisGetSerialNumber", "QuantisGetDeviceId", "QuantisGetDeviceType"}];
 trqsNames = Flatten[trqsNames];
 
@@ -165,7 +166,7 @@ TrueRandomUnitary[dim_]:=Module[{z,q,r,d,ph},
 ]
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Pure states*)
 
 
@@ -194,6 +195,17 @@ TrueRandomStateBures[d_]:=Block[{A,U,X},
 	X=(IdentityMatrix[d]+U).A.A\[ConjugateTranspose].(IdentityMatrix[d]+U)\[ConjugateTranspose];
 	Chop[X/Tr[X]]
 ];
+
+
+TrueRandomStateInduced[d_,exK_]:=Block[{A},
+	If[exK>=d,
+		A=TrueGinibreMatrix[d,exK];
+		A=(A.ConjugateTranspose[A]);
+		A=Chop[A/Tr[A]],
+		Message[TrueRandomStateInduced::argerr,exK]
+	];
+];
+TrueRandomStateInduced::argerr = "The second argument should be larger or equal to the first one.";
 
 
 (* ::Subsection:: *)
