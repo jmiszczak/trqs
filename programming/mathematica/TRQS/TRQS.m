@@ -4,10 +4,10 @@
 (*Header*)
 
 
-(* File: QI.m *)
+(* File: TRQS.m *)
 (* Description: Mathematica package for generating truly random quantum states using quantum random number generator *)
 (* Author: Jaroslaw Miszczak <miszczak@iitis.pl> *)
-(* Version: 0.0.7 (15/02/2011) *)
+(* Version: 0.0.8 (22/02/2011) *)
 (* License: GPLv3 *)
 
 
@@ -31,13 +31,13 @@ trqsHistory = {
 	{"0.0.5", "13/02/2011", "Jarek", "Some configuration related functions."},
 	{"0.0.6", "14/02/2011", "Jarek", "Induced measures."},
 	{"0.0.7", "15/02/2011", "Jarek", "Help messages updated."},
-	{"0.0.8", "22/02/2011", "Jarek", "TrueRandomProductKet and TrueRandomLocalUnitary added."}
+	{"0.0.8", "22/02/2011", "Jarek", "TrueRandomProductKet, TrueRandomProductState and TrueRandomLocalUnitary added."}
 };
 
 
 trqsNames = {"TrueRandomInteger", "TrueRandomReal", "TrueRandomRealNormal", "TrueGinibreMatrix", "TrueRandomSimplex"};
 trqsNames = Append[trqsNames, {"TrueRandomKet", "TrueRandomProductKet","TrueRandomUnitary","TrueRandomLocalUnitary"}];
-trqsNames = Append[trqsNames, {"TrueRandomStateHS", "TrueRandomStateBures", "TrueRandomStateInduced"}];
+trqsNames = Append[trqsNames, {"TrueRandomStateHS", "TrueRandomStateBures", "TrueRandomStateInduced","TrueRandomProductState"}];
 trqsNames = Append[trqsNames, {"QuantisGetLibVersion", "QuantisGetSerialNumber", "QuantisGetDeviceId", "QuantisGetDeviceType"}];
 trqsNames = Flatten[trqsNames];
 
@@ -79,29 +79,29 @@ TrueRandomReal::usage = TrueRandomReal::usage <> "\nTrueRandomReal[i] returns a 
 TrueRandomReal::usage = TrueRandomReal::usage <> "\nTrueRandomReal[] returns a random double in the range [0,1].";
 
 
-TrueRandomRealNormal::usage = "TrueRandomRealNormal[m,s,dims] provides a sample of random numbers distributed according to the normal distribution N[m,s] in an array of dimensions given by dims. Random numbers are obtained using quantum random number generator.";
+TrueRandomRealNormal::usage = "TrueRandomRealNormal[m,s,dims] provides a sample of random numbers distributed according to the normal distribution N[m,s] in an array of dimensions given by dims.";
 
 
-TrueGinibreMatrix::usage = "TrueGinibreMatrix[n] returns n-dimesnional complex matrix with entries having real and complex part distributed according to the normal distribution N[0,1]. Random numbers used in this functions are obtained from the quantum random numbers generator.";
+TrueGinibreMatrix::usage = "TrueGinibreMatrix[n] returns n-dimesional complex matrix with entries having real and complex part distributed according to the normal distribution N[0,1].";
 
 
-TrueRandomSimplex::usage = "";
+TrueRandomSimplex::usage = "TrueRandomSimplex[n] returns distributed uniformly element of a standard n-simplex.";
 
 
 (* ::Subsection:: *)
 (*Pure states*)
 
 
-TrueRandomKet::usage = "TrueRandomKet[d] returns a d-dimensional random pure state represented as a state vector. Random numbers used in this functions are obtained from the quantum random numbers generator.";
+TrueRandomKet::usage = "TrueRandomKet[d] returns a d-dimensional random pure state represented as a state vector.";
 
 
-TrueRandomProductKet::usage = "TrueRandomProductKet[{d1,d2,...,dn}] ";
+TrueRandomProductKet::usage = "TrueRandomProductKet[{d1,d2,...,dn}] returns a random  pure state, which is an element of space with the tensor product structure.";
 
 
 TrueRandomUnitary::usage = "TrueRandomUnitary[d] returns d-dimensional random unitary matrix.";
 
 
-TrueRandomLocalUnitary::usage = "TrueRandomLocalUnitary[{d1,d2,...,dn}]";
+TrueRandomLocalUnitary::usage = "TrueRandomLocalUnitary[{d1,d2,...,dn}] returns a random unitary matrix, which acts on the elements of space with the tensor product structure.";
 
 
 (* ::Subsection:: *)
@@ -140,7 +140,7 @@ QuantisGetDeviceType::usage = "QuantisGetDeviceType[] returns a type of the used
 Begin["`Private`"];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Basic functions*)
 
 
@@ -183,7 +183,7 @@ TrueRandomProductKet[l_]:=Fold[KroneckerProduct[#1,#2]&,{1},Map[TrueRandomKet[#]
 
 
 TrueRandomUnitary[dim_]:=Block[{Q,R},
-	{Q,R}=QRDecomposition[GinibreMatrix[dim,dim]];
+	{Q,R}=QRDecomposition[TrueGinibreMatrix[dim,dim]];
 	Q.DiagonalMatrix[Diagonal[R]/Abs[Diagonal[R]]]
 ];
 
@@ -221,6 +221,19 @@ TrueRandomStateInduced[d_,exK_]:=Block[{A},
 TrueRandomStateInduced::argerr = "The second argument should be larger or equal to the first one.";
 
 
+TrueRandomProductState[l_,mu_:"HS"]:=Block[{},
+	Switch[mu,
+		"HS", Fold[KroneckerProduct[#1,#2]&,{{1}},Map[TrueRandomStateHS[#]&,l]],
+		"Bures", Fold[KroneckerProduct[#1,#2]&,{{1}},Map[TrueRandomStateBures[#]&,l]],
+		_, If[IntegerQ[dismu] && mu >=Max[l],
+				Fold[KroneckerProduct[#1,#2]&,{{1}},Map[TrueRandomStateInduced[#,mu]&,l]],
+				Message[TrueRandomProductState::argerr,dist]
+			]
+	]
+];
+RandomState::argerr = "The second argument should be \"HS\" or \"Bures\" or an integer K>2, mesure \"`1`\" not implemented yet.";
+
+
 (* ::Subsection:: *)
 (*Configuration related functions*)
 
@@ -234,7 +247,7 @@ Install[trqsBinaries<>"/quantis_get_device_type"];
 End[];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Footer*)
 
 
