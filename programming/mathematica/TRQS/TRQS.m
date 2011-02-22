@@ -17,25 +17,26 @@ BeginPackage["TRQS`"];
 Begin["`Private`"];
 
 
-trqsVersion = "0.0.7";
+trqsVersion = "0.0.8";
 
 
-trqsLastModification = "February 15, 2011";
+trqsLastModification = "February 22, 2011";
 
 
 trqsHistory = {
 	{"0.0.1", "10/01/2011", "Jarek", "Initial version."},
 	{"0.0.2", "31/01/2011", "Jarek", "Some cleanups in functions."},
 	{"0.0.3", "06/02/2011", "Jarek", "External functions for integer numbers."},
-	{"0.0.4", "07/02/2011", "Jarek", "External functions for double numbers. normal distribution."},
+	{"0.0.4", "07/02/2011", "Jarek", "External functions for double numbers. Normal distribution."},
 	{"0.0.5", "13/02/2011", "Jarek", "Some configuration related functions."},
 	{"0.0.6", "14/02/2011", "Jarek", "Induced measures."},
-	{"0.0.7", "15/02/2011", "Jarek", "Help messages updated."}
+	{"0.0.7", "15/02/2011", "Jarek", "Help messages updated."},
+	{"0.0.8", "22/02/2011", "Jarek", "TrueRandomProductKet and TrueRandomLocalUnitary added."}
 };
 
 
 trqsNames = {"TrueRandomInteger", "TrueRandomReal", "TrueRandomRealNormal", "TrueGinibreMatrix", "TrueRandomSimplex"};
-trqsNames = Append[trqsNames, {"TrueRandomKet", "TrueRandomUnitary"}];
+trqsNames = Append[trqsNames, {"TrueRandomKet", "TrueRandomProductKet","TrueRandomUnitary","TrueRandomLocalUnitary"}];
 trqsNames = Append[trqsNames, {"TrueRandomStateHS", "TrueRandomStateBures", "TrueRandomStateInduced"}];
 trqsNames = Append[trqsNames, {"QuantisGetLibVersion", "QuantisGetSerialNumber", "QuantisGetDeviceId", "QuantisGetDeviceType"}];
 trqsNames = Flatten[trqsNames];
@@ -91,10 +92,16 @@ TrueRandomSimplex::usage = "";
 (*Pure states*)
 
 
-TrueRandomKet::usage = "TrueRandomKet[d] returns d-dimensional a random pure state represented as a state vector. Random numbers used in this functions are obtained from the quantum random numbers generator.";
+TrueRandomKet::usage = "TrueRandomKet[d] returns a d-dimensional random pure state represented as a state vector. Random numbers used in this functions are obtained from the quantum random numbers generator.";
 
 
-TrueRandomUnitary::usage = "";
+TrueRandomProductKet::usage = "TrueRandomProductKet[{d1,d2,...,dn}] ";
+
+
+TrueRandomUnitary::usage = "TrueRandomUnitary[d] returns d-dimensional random unitary matrix.";
+
+
+TrueRandomLocalUnitary::usage = "TrueRandomLocalUnitary[{d1,d2,...,dn}]";
 
 
 (* ::Subsection:: *)
@@ -160,16 +167,6 @@ TrueRandomSimplex[d_]:=Block[{r,r1,r2},
 ];
 
 
-TrueRandomUnitary[dim_]:=Module[{z,q,r,d,ph},
-	z=TrueGinibreMatrix[dim,dim];
-	{q,r}=QRDecomposition[z];
-	d=Diagonal[r];
-	ph=d/Abs[d];
-	q=q.DiagonalMatrix[ph];
-	q
-]
-
-
 (* ::Subsection:: *)
 (*Pure states*)
 
@@ -180,6 +177,18 @@ TrueRandomKet[n_]:=Block[{p,ph},
 	ph=Prepend[ph,1];
 	p*ph
 ];
+
+
+TrueRandomProductKet[l_]:=Fold[KroneckerProduct[#1,#2]&,{1},Map[TrueRandomKet[#]&,l]];
+
+
+TrueRandomUnitary[dim_]:=Block[{Q,R},
+	{Q,R}=QRDecomposition[GinibreMatrix[dim,dim]];
+	Q.DiagonalMatrix[Diagonal[R]/Abs[Diagonal[R]]]
+];
+
+
+TrueRandomLocalUnitary[l_]:=Fold[KroneckerProduct[#1,#2]&,{{1}},Map[TrueRandomUnitary[#]&,l]];
 
 
 (* ::Subsection:: *)
