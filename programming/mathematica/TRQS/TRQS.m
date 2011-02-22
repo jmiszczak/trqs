@@ -65,7 +65,7 @@ Clear@@TRQS`Private`trqsNames;
 (*Public interface*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Basic functions*)
 
 
@@ -88,7 +88,7 @@ TrueGinibreMatrix::usage = "TrueGinibreMatrix[n] returns n-dimesional complex ma
 TrueRandomSimplex::usage = "TrueRandomSimplex[n] returns distributed uniformly element of a standard n-simplex.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Pure states*)
 
 
@@ -104,7 +104,7 @@ TrueRandomUnitary::usage = "TrueRandomUnitary[d] returns d-dimensional random un
 TrueRandomLocalUnitary::usage = "TrueRandomLocalUnitary[{d1,d2,...,dn}] returns a random unitary matrix, which acts on the elements of space with the tensor product structure.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Mixed states*)
 
 
@@ -114,10 +114,13 @@ TrueRandomStateHS::usage = "TrueRandomStateHS[d] random state of dimension d, ge
 TrueRandomStateBures::usage = "TrueRandomStateBures[d] random state of dimension d, generated uniformly with respect to the Bures measure.";
 
 
-TrueRandomStateInduced::usage = "TrueRandomStateInduced[d,exK] random state of dimension d, generated uniformly with respect to the induced measure with the external system of dimension exK."
+TrueRandomStateInduced::usage = "TrueRandomStateInduced[d,exK] random state of dimension d, generated uniformly with respect to the induced measure with the external system of dimension exK.";
 
 
-(* ::Subsection:: *)
+TrueRandomProductState::usage = "TrueRandomProductState[] returns a product random density matrix acting on the space with the tensor product structure and with each local component generated according to measure \[Mu], where \[Mu] can be set to \"HS\", \"Bures\" or some integer K describing an induced measure.";
+
+
+(* ::Subsection::Closed:: *)
 (*Configuration related functions*)
 
 

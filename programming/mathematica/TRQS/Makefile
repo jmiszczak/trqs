@@ -1,13 +1,24 @@
+###############################################################################
+# GNU Makefile for TRQS Mathematica package
+# (c) 2011 Jarek Miszczak
+###############################################################################
 SRCS = quantis_random_integer.tm quantis_random_integer_0.tm quantis_random_integer_1.tm \
 	quantis_random_double.tm quantis_random_double_0.tm quantis_random_double_1.tm \
 	quantis_get_lib_version.tm quantis_get_serial_number.tm quantis_get_device_id.tm quantis_get_device_type.tm
 
+################################################################################
 BINS = $(SRCS:%.tm=%)
-TRQSV = 0.0.5	
+TRQSV = 0.0.8
+###############################################################################
 
+###############################################################################
+# update these to reflect your configuration
+###############################################################################
 QUANTIS_HOME = /usr/local/IDQ/Quantis
-QUANTIS_LIB = $(QUANTIS_HOME)/lib64
+QUANTIS_LIB = $(QUANTIS_HOME)/lib
 QUANTIS_INC = $(QUANTIS_HOME)/include
+BACKEND_DIR = TRQS_Quantis
+###############################################################################
 
 CCFLAGS = -lQuantis
 MCCFLAGS = $(CCFLAGS)
@@ -29,5 +40,14 @@ clean:
 quantis_test:
 	$(CC) $(@:%=%.c) -o $@ -I$(QUANTIS_INC) -L$(QUANTIS_LIB) $(CCFLAGS)
 
-dist:
-	tar czvf TRQS-$(TRQSV).tgz $(SRCS) Makefile TRQS.h TRQS.m TRQSTest.nb README
+src-dist:
+	tar czf TRQS-$(TRQSV).tgz $(SRCS) Makefile TRQS.h TRQS.m TRQSTest.nb README
+
+bin-dist: $(BINS)
+	mkdir -p $(BACKEND_DIR)
+	mv $(BINS) $(BACKEND_DIR)
+	tar czf TRQS-$(TRQSV)-i686.tgz $(addprefix $(BACKEND_DIR)/, $(BINS)) TRQS.m TRQSTest.nb README
+	rm -Rf $(BACKEND_DIR)
+
+dist: src-dist bin-dist
+	
