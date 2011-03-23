@@ -20,7 +20,7 @@ QUANTIS_INC = $(QUANTIS_HOME)/include
 BACKEND_DIR = TRQS_Quantis
 ###############################################################################
 
-CCFLAGS = -lQuantis
+CCFLAGS = -lQuantis-NoHw
 MCCFLAGS = $(CCFLAGS)
 
 CC = gcc
@@ -46,7 +46,7 @@ src-dist:
 bin-dist: $(BINS)
 	mkdir -p $(BACKEND_DIR)
 	mv $(BINS) $(BACKEND_DIR)
-	tar czf TRQS-$(TRQSV)-`uname -m`.tgz $(addprefix $(BACKEND_DIR)/, $(BINS)) TRQS.m TRQSTest.nb README quantis_installation.pdf
+	tar czf TRQS-$(TRQSV)-`uname -m`-NoHw.tgz $(addprefix $(BACKEND_DIR)/, $(BINS)) TRQS.m TRQSTest.nb README quantis_installation.pdf
 	rm -Rf $(BACKEND_DIR)
 
 dist: src-dist bin-dist

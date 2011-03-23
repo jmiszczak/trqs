@@ -1,4 +1,5 @@
 % v. 0.01 - 15/02/2011 - Jarek - instalation instructions written during tests on tesla
+% v. 0.02 - 23/03/2011 - Jarek - minor improvements
 \documentclass[a4paper]{scrartcl}
 \usepackage{fullpage}
 \usepackage[utf8]{inputenc}
@@ -6,15 +7,11 @@
 
 \title{Installation of Quantis drivers and libraries}
 \author{Jaroslaw Miszczak}
-\date{15/02/2011 (v.0.01)}
-
-
+\date{23/03/2011 (v.0.02)}
 
 \newcommand{\eg}{\textsl{e.g}}
 \begin{document}
 \maketitle
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -22,8 +19,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \textbf{\underline{Note}}: In the following instructions
-\texttt{Quantis-v11.01.12} should be replaced by the apropraite directory
-depanding on the software package you are using.
+\texttt{Quantis-v11.01.12} should be replaced by the appropriate directory
+depending on the software package you are using.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{PCI and PCI-express version}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -37,7 +34,7 @@ depanding on the software package you are using.
     \item Install the module\\ \texttt{make install}\\ and check if the module was
     installed properly\\ \texttt{find /lib/modules/ -name quantis\_pci.ko}
     \item Make sure that the drive will be loaded during the next book \\ \texttt{echo "quantis\_pci" >> /etc/modules}
-    \item Follow instuctions in Section~\ref{sec:permisions}.
+    \item Follow instructions in Section~\ref{sec:permissions}.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -46,14 +43,14 @@ depanding on the software package you are using.
 \begin{enumerate}
     \item Install \texttt{libusb} and \texttt{libusb-dev} packages\\ 
     \texttt{apt-get install libusb-1.0-0 libusb-1.0-0-dev}
-    \item Check your devic with \texttt{lsusb}\\
+    \item Check your device with \texttt{lsusb}\\
     \texttt{lsusb -d 0aba:0102 -v} or \texttt{lsusb -v | grep Quantis}
-    \item Follow instuctions in Section~\ref{sec:permisions}.
+    \item Follow instructions in Section~\ref{sec:permissions}.
 \end{enumerate}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Device permisions}\label{sec:permisions}
+\subsection{Device permissions}\label{sec:permissions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{enumerate}
     \item Make sure that the \texttt{plugdev} group exists\\

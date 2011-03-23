@@ -10,16 +10,22 @@ QUANTIS_DEVICE_PCI) and QUANTIS_DEVICE_ID (eg. 0) according to your hardware
 configuration.
 
 * Compilation
+- In order to compile *.tm source files one should note that
+  - A working Mathematica installation is required.
+  - We assume that header files are installed in /usr/local/IDQ/Quantis/include
+    and libraries in /usr/local/IDQ/Quantis/lib. Modify QUANTIS_HOME in the
+    Makefile if this is not the case.
 
-In order to compile *.tm source files one should note that
-- A working Mathematica installation is required.
-- We assume that header files are installed in /usr/local/IDQ/Quantis/include
-  and libraries in /usr/local/IDQ/Quantis/lib. Modify QUANTIS_HOME in the
-  Makefile if this is not the case.
+- Consult quantis_installation.pdf document in the case of problems with 
+  Quantis installation.
+- It is also possible to run the package without a Quantis device. In order 
+  to do this use Makefile.NoHw makefile to compile MathLink executables.
 
-* Instalation
+* Installation
+- Make sure that the dynamic loader know where to search for libQuantis (e.g. 
+  add /usr/local/IDQ/Quantis/lib to /etc/ld.so.conf).
 - Copy TRQS.m to $HOME/.Mathematica/Applications director
-- Copy compiled files to $HOME/.Mathematica/Applications/TRQS_Quantis directory
+- Copy compiled files to $HOME/.Mathematica/Applications/TRQS_Quantis directory.
 
 * Examples
-Notebook TRQSTest.nb contains some examples.
+- Notebook TRQSTest.nb contains some examples.
