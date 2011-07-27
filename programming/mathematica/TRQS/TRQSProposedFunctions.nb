@@ -1,0 +1,324 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     10455,        315]
+NotebookOptionsPosition[      9599,        282]
+NotebookOutlinePosition[      9956,        298]
+CellTagsIndexPosition[      9913,        295]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"TrueRandomChoice", "[", "l_", "]"}], ":=", 
+   RowBox[{"l", "[", 
+    RowBox[{"[", 
+     RowBox[{"TrueRandomInteger", "[", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", 
+        RowBox[{"Length", "[", "l", "]"}]}], "}"}], "]"}], "]"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.52077419263852*^9, 3.520774307160782*^9}, {
+  3.520774985198543*^9, 3.520774987850271*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"TrueRandomChoice", "::", "usage"}], " ", "=", " ", 
+   "\"\<TrueRandomChoice[{\!\(\*SubscriptBox[\(e\), \
+\(1\)]\),\!\(\*SubscriptBox[\(e\), \
+\(2\)]\),\[Ellipsis],\!\(\*SubscriptBox[\(e\), \(n\)]\)}] retursn at random \
+one of the \!\(\*SubscriptBox[\(e\), \(i\)]\).\>\""}], ";"}]], "Input",
+ CellChangeTimes->{{3.52077499324465*^9, 3.520775065567035*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"TrueRandomDynamicalMatrix", "[", 
+    RowBox[{"n_", ",", 
+     RowBox[{"k_:", "0"}]}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"mX", ",", "mY", ",", "di"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"mX", "=", 
+       RowBox[{"TrueGinibreMatrix", "[", 
+        RowBox[{
+         RowBox[{"n", "^", "2"}], ",", 
+         RowBox[{
+          RowBox[{"n", "^", "2"}], "-", "k"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"mY", "=", 
+       RowBox[{"MatrixPower", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"Plus", "@@", 
+             RowBox[{"(", 
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"mX", "[", 
+                 RowBox[{"[", 
+                  RowBox[{
+                   RowBox[{"jj", "+", 
+                    RowBox[{"n", "*", "ii"}]}], " ", ",", 
+                   RowBox[{
+                    RowBox[{"1", "+", 
+                    RowBox[{"n", "*", "ii"}]}], ";;", 
+                    RowBox[{
+                    RowBox[{"(", 
+                    RowBox[{"ii", "+", "1"}], ")"}], " ", "n"}]}]}], "]"}], 
+                 "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"ii", ",", "0", ",", 
+                  RowBox[{"n", "-", "1"}]}], "}"}]}], "]"}], ")"}]}], ",", 
+            RowBox[{"{", 
+             RowBox[{"jj", ",", "1", ",", "n"}], "}"}]}], "]"}], ";"}], ",", 
+         RowBox[{"-", "0.5"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"KroneckerProduct", "[", 
+        RowBox[{
+         RowBox[{"IdentityMatrix", "[", "n", "]"}], ",", "mY"}], "]"}], ".", 
+       "mX", ".", 
+       RowBox[{"mX", "\[ConjugateTranspose]"}], ".", 
+       RowBox[{"KroneckerProduct", "[", 
+        RowBox[{
+         RowBox[{"IdentityMatrix", "[", "n", "]"}], ",", "mY"}], "]"}]}]}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.520781497442742*^9, 3.520781514813076*^9}, {
+  3.520781549776444*^9, 3.520781663546667*^9}, {3.520781734389877*^9, 
+  3.520781785386449*^9}, {3.520781816617191*^9, 3.520781817016597*^9}, {
+  3.520781934592555*^9, 3.52078208541902*^9}, {3.520782139045191*^9, 
+  3.520782174949443*^9}, {3.520782252453843*^9, 3.520782254329577*^9}, {
+  3.52078480689663*^9, 3.520784830533122*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"TrueRandomDynamicalMatrix", "::", "usage"}], "=", 
+   "\"\<TrueRandomDynamicalMatrix[n,k] returns a dynamical matrix acting on \
+n-dimensional states with k evigenvalues equal to 0.\>\""}], ";"}]], "Input",
+ CellChangeTimes->{{3.520782177080381*^9, 3.520782264994591*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"PartialTrace1", "[", 
+    RowBox[{"m_", ",", "d1_", ",", "d2_"}], "]"}], ":=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"Plus", "@@", 
+      RowBox[{"(", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"m", "[", 
+          RowBox[{"[", 
+           RowBox[{
+            RowBox[{"jj", "+", 
+             RowBox[{"d2", "*", "ii"}]}], " ", ",", 
+            RowBox[{
+             RowBox[{"1", "+", 
+              RowBox[{"d2", "*", "ii"}]}], ";;", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"ii", "+", "1"}], ")"}], " ", "d2"}]}]}], "]"}], "]"}],
+          ",", 
+         RowBox[{"{", 
+          RowBox[{"ii", ",", "0", ",", 
+           RowBox[{"d1", "-", "1"}]}], "}"}]}], "]"}], ")"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"jj", ",", "1", ",", "d2"}], "}"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.520781849660183*^9, 3.520781916670057*^9}, {
+   3.520784341884197*^9, 3.520784361139036*^9}, {3.520784406764232*^9, 
+   3.5207844112163*^9}, {3.520784448167311*^9, 3.520784482151784*^9}, {
+   3.520784629332358*^9, 3.520784664887415*^9}, 3.520784759127461*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"PartialTrace2", "[", 
+    RowBox[{"m_", ",", "d1_", ",", "d2_"}], "]"}], ":=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"Plus", "@@", 
+      RowBox[{"(", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"m", "[", 
+           RowBox[{"[", 
+            RowBox[{"ii", "+", 
+             RowBox[{"jj", "*", "d2"}]}], "]"}], "]"}], "[", 
+          RowBox[{"[", 
+           RowBox[{"ii", ";;", 
+            RowBox[{"d1", "*", "d2"}], ";;", "d2"}], "]"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"ii", ",", "1", ",", "d2"}], "}"}]}], "]"}], ")"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"jj", ",", "0", ",", 
+       RowBox[{"d1", "-", "1"}]}], "}"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.520784216903069*^9, 3.52078426265675*^9}, {
+  3.520784415670981*^9, 3.520784496568102*^9}, {3.52078467149957*^9, 
+  3.520784672442306*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Tests", " ", "with", " ", "partial", " ", "trace"}]], "Input",
+ CellChangeTimes->{{3.520784841753338*^9, 3.520784850745078*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"<<", "QI`"}]], "Input",
+ CellChangeTimes->{{3.520784502785386*^9, 3.520784504525054*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Package QI version \"\>", 
+   "\[InvisibleSpace]", "\<\"0.3.37\"\>", 
+   "\[InvisibleSpace]", "\<\" (last modification: \"\>", 
+   "\[InvisibleSpace]", "\<\"07/07/2011\"\>", 
+   "\[InvisibleSpace]", "\<\").\"\>"}],
+  SequenceForm[
+  "Package QI version ", "0.3.37", " (last modification: ", "07/07/2011", 
+   ")."],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.520784505306569*^9, 3.520784673695669*^9, 
+  3.520784763038051*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"mA", "=", 
+   RowBox[{"SymbolicMatrix", "[", 
+    RowBox[{"a", ",", "12", ",", "12"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.520784511494537*^9, 3.520784545271271*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"PartialTrace", "[", 
+   RowBox[{"mA", ",", 
+    RowBox[{"{", 
+     RowBox[{"3", ",", "4"}], "}"}], ",", 
+    RowBox[{"{", "2", "}"}]}], "]"}], "-", 
+  RowBox[{"PartialTrace2", "[", 
+   RowBox[{"mA", ",", "3", ",", "4"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.520784541213652*^9, 3.5207845979703*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0", "0", "0"},
+     {"0", "0", "0"},
+     {"0", "0", "0"}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{{3.520784562489364*^9, 3.520784598367688*^9}, 
+   3.520784675224747*^9, 3.520784765353293*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"PartialTrace", "[", 
+   RowBox[{"mA", ",", 
+    RowBox[{"{", 
+     RowBox[{"3", ",", "4"}], "}"}], ",", 
+    RowBox[{"{", "1", "}"}]}], "]"}], "-", 
+  RowBox[{"PartialTrace1", "[", 
+   RowBox[{"mA", ",", "3", ",", "4"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.520784700933793*^9, 3.520784722989649*^9}, {
+  3.520784769057331*^9, 3.520784774188701*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {"0", "0", "0", "0"},
+     {"0", "0", "0", "0"},
+     {"0", "0", "0", "0"},
+     {"0", "0", "0", "0"}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{{3.520784711822915*^9, 3.520784723345448*^9}, {
+  3.520784766138069*^9, 3.520784774562932*^9}}]
+}, Open  ]]
+},
+WindowSize->{1280, 716},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+FrontEndVersion->"8.0 for Linux x86 (32-bit) (February 23, 2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 425, 12, 30, "Input"],
+Cell[985, 34, 404, 8, 30, "Input"],
+Cell[1392, 44, 2436, 61, 107, "Input"],
+Cell[3831, 107, 319, 6, 50, "Input"],
+Cell[4153, 115, 1177, 31, 30, "Input"],
+Cell[5333, 148, 943, 26, 30, "Input"],
+Cell[6279, 176, 152, 2, 30, "Input"],
+Cell[CellGroupData[{
+Cell[6456, 182, 113, 2, 30, "Input"],
+Cell[6572, 186, 483, 12, 23, "Print"]
+}, Open  ]],
+Cell[7070, 201, 213, 5, 30, "Input"],
+Cell[CellGroupData[{
+Cell[7308, 210, 338, 9, 30, "Input"],
+Cell[7649, 221, 731, 20, 60, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8417, 246, 389, 10, 30, "Input"],
+Cell[8809, 258, 774, 21, 76, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
