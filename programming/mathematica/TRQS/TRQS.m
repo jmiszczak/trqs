@@ -7,7 +7,7 @@
 (* File: TRQS.m *)
 (* Description: Mathematica package for generating truly random quantum states using quantum random number generator *)
 (* Author: Jaroslaw Miszczak <miszczak@iitis.pl> *)
-(* Version: 0.0.8 (22/02/2011) *)
+(* Version: 0.1.0 (28/07/2011) *)
 (* License: GPLv3 *)
 
 
@@ -17,10 +17,10 @@ BeginPackage["TRQS`"];
 Begin["`Private`"];
 
 
-trqsVersion = "0.0.8";
+trqsVersion = "0.1.0";
 
 
-trqsLastModification = "February 22, 2011";
+trqsLastModification = "July 28, 2011";
 
 
 trqsHistory = {
@@ -31,13 +31,15 @@ trqsHistory = {
 	{"0.0.5", "13/02/2011", "Jarek", "Some configuration related functions."},
 	{"0.0.6", "14/02/2011", "Jarek", "Induced measures."},
 	{"0.0.7", "15/02/2011", "Jarek", "Help messages updated."},
-	{"0.0.8", "22/02/2011", "Jarek", "TrueRandomProductKet, TrueRandomProductState and TrueRandomLocalUnitary added."}
+	{"0.0.9", "27/07/2011", "Jarek", "TrueRandomChoice function added."},
+	{"0.1.0", "28/07/2011", "Jarek", "TrueRandomDynamicalMatrix function added."}
 };
 
 
-trqsNames = {"TrueRandomInteger", "TrueRandomReal", "TrueRandomRealNormal", "TrueGinibreMatrix", "TrueRandomSimplex"};
+trqsNames = {"TrueRandomInteger", "TrueRandomReal", "TrueRandomRealNormal", "TrueGinibreMatrix", "TrueRandomSimplex", "TrueRandomChoice"};
 trqsNames = Append[trqsNames, {"TrueRandomKet", "TrueRandomProductKet","TrueRandomUnitary","TrueRandomLocalUnitary"}];
 trqsNames = Append[trqsNames, {"TrueRandomStateHS", "TrueRandomStateBures", "TrueRandomStateInduced","TrueRandomProductState"}];
+trqsNames = Append[trqsNames, {"TrueRandomDynamicalMatrix"}];
 trqsNames = Append[trqsNames, {"QuantisGetLibVersion", "QuantisGetSerialNumber", "QuantisGetDeviceId", "QuantisGetDeviceType"}];
 trqsNames = Flatten[trqsNames];
 
@@ -65,7 +67,7 @@ Clear@@TRQS`Private`trqsNames;
 (*Public interface*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Basic functions*)
 
 
@@ -86,6 +88,9 @@ TrueGinibreMatrix::usage = "TrueGinibreMatrix[n] returns n-dimesional complex ma
 
 
 TrueRandomSimplex::usage = "TrueRandomSimplex[n] returns distributed uniformly element of a standard n-simplex.";
+
+
+TrueRandomChoice::usage = "TrueRandomChoice[{\!\(\*SubscriptBox[\(e\), \(1\)]\),\!\(\*SubscriptBox[\(e\), \(2\)]\),\[Ellipsis],\!\(\*SubscriptBox[\(e\), \(n\)]\)}] retursn at random one of the \!\(\*SubscriptBox[\(e\), \(i\)]\).";
 
 
 (* ::Subsection::Closed:: *)
@@ -120,6 +125,13 @@ TrueRandomStateInduced::usage = "TrueRandomStateInduced[d,exK] random state of d
 TrueRandomProductState::usage = "TrueRandomProductState[] returns a product random density matrix acting on the space with the tensor product structure and with each local component generated according to measure \[Mu], where \[Mu] can be set to \"HS\", \"Bures\" or some integer K describing an induced measure.";
 
 
+(* ::Subsection:: *)
+(*Channels*)
+
+
+TrueRandomDynamicalMatrix::usage="TrueRandomDynamicalMatrix[n,k] returns a dynamical matrix acting on n-dimensional states with k evigenvalues equal to 0.";
+
+
 (* ::Subsection::Closed:: *)
 (*Configuration related functions*)
 
@@ -143,7 +155,7 @@ QuantisGetDeviceType::usage = "QuantisGetDeviceType[] returns a type of the used
 Begin["`Private`"];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Basic functions*)
 
 
@@ -170,7 +182,10 @@ TrueRandomSimplex[d_]:=Block[{r,r1,r2},
 ];
 
 
-(* ::Subsection:: *)
+TrueRandomChoice[l_]:=l[[TrueRandomInteger[{1,Length[l]}]]];
+
+
+(* ::Subsection::Closed:: *)
 (*Pure states*)
 
 
@@ -194,7 +209,7 @@ TrueRandomUnitary[dim_]:=Block[{Q,R},
 TrueRandomLocalUnitary[l_]:=Fold[KroneckerProduct[#1,#2]&,{{1}},Map[TrueRandomUnitary[#]&,l]];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Mixed states*)
 
 
@@ -237,7 +252,24 @@ TrueRandomProductState[l_,mu_:"HS"]:=Block[{},
 RandomState::argerr = "The second argument should be \"HS\" or \"Bures\" or an integer K>2, mesure \"`1`\" not implemented yet.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
+(*Channels*)
+
+
+TrueRandomDynamicalMatrix[n_,k_:0]:=Block[{mX=TrueGinibreMatrix[n^2,n^2-k],mY,di},
+	mX=mX.mX\[ConjugateTranspose];
+	mY=KroneckerProduct[
+		DiagonalMatrix[Table[1,{n}]],
+			MatrixPower[
+				Table[Plus@@(Table[mX[[jj+n*ii ,1+n*ii;;(ii+1) n]],{ii,0,n-1}]),{jj,1,n}],
+			-0.5
+			]
+		];
+	mY.mX.mY
+];
+
+
+(* ::Subsection::Closed:: *)
 (*Configuration related functions*)
 
 
