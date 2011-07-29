@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      4087,        145]
-NotebookOptionsPosition[      3313,        112]
-NotebookOutlinePosition[      3650,        127]
-CellTagsIndexPosition[      3607,        124]
+NotebookDataLength[      4578,        157]
+NotebookOptionsPosition[      3802,        124]
+NotebookOutlinePosition[      4140,        139]
+CellTagsIndexPosition[      4097,        136]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -99,19 +99,31 @@ Cell[BoxData[
  RowBox[{"{", 
   RowBox[{
    RowBox[{"{", 
-    RowBox[{"1", ",", "0.096423`5.435725633017751"}], "}"}], ",", 
+    RowBox[{"1", ",", "0.103664`5.46717295609722"}], "}"}], ",", 
    RowBox[{"{", 
-    RowBox[{"2", ",", "0.998461`6.450876099442227"}], "}"}]}], 
+    RowBox[{"2", ",", "0.999978`6.4515354389122725"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "10.279935`7.463535362121123"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "100.200038`8.452412879729662"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"5", ",", "1001.410279`9.45215703840794"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"6", ",", "10012.103714`10.452070333252037"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"7", ",", "60738.7188`11.235010620328158"}], "}"}]}], 
   "}"}]], "Output",
- CellChangeTimes->{{3.520845592091833*^9, 3.5208456095617456`*^9}}],
+ CellChangeTimes->{{3.520845592091833*^9, 3.5208456095617456`*^9}, 
+   3.5209175370758953`*^9}],
 
 Cell[BoxData["\<\"quantis.dat\"\>"], "Output",
- CellChangeTimes->{{3.520845592091833*^9, 3.520845609564616*^9}}]
+ CellChangeTimes->{{3.520845592091833*^9, 3.5208456095617456`*^9}, 
+   3.520917537078005*^9}]
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{1920, 1123},
-WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowSize->{740, 867},
+WindowMargins->{{Automatic, 490}, {Automatic, 57}},
 FrontEndVersion->"8.0 for Linux x86 (64-bit) (February 23, 2011)",
 StyleDefinitions->"Default.nb"
 ]
@@ -142,9 +154,9 @@ Cell[1712, 61, 132, 2, 30, "Output"]
 Cell[CellGroupData[{
 Cell[1881, 68, 104, 1, 74, "Section"],
 Cell[CellGroupData[{
-Cell[2010, 73, 865, 22, 50, "Input"],
-Cell[2878, 97, 292, 8, 30, "Output"],
-Cell[3173, 107, 112, 1, 30, "Output"]
+Cell[2010, 73, 865, 22, 88, "Input"],
+Cell[2878, 97, 753, 19, 50, "Output"],
+Cell[3634, 118, 140, 2, 30, "Output"]
 }, Open  ]]
 }, Open  ]]
 }
