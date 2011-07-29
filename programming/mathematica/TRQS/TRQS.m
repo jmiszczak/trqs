@@ -7,7 +7,7 @@
 (* File: TRQS.m *)
 (* Description: Mathematica package for generating truly random quantum states using quantum random number generator *)
 (* Author: Jaroslaw Miszczak <miszczak@iitis.pl> *)
-(* Version: 0.1.0 (28/07/2011) *)
+(* Version: 0.1.1 (29/07/2011) *)
 (* License: GPLv3 *)
 
 
@@ -17,10 +17,10 @@ BeginPackage["TRQS`"];
 Begin["`Private`"];
 
 
-trqsVersion = "0.1.0";
+trqsVersion = "0.1.1";
 
 
-trqsLastModification = "July 28, 2011";
+trqsLastModification = "July 21, 2011";
 
 
 trqsHistory = {
@@ -32,7 +32,8 @@ trqsHistory = {
 	{"0.0.6", "14/02/2011", "Jarek", "Induced measures."},
 	{"0.0.7", "15/02/2011", "Jarek", "Help messages updated."},
 	{"0.0.9", "27/07/2011", "Jarek", "TrueRandomChoice function added."},
-	{"0.1.0", "28/07/2011", "Jarek", "TrueRandomDynamicalMatrix function added."}
+	{"0.1.0", "28/07/2011", "Jarek", "TrueRandomDynamicalMatrix function added."},
+	{"0.1.0", "28/07/2011", "Jarek", "TrueRandomGraph function added."}
 };
 
 
@@ -40,6 +41,7 @@ trqsNames = {"TrueRandomInteger", "TrueRandomReal", "TrueRandomRealNormal", "Tru
 trqsNames = Append[trqsNames, {"TrueRandomKet", "TrueRandomProductKet","TrueRandomUnitary","TrueRandomLocalUnitary"}];
 trqsNames = Append[trqsNames, {"TrueRandomStateHS", "TrueRandomStateBures", "TrueRandomStateInduced","TrueRandomProductState"}];
 trqsNames = Append[trqsNames, {"TrueRandomDynamicalMatrix"}];
+trqsNames = Append[trqsNames, {"TrueRandomGraph"}];
 trqsNames = Append[trqsNames, {"QuantisGetLibVersion", "QuantisGetSerialNumber", "QuantisGetDeviceId", "QuantisGetDeviceType"}];
 trqsNames = Flatten[trqsNames];
 
@@ -67,7 +69,7 @@ Clear@@TRQS`Private`trqsNames;
 (*Public interface*)
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Basic functions*)
 
 
@@ -91,6 +93,9 @@ TrueRandomSimplex::usage = "TrueRandomSimplex[n] returns distributed uniformly e
 
 
 TrueRandomChoice::usage = "TrueRandomChoice[{\!\(\*SubscriptBox[\(e\), \(1\)]\),\!\(\*SubscriptBox[\(e\), \(2\)]\),\[Ellipsis],\!\(\*SubscriptBox[\(e\), \(n\)]\)}] retursn at random one of the \!\(\*SubscriptBox[\(e\), \(i\)]\).";
+
+
+TrueRandomGraph::usage ="TrueRandomGraph[v,e] returns a pseudorandom graph with v vertices and e edges.";
 
 
 (* ::Subsection::Closed:: *)
@@ -125,7 +130,7 @@ TrueRandomStateInduced::usage = "TrueRandomStateInduced[d,exK] random state of d
 TrueRandomProductState::usage = "TrueRandomProductState[] returns a product random density matrix acting on the space with the tensor product structure and with each local component generated according to measure \[Mu], where \[Mu] can be set to \"HS\", \"Bures\" or some integer K describing an induced measure.";
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Channels*)
 
 
@@ -183,6 +188,30 @@ TrueRandomSimplex[d_]:=Block[{r,r1,r2},
 
 
 TrueRandomChoice[l_]:=l[[TrueRandomInteger[{1,Length[l]}]]];
+
+
+TrueRandomGraph[{v_,e_},form_:"Graph"]:=Block[{maxE=1/2 (-v+v^2),edges={},newEdge,edgesLeft=e,noEdge,e1,e2},
+	If[e>maxE,
+		Message[TrueRandomGraph::argerr,e,v],
+		While[edgesLeft>0,
+			e1=RandomChoice[Range[v]];
+			e2=RandomChoice[Delete[Range[v],e1]];
+			newEdge=Sort[{e1,e2}];
+			If[Length[Position[edges,newEdge]]==0,
+				AppendTo[edges,newEdge];
+				edgesLeft=edgesLeft-1;
+			]
+		];
+		Switch[form,
+			"Graph",Graph[Range[v],Map[UndirectedEdge[#[[1]],#[[2]]]&,edges]],
+			"List", {Range[v],edges},
+			_,Message[TrueRandomGraph::formerr,form]
+		]
+	]
+];
+
+TrueRandomGraph::argerr = "Invailid paramaters `1` (vertices) and `2` (edges) in TrueRandomGraph function call.";
+TrueRandomGraph::formerr = "Invailid output form. Please choose Graph or List (default)";
 
 
 (* ::Subsection::Closed:: *)
