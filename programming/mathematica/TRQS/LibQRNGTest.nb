@@ -10,20 +10,53 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[       894,         36]
-NotebookOptionsPosition[       661,         23]
-NotebookOutlinePosition[       998,         38]
-CellTagsIndexPosition[       955,         35]
+NotebookDataLength[      2228,         77]
+NotebookOptionsPosition[      1780,         56]
+NotebookOutlinePosition[      2115,         71]
+CellTagsIndexPosition[      2072,         68]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
-Cell[BoxData["Directoy"], "Input",
- CellChangeTimes->{{3.544169790586372*^9, 3.544169803081888*^9}}]
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"SetDirectory", "[", 
+  RowBox[{"NotebookDirectory", "[", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.544169790586372*^9, 3.544169803081888*^9}, {
+  3.544193835317119*^9, 3.544193865918902*^9}}],
+
+Cell[BoxData["\<\"/home/jam/Kuweta/notatki/programming/mathematica/TRQS\"\>"],\
+ "Output",
+ CellChangeTimes->{3.544193868422081*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Install", "[", "\"\<./qrng_get_lib_version\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.544193869368558*^9, 3.544193872464226*^9}, {
+  3.544193947454827*^9, 3.544193979341052*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"LinkOpen", "::", "linke"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"\[NoBreak]\\!\\(\\\"Could not find MathLink executable\\\"\
+\\)\[NoBreak]. \\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", \
+ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/LinkOpen/linke\\\", ButtonNote -> \
+\\\"LinkOpen::linke\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{{3.544193974722492*^9, 3.544193979871128*^9}}],
+
+Cell[BoxData["$Failed"], "Output",
+ CellChangeTimes->{{3.544193974734498*^9, 3.544193979873219*^9}}]
+}, Open  ]]
 },
-WindowSize->{740, 867},
-WindowMargins->{{168, Automatic}, {Automatic, 55}},
-FrontEndVersion->"8.0 for Linux x86 (64-bit) (October 10, 2011)",
+WindowSize->{1280, 718},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"8.0 for Linux x86 (32-bit) (October 10, 2011)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
@@ -37,10 +70,17 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 100, 1, 29, "Input"]
+Cell[CellGroupData[{
+Cell[579, 22, 219, 4, 30, "Input"],
+Cell[801, 28, 132, 2, 30, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[970, 35, 204, 3, 30, "Input"],
+Cell[1177, 40, 484, 10, 24, "Message"],
+Cell[1664, 52, 100, 1, 30, "Output"]
+}, Open  ]]
 }
 ]
 *)
 
 (* End of internal cache information *)
-

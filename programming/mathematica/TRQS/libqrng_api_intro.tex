@@ -1,0 +1,64 @@
+\pdfoutput=1
+% v. 0.01 - 23/04/2012 - initial version
+
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{dsfont} % some math symbols
+\usepackage{courier} % ttfamily
+
+\lstset{language=C}
+\lstset{captionpos=b,basicstyle=\ttfamily,frame=lb,mathescape=true}
+
+
+\title{Introduction to \texttt{libQRNG} library}
+\author{Jaros{\l}aw A. Miszczak\\Institute of Theoretical and Applied Informatics, Polish Academy of Sciences\\ Baltycka 5, 44-100 Gliwice, Poland}
+\date{23/04/2012 (v. 0.01)}
+
+
+\begin{document}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Establising connection with the QRGN server}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In order to retrive data from the QRNG service provided by the PicoQuant and the
+Department of Physics of Humboldt University, it is necessary to register on the
+service web page~\cite{qrng-www}. In order to establish a connection with the server one can use
+one of the function
+\begin{itemize}
+    \item \lstinline{qrng_connect(qrng_username, qrng_password)} -- establish a
+      connection with the QRNG service (qrng.physik.hu-berlin.de:4499),
+
+    \item \lstinline{qrng_connect_SSL(qrng_username, qrng_password)} --
+      establish a secure connection with the QRNG service using SSL.
+\end{itemize}
+Both functions require username and password provided during the registration.
+The connection is closed using \lstinline{qrng_disconnect()} function.
+\begin{itemize}
+	\item \lstinline{qrng_disconnect()} -- close the connection with the QRNG
+	server.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Retriving random data}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+QRNG service allows to retrive random data in the form of integer number, double precision numbers or byte
+
+
+\begin{thebibliography}{2}
+    \bibitem{qrng-www} QRNG Service, \url{http://qrng.physik.hu-berlin.de}
+
+    \bibitem{wahl11ultrafast} M.~Wahl, M. Leifgen, M. Berlin, T. R\"ohlicke,
+       H.-J. Rahn, and O. Benson, \emph{An ultrafast quantum random number
+       generator with provably bounded output bias based on photon arrival time
+       measurements}, Appl. Phys. Lett. 98, 171105 (2011)
+       \url{http://dx.doi.org/10.1063/1.3578456}
+\end{thebibliography}
+
+\end{document}

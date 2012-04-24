@@ -16,13 +16,6 @@ BeginPackage["TRQS`"];
 
 Begin["`Private`"];
 
-
-trqsVersion = "0.1.1";
-
-
-trqsLastModification = "July 21, 2011";
-
-
 trqsHistory = {
 	{"0.0.1", "10/01/2011", "Jarek", "Initial version."},
 	{"0.0.2", "31/01/2011", "Jarek", "Some cleanups in functions."},
@@ -33,9 +26,13 @@ trqsHistory = {
 	{"0.0.7", "15/02/2011", "Jarek", "Help messages updated."},
 	{"0.0.9", "27/07/2011", "Jarek", "TrueRandomChoice function added."},
 	{"0.1.0", "28/07/2011", "Jarek", "TrueRandomDynamicalMatrix function added."},
-	{"0.1.0", "28/07/2011", "Jarek", "TrueRandomGraph function added."}
+	{"0.1.1", "28/07/2011", "Jarek", "TrueRandomGraph function added."},
+	{"0.2.0", "24/04/2012", "Jarek", "Build system for the backend files improved."}
 };
 
+trqsVersion = Last[trqsHistory][[1]];
+
+trqsLastModification = Last[trqsHistory][[2]];
 
 trqsNames = {"TrueRandomInteger", "TrueRandomReal", "TrueRandomRealNormal", "TrueGinibreMatrix", "TrueRandomSimplex", "TrueRandomChoice"};
 trqsNames = Append[trqsNames, {"TrueRandomKet", "TrueRandomProductKet","TrueRandomUnitary","TrueRandomLocalUnitary"}];
@@ -45,12 +42,9 @@ trqsNames = Append[trqsNames, {"TrueRandomGraph"}];
 trqsNames = Append[trqsNames, {"QuantisGetLibVersion", "QuantisGetSerialNumber", "QuantisGetDeviceId", "QuantisGetDeviceType"}];
 trqsNames = Flatten[trqsNames];
 
-
 trqsHomeDirectory = DirectoryName[FindFile["TRQS.m"]];
 
-
-trqsBackend = "TRQS_Quantis";
-
+trqsBackend = "TRQS_BACKEND";
 
 trqsBinaries = ToString[trqsHomeDirectory<>trqsBackend];
 
