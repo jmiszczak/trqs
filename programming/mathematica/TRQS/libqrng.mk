@@ -1,4 +1,9 @@
 ###############################################################################
+# include targets and definitions commong for all backends
+###############################################################################
+include common.mk
+
+###############################################################################
 # libQRNG specific part
 # Note: You must update some of these to reflect your configuration!
 ###############################################################################
@@ -6,34 +11,36 @@
 ###############################################################################
 # libQRNG configuration
 ###############################################################################
-LIBQRNG_HOME = /usr/local/PicoQuant/QRNG
-LIBQRNG_LIBDIR = $(LIBQRNG_HOME)/lib
-LIBQRNG_INCDIR = $(LIBQRNG_HOME)/include
-LIBQRNG_LIB = -lQRNG
+BACKEND_HOME = /usr/local/PicoQuant/QRNG
+BACKEND_LIBDIR = $(BACKEND_HOME)/lib
+BACKEND_INCDIR = $(BACKEND_HOME)/include
+BACKEND_LIB = -lQRNG
 
 ###############################################################################
 # *.tm files for TRQS_libQRNG backend
 ###############################################################################
-LIBQRNG_SRC := $(wildcard libqrng_*.tm)
-LIBQRNG_BIN = $(LIBQRNG_SRC:%.tm=%)
+BACKEND_SRC := $(wildcard libqrng_*.tm)
+BACKEND_BIN = $(BACKEND_SRC:%.tm=%)
 ###############################################################################
 
 ###############################################################################
-# redefine variables used in the main Makefile
-BACKEND_LIB = $(LIBQRNG_LIB)
-BACKEND_LIBDIR = $(LIBQRNG_LIBDIR)
-BACKEND_INCDIR = $(LIBQRNG_INCDIR)
+# directory used to store compiled files
+###############################################################################
 BACKEND_DIR = TRQS_libQRNG
 
-quantis-all: $(LIBQRNG_BIN) libqrng_test
+libqrng-all: $(BACKEND_BIN) libqrng_test
 
-quantis_test:
-	$(CC) $(@:%=%.c) -o $@ -I$(QUANTIS_INCDIR) -L$(QUANTIS_LIBDIR) $(QUANTIS_LIB) $(CCFLAGS)
+libqrng_test:
+	$(CC) $(@:%=%.c) -o $@ -I$(BACKEND_INCDIR) -L$(BACKEND_LIBDIR) $(BACKEND_LIB) $(CCFLAGS)
 
-quantis-bin-dist: $(QUANTIS_BIN)
+libqrng-bin-dist: $(BACKEND_BIN)
 	mkdir -p $(BACKEND_DIR)
-	mv $(QUANTIS_BIN) $(BACKEND_DIR)
+	mv $(BACKEND_BIN) $(BACKEND_DIR)
 	cat TRQS.m.tpl | sed s/TRQS_BACKEND/$(BACKEND_DIR)/g > TRQS.m
-	tar czf TRQS-$(TRQSV)-`uname -m`-Quantis.tgz $(addprefix $(BACKEND_DIR)/, $(QUANTIS_BIN)) TRQS.m TRQSTest.nb README quantis_installation.pdf
+	tar czf TRQS-$(TRQSV)-`uname -m`-libQRNG.tgz $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) TRQS.m TRQSTest.nb README libqrng_api_intro.pdf
 	rm -Rf $(BACKEND_DIR)
 
+% : %.tm
+	$(MPREP) $^ -o $^.c
+	$(CC) -I$(ML_INCDIR) -L$(ML_LIBDIR) -I$(BACKEND_INCDIR) -L$(BACKEND_LIBDIR) $(ML_LIBS) $(BACKEND_LIB) -c -o $^.o $^.c
+	$(CXX) -I$(ML_INCDIR) -L$(ML_LIBDIR) -I$(BACKEND_INCDIR) -L$(BACKEND_LIBDIR) $^.o $(ML_LIBS) $(BACKEND_LIB) -o $@ 

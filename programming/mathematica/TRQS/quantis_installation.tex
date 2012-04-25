@@ -1,18 +1,30 @@
+\pdfoutput=1
 % v. 0.01 - 15/02/2011 - Jarek - instalation instructions written during tests on tesla
 % v. 0.02 - 23/03/2011 - Jarek - minor improvements
-\documentclass[a4paper]{scrartcl}
+% v. 0.03 - 23/04/2012 - Jarek - style and layout improvements
+
+\documentclass[a4paper,11pt]{article}
+
 \usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{dsfont} % some math symbols
+\usepackage{courier} % ttfamily
 \usepackage[utf8]{inputenc}
+
 \renewcommand{\familydefault}{\sfdefault}
+\newcommand{\eg}{\textsl{e.g}}
 
 \title{Installation of Quantis drivers and libraries}
-\author{Jaroslaw Miszczak}
-\date{23/03/2011 (v.0.02)}
+\author{Jaros{\l}aw A. Miszczak\\
+Institute of Theoretical and Applied Informatics, Polish Academy of Sciences\\
+Baltycka 5, 44-100 Gliwice, Poland}
+\date{25/04/2012 (v.0.03)}
 
-\newcommand{\eg}{\textsl{e.g}}
 \begin{document}
-\maketitle
 
+\maketitle
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Device drivers}
@@ -57,7 +69,7 @@ depending on the software package you are using.
     \texttt{cat /etc/group | grep plugdev}
     \item Add user to the \texttt{plugdev} group\\
     \texttt{usermod -G plugdev -a LOGIN},\\ where \texttt{LOGIN} is the login name of the user
-    \item Copy file\\ \texttt{Quantis-v11.01.12/Drivers/Unix/idq-quantis.rules}, to \texttt{/etc/udev/rules.d/} directory and reload the UDEV rules\\
+    \item Copy file \texttt{Quantis-v11.01.12/Drivers/Unix/idq-quantis.rules},\\ to \texttt{/etc/udev/rules.d/} directory and reload the UDEV rules\\
     \texttt{udevadm control --reload-rules}
 \end{enumerate}
 
@@ -76,8 +88,8 @@ depending on the software package you are using.
    \texttt{Quantis-v11.01.12/Libs-Apps/Quantis}\\ to\\
    \texttt{/usr/local/IQD/Quantis/include}
     \item Add \texttt{/usr/local/IDQ/Quantis/lib} (or
-    \texttt{/usr/local/IDQ/Quantis/lib64}) to \texttt{/etc/ld.so.config} or some
-    file which in included by this file \eg\
+    \texttt{/usr/local/IDQ/Quantis/lib64}) to \\ \texttt{/etc/ld.so.config} or some
+    file which in included by this file \eg\ \\
     \texttt{/etc/ld.so.conf.d/quantis.conf}
     \item Update the loader cache\\
     \texttt{ldconfig}

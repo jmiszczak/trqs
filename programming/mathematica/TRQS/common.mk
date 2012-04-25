@@ -33,15 +33,15 @@ endif
 
 ML_LIBS = $(ML_LIB) -lm -lpthread -lstdc++ -lrt 
 
+################################################################################
+# some helper targets
+################################################################################
 .PHONY: help clean
 
-default: help
-
 ################################################################################
-# external makefiles for supported backends 
-include quantis.mk 
-#include quantis-nohw.mk 
-#include libqrng.mk 
+# target defintions
+################################################################################
+default: help
 
 help:
 	@echo --------------------------------------------------------------------------------
@@ -60,13 +60,8 @@ help:
 	@echo \ clean - clean the working directory
 	@echo --------------------------------------------------------------------------------
 
-% : %.tm
-	$(MPREP) $^ -o $^.c
-	$(CC) -I$(ML_INCDIR) -L$(ML_LIBDIR) -I$(BACKEND_INCDIR) -L$(BACKEND_LIBDIR) $(ML_LIBS) $(BACKEND_LIB) -c -o $^.o $^.c
-	$(CXX) -I$(ML_INCDIR) -L$(ML_LIBDIR) -I$(BACKEND_INCDIR) -L$(BACKEND_LIBDIR) $^.o $(ML_LIBS) $(BACKEND_LIB) -o $@ 
-
 src-dist:
-	tar czf TRQS-$(TRQSV).tgz *.tm Makefile *.mk TRQS.h TRQS.m.tpl TRQSTest.nb README quantis_installation.pdf
+	tar czf TRQS-$(TRQSV).tgz *.tm *.mk TRQS.h TRQS.m.tpl TRQSTest.nb README *.pdf
 
 clean:
 	rm -rf *.tm.c *.tm.o
