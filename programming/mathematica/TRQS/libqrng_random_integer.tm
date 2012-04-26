@@ -22,8 +22,8 @@ int libqrng_random_integer(int i, int j) {
 		}
 		rand_int = rem + i;
 	}
-
-    return rand_int; 
+	qrng_disconnect();
+	return rand_int; 
 }
 
 int main(int argc, char* argv[]) {
