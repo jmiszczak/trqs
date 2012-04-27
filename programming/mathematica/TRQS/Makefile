@@ -3,43 +3,58 @@
 # (c) 2011-2012 Jarek Miszczak
 ###############################################################################
 
-# disable automatic rules for *.o files
-.SUFFIXES:
+###############################################################################
+# libQRNG configuration (alter accorind to your setup)
+###############################################################################
+export QRNG_HOME = /usr/local/PicoQuant/QRNG
+export QRNG_LIB = -lQRNG
+export QRNG_LIBDIR = $(QRNG_HOME)/lib
+export QRNG_INCDIR = $(QRNG_HOME)/include
+
+###############################################################################
+# libQuantis configuration (alter accorind to your setup)
+###############################################################################
+export QUANTIS_HOME = /usr/local/IDQ/Quantis
+export QUANTIS_LIB = -lQuantis
+export QUANTIS_LIBDIR = $(QUANTIS_HOME)/lib
+export QUANTIS_INCDIR = $(QUANTIS_HOME)/include
 
 ###############################################################################
 # general configuration options
 ###############################################################################
-TRQSV = 0.2.0
+export TRQSV = 0.2.1
 
 ###############################################################################
 # MathLink variables used during the compilation
 ###############################################################################
-ML_HOME = $(lastword  $(shell mcc --internals | grep 'MLDK Directory'))
-ML_INCDIR = $(ML_HOME)
-ML_LIBDIR = $(ML_HOME)
-MPREP = $(ML_HOME)/mprep
+export ML_HOME := $(lastword  $(shell mcc --internals | grep 'MLDK Directory'))
+export ML_INCDIR = $(ML_HOME)
+export ML_LIBDIR = $(ML_HOME)
+export MPREP = $(ML_HOME)/mprep
 
 ################################################################################
 # choose the right MathLink library for your architecture
 ################################################################################
-ARCH = $(shell uname -m)
-ifeq ($(ARCH),i686) 
+ARCH := $(shell uname -m)
+ifeq ($(ARCH),x86_64)
+  ML_LIB = -lML64i3
+else
   ML_LIB = -lML32i3 
 endif
 
-ifeq ($(ARCH),x86_64)
-  ML_LIB = -lML64i3
-endif
-
-ML_LIBS = $(ML_LIB) -lm -lpthread -lstdc++ -lrt 
-
+export ML_LIBS = $(ML_LIB) -lm -lpthread -lstdc++ -lrt 
 
 ################################################################################
 # available backends are in separate dirs
 ################################################################################
 QUANTIS_BACKEND_DIR = TRQS_Quantis
-LIBQRNG_BACKEND_DIR = TRQS_libQRNG
+QRNG_BACKEND_DIR = TRQS_QRNG
 BACKEND_DIRS = $(QUANTIS_BACKEND_DIR) $(LIBQRNG_BACKEND_DIR)
+
+################################################################################
+# disable automatic rules for *.o files
+################################################################################
+.SUFFIXES:
 
 ################################################################################
 # some helper targets
@@ -64,7 +79,7 @@ help:
 	@echo \ src-dist - build .tgz archive with all source files
 	@echo \ quantis-bin-dist - build binary distributions based on libQuantis by IDQ
 	@echo \ quantis-nohw-bin-dist - same as above by based on libQuantis-NoHw
-	@echo \ libqrng-bin-dist - build binary distribution based on libQRNG by PicoQuant
+	@echo \ qrng-bin-dist - build binary distribution based on libQRNG by PicoQuant
 	@echo \ all - build all above targets
 	@echo \ clean - clean the working directory
 	@echo
@@ -74,15 +89,28 @@ help:
 src-dist:
 	tar czf TRQS-$(TRQSV).tgz *.tm *.mk TRQS.h TRQS.m.tpl TRQSTest.nb README *.pdf
 
-clean:
-	rm -rf *.tm.c *.tm.o
-	rm -rf quantis_test
-	rm -rf libqrng_test
+clean: 
+	$(MAKE) -C $(QUANTIS_BACKEND_DIR) quantis-clean 
+	$(MAKE) -C $(QRNG_BACKEND_DIR) qrng-clean
 	
 
 ################################################################################
 # backend target defintions
 ################################################################################
 
-quantis-nowh-bin-dist:
-	$(MAKE) -C $(QUANTIS_BACKEND_DIR) $^	
+all: quantis-bin-dist quantis-nohw-bin-dist qrng-bin-dist
+
+quantis-bin-dist:
+	$(MAKE) -C $(QUANTIS_BACKEND_DIR) $@
+
+quantis-nohw-bin-dist:
+	$(MAKE) -C $(QUANTIS_BACKEND_DIR) $@
+
+quantis-all:
+	$(MAKE) -C $(QUANTIS_BACKEND_DIR) $@
+
+qrng-bin-dist:
+	$(MAKE) -C $(QRNG_BACKEND_DIR) $@
+
+qrng-all:
+	$(MAKE) -C $(QRNG_BACKEND_DIR) $@

@@ -2,49 +2,41 @@
 # GNU Makefile for TRQS Mathematica package
 # (c) 2011-2012 Jarek Miszczak
 ###############################################################################
-# This Makefile is used for building Quantis backend for the TRQS package
+# This Makefile is used for building QRNG backend for the TRQS package
 ###############################################################################
 
 # disable automatic rules for *.o files
 .SUFFIXES:
 
 ###############################################################################
-# libQuantis backend configuration is included in the main Makefile
+# libQRNG backend configuration is included in the main Makefile
 ###############################################################################
-BACKEND_HOME = $(QUQANTIS_HOME)
-BACKEND_LIB = $(QUANTIS_LIB)
-BACKEND_LIBDIR = $(QUANTIS_LIBDIR)
-BACKEND_INCDIR = $(QUANTIS_INCDIR)
-BACKEND_DIR = TRQS_Quantis
+BACKEND_HOME = $(QRNG_HOME)
+BACKEND_LIB = $(QRNG_LIB)
+BACKEND_LIBDIR = $(QRNG_LIBDIR)
+BACKEND_INCDIR = $(QRNG_INCDIR)
+BACKEND_DIR = TRQS_QRNG
 
 ###############################################################################
-# *.tm files for TRQS_Quantis backend
+# *.tm files for TRQS_QRNG backend
 ###############################################################################
-BACKEND_SRC := $(wildcard quantis_*.tm)
+BACKEND_SRC := $(wildcard qrng_*.tm)
 BACKEND_BIN = $(BACKEND_SRC:%.tm=%)
 ###############################################################################
 
-quantis-all: $(BACKEND_BIN) quantis_test
+qrng-all: $(BACKEND_BIN) qrng_test
 
-quantis_test:
+qrng_test:
 	@echo Building files \'$^\'
 	$(CC) $(@:%=%.c) -o $@ -I$(BACKEND_INCDIR) -I.. -L$(BACKEND_LIBDIR) $(BACKEND_LIB) $(CCFLAGS)
 
-quantis-bin-dist: $(BACKEND_BIN)
+qrng-bin-dist: $(BACKEND_BIN)
 	@echo Building binary dsitribution for $(BACKEND_DIR)
 	mkdir -p $(BACKEND_DIR)
 	mv $(BACKEND_BIN) $(BACKEND_DIR)
 	cat ../TRQS.m.tpl | sed s/TRQS_BACKEND/$(BACKEND_DIR)/g > TRQS.m
-	tar czf ../TRQS-$(TRQSV)-`uname -m`-Quantis.tgz $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) TRQS.m ../TRQSTest.nb ../README quantis_installation.pdf
-	rm -Rf $(BACKEND_DIR)
-
-quantis-nohw-bin-dist: $(eval BACKEND_LIB = -lQuantis-NoHw) $(BACKEND_BIN)
-	@echo Building binary dsitribution for $(BACKEND_DIR) linked against libQuantis-NoHw
-	mkdir -p $(BACKEND_DIR)
-	mv $(BACKEND_BIN) $(BACKEND_DIR)
-	cat ../TRQS.m.tpl | sed s/TRQS_BACKEND/$(BACKEND_DIR)/g > TRQS.m
-	tar czf ../TRQS-$(TRQSV)-`uname -m`-Quantis-NoHw.tgz $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) TRQS.m ../TRQSTest.nb \
-	  ../README quantis_installation.pdf
+	tar czf ../TRQS-$(TRQSV)-`uname -m`-QRNG.tgz $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) TRQS.m ../TRQSTest.nb \
+	  ../README libqrng_api_intro.pdf
 	rm -Rf $(BACKEND_DIR)
 
 % : %.tm
@@ -53,7 +45,7 @@ quantis-nohw-bin-dist: $(eval BACKEND_LIB = -lQuantis-NoHw) $(BACKEND_BIN)
 	$(CC) -I$(ML_INCDIR) -I$(BACKEND_INCDIR) -I.. $(ML_LIBS) $(BACKEND_LIB) -c -o $^.o $^.c
 	$(CXX) -L$(ML_LIBDIR) -I$(BACKEND_INCDIR) -L$(BACKEND_LIBDIR) $^.o $(ML_LIBS) $(BACKEND_LIB) -o $@ 
 
-quantis-clean:
+qrng-clean:
 	rm -rf *.tm.c *.tm.o
-	rm -rf quantis_test
+	rm -rf qrng_test
 
