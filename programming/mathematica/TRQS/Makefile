@@ -33,13 +33,21 @@ endif
 
 ML_LIBS = $(ML_LIB) -lm -lpthread -lstdc++ -lrt 
 
+
+################################################################################
+# available backends are in separate dirs
+################################################################################
+QUANTIS_BACKEND_DIR = TRQS_Quantis
+LIBQRNG_BACKEND_DIR = TRQS_libQRNG
+BACKEND_DIRS = $(QUANTIS_BACKEND_DIR) $(LIBQRNG_BACKEND_DIR)
+
 ################################################################################
 # some helper targets
 ################################################################################
 .PHONY: help clean
 
 ################################################################################
-# target defintions
+# global target defintions
 ################################################################################
 default: help
 
@@ -47,10 +55,11 @@ help:
 	@echo --------------------------------------------------------------------------------
 	@echo Hello, this is the main Makefile for the TRQS package version $(TRQSV). Please
 	@echo choose one of the targets suitable for your configuration. Note that some of the 
-	@echo configuration oprtions are set in TRQS.h file. You will also need to change some 
-	@echo variables in following makefiles:
-	@echo \ $(wildcard *.mk)  
-	@echo to reflect you configuration.
+	@echo configuration oprtions are set in TRQS.h file. You may also need to change some 
+	@echo variables in makefiles in the 
+	@echo  \ $(BACKEND_DIRS) 
+	@echo directories to reflect your configuration
+	@echo
 	@echo Availabale targets:
 	@echo \ src-dist - build .tgz archive with all source files
 	@echo \ quantis-bin-dist - build binary distributions based on libQuantis by IDQ
@@ -58,6 +67,8 @@ help:
 	@echo \ libqrng-bin-dist - build binary distribution based on libQRNG by PicoQuant
 	@echo \ all - build all above targets
 	@echo \ clean - clean the working directory
+	@echo
+	@echo You can find more information at http://www.iitis.pl/~miszczak/trqs
 	@echo --------------------------------------------------------------------------------
 
 src-dist:
@@ -67,3 +78,11 @@ clean:
 	rm -rf *.tm.c *.tm.o
 	rm -rf quantis_test
 	rm -rf libqrng_test
+	
+
+################################################################################
+# backend target defintions
+################################################################################
+
+quantis-nowh-bin-dist:
+	$(MAKE) -C $(QUANTIS_BACKEND_DIR) $^	
