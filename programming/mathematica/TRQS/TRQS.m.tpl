@@ -27,32 +27,33 @@ trqsHistory = {
 	{"0.0.9", "27/07/2011", "Jarek", "TrueRandomChoice function added."},
 	{"0.1.0", "28/07/2011", "Jarek", "TrueRandomDynamicalMatrix function added."},
 	{"0.1.1", "28/07/2011", "Jarek", "TrueRandomGraph function added."},
-	{"0.2.0", "24/04/2012", "Jarek", "Build system for the backend files improved."}
+	{"0.2.0", "24/04/2012", "Jarek", "Build system for the backend files improved."},
+	{"0.2.1", "27/04/2012", "Jarek", "Build system for the backend files improved."},
+	{"0.2.2", "30/04/2012", "Jarek", "Documentation improvements and simple backend sanity check."}
 };
 
 trqsVersion = Last[trqsHistory][[1]];
 
 trqsLastModification = Last[trqsHistory][[2]];
 
-trqsNames = {"TrueRandomInteger", "TrueRandomReal", "TrueRandomRealNormal", "TrueGinibreMatrix", "TrueRandomSimplex", "TrueRandomChoice"};
-trqsNames = Append[trqsNames, {"TrueRandomKet", "TrueRandomProductKet","TrueRandomUnitary","TrueRandomLocalUnitary"}];
-trqsNames = Append[trqsNames, {"TrueRandomStateHS", "TrueRandomStateBures", "TrueRandomStateInduced","TrueRandomProductState"}];
-trqsNames = Append[trqsNames, {"TrueRandomDynamicalMatrix"}];
-trqsNames = Append[trqsNames, {"TrueRandomGraph"}];
-trqsNames = Append[trqsNames, {"QuantisGetLibVersion", "QuantisGetSerialNumber", "QuantisGetDeviceId", "QuantisGetDeviceType"}];
-trqsNames = Flatten[trqsNames];
+trqsNames = Names["TRQS`*"]
 
 trqsHomeDirectory = DirectoryName[FindFile["TRQS.m"]];
 
-trqsBackend = "TRQS_BACKEND";
+trqsBackendName = "TRQS_BACKEND_NAME";
 
-trqsBinaries = ToString[trqsHomeDirectory<>trqsBackend];
+trqsBackendDir = "TRQS_" <> trqsBackendName;
+
+trqsBackendBinPrefix = ToLowerCase[trqsBackendName];
+
+trqsBinaries = ToString[trqsHomeDirectory <> trqsBackendDir];
 
 
 End[];
 
 
 Print["Package TRQS version ", TRQS`Private`trqsVersion, " (last modification: ", TRQS`Private`trqsLastModification, ")."];
+Print["Using " <> TRQS`Private`trqsBackendName <> " as a source of randomness."];
 
 
 Unprotect@@TRQS`Private`trqsNames;
@@ -80,7 +81,7 @@ TrueRandomReal::usage = TrueRandomReal::usage <> "\nTrueRandomReal[] returns a r
 TrueRandomRealNormal::usage = "TrueRandomRealNormal[m,s,dims] provides a sample of random numbers distributed according to the normal distribution N[m,s] in an array of dimensions given by dims.";
 
 
-TrueGinibreMatrix::usage = "TrueGinibreMatrix[n] returns n-dimesional complex matrix with entries having real and complex part distributed according to the normal distribution N[0,1].";
+TrueGinibreMatrix::usage = "TrueGinibreMatrix[m,n] returns (m x n)-dimesional complex matrix with entries having real and complex part distributed according to the normal distribution N[0,1].";
 
 
 TrueRandomSimplex::usage = "TrueRandomSimplex[n] returns distributed uniformly element of a standard n-simplex.";
@@ -157,15 +158,13 @@ Begin["`Private`"];
 (* ::Subsection:: *)
 (*Basic functions*)
 
+Install[trqsBinaries <> "/" <> trqsBackendBinPrefix  <> "_random_integer"];
+Install[trqsBinaries <> "/" <> trqsBackendBinPrefix  <> "_random_integer_1"];
+Install[trqsBinaries <> "/" <> trqsBackendBinPrefix  <> "_random_integer_0"];
 
-Install[trqsBinaries<>"/quantis_random_integer"];
-Install[trqsBinaries<>"/quantis_random_integer_1"];
-Install[trqsBinaries<>"/quantis_random_integer_0"];
-
-
-Install[trqsBinaries<>"/quantis_random_double"];
-Install[trqsBinaries<>"/quantis_random_double_1"];
-Install[trqsBinaries<>"/quantis_random_double_0"];
+Install[trqsBinaries <> "/" <> trqsBackendBinPrefix  <> "_random_double"];
+Install[trqsBinaries <> "/" <> trqsBackendBinPrefix  <> "_random_double_1"];
+Install[trqsBinaries <> "/" <> trqsBackendBinPrefix  <> "_random_double_0"];
 
 
 TrueRandomRealNormal[m_,s_,dims_]:=FlattenAt[Fold[Partition[#1,#2]&,m+Sqrt[2]s InverseErf[-1+2 Table[TrueRandomReal[],{Times@@dims}]],Reverse[dims]],1];
@@ -295,11 +294,17 @@ TrueRandomDynamicalMatrix[n_,k_:0]:=Block[{mX=TrueGinibreMatrix[n^2,n^2-k],mY,di
 (* ::Subsection::Closed:: *)
 (*Configuration related functions*)
 
-
-Install[trqsBinaries<>"/quantis_get_lib_version"];
-Install[trqsBinaries<>"/quantis_get_serial_number"];
-Install[trqsBinaries<>"/quantis_get_device_id"];
-Install[trqsBinaries<>"/quantis_get_device_type"];
+Switch[ trqsBackendName, 
+	"Quantis",
+		Install[trqsBinaries<>"/quantis_get_lib_version"];
+		Install[trqsBinaries<>"/quantis_get_serial_number"];
+		Install[trqsBinaries<>"/quantis_get_device_id"];
+		Install[trqsBinaries<>"/quantis_get_device_type"],
+	"QRNG", 
+		Install[trqsBinaries<>"/qrng_get_lib_version"];
+		Install[trqsBinaries<>"/qrng_server_connect"];
+		Install[trqsBinaries<>"/qrng_server_disconnect"];
+]
 
 
 End[];

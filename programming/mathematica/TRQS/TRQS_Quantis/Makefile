@@ -1,8 +1,12 @@
 ###############################################################################
 # GNU Makefile for TRQS Mathematica package
 # (c) 2011-2012 Jarek Miszczak
+# WWW: http://www.iitis.pl/~miszczak/trqs
 ###############################################################################
-# This Makefile is used for building Quantis backend for the TRQS package
+
+###############################################################################
+# This Makefile is used for building Quantis backend for the TRQS package, but 
+# the configuration options for this backend must be set in the main Makefile
 ###############################################################################
 
 # disable automatic rules for *.o files
@@ -11,11 +15,12 @@
 ###############################################################################
 # libQuantis backend configuration is included in the main Makefile
 ###############################################################################
-BACKEND_HOME = $(QUQANTIS_HOME)
+BACKEND_NAME = Quantis
+BACKEND_HOME = $(QUANTIS_HOME)
 BACKEND_LIB = $(QUANTIS_LIB)
 BACKEND_LIBDIR = $(QUANTIS_LIBDIR)
 BACKEND_INCDIR = $(QUANTIS_INCDIR)
-BACKEND_DIR = TRQS_Quantis
+BACKEND_DIR = TRQS_$(BACKEND_NAME)
 
 ###############################################################################
 # *.tm files for TRQS_Quantis backend
@@ -27,28 +32,31 @@ BACKEND_BIN = $(BACKEND_SRC:%.tm=%)
 quantis-all: $(BACKEND_BIN) quantis_test
 
 quantis_test:
-	@echo Building files \'$^\'
+	@echo '==>' Building file \'$@\'
 	$(CC) $(@:%=%.c) -o $@ -I$(BACKEND_INCDIR) -I.. -L$(BACKEND_LIBDIR) $(BACKEND_LIB) $(CCFLAGS)
 
 quantis-bin-dist: $(BACKEND_BIN)
-	@echo Building binary dsitribution for $(BACKEND_DIR)
+	@echo '==>' Building binary dsitribution for $(BACKEND_DIR)
 	mkdir -p $(BACKEND_DIR)
 	mv $(BACKEND_BIN) $(BACKEND_DIR)
-	cat ../TRQS.m.tpl | sed s/TRQS_BACKEND/$(BACKEND_DIR)/g > TRQS.m
-	tar czf ../TRQS-$(TRQSV)-`uname -m`-Quantis.tgz $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) TRQS.m ../TRQSTest.nb ../README quantis_installation.pdf
+	cat ../TRQS.m.tpl | sed s/TRQS_BACKEND_NAME/$(BACKEND_NAME)/g > ../TRQS.m
+	tar czvf ../TRQS-$(TRQSV)-$(ARCH)-Quantis.tgz \
+        $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) ../TRQS.m ../TRQSTest.nb \
+        ../README quantis_installation.pdf
 	rm -Rf $(BACKEND_DIR)
 
 quantis-nohw-bin-dist: $(eval BACKEND_LIB = -lQuantis-NoHw) $(BACKEND_BIN)
-	@echo Building binary dsitribution for $(BACKEND_DIR) linked against libQuantis-NoHw
+	@echo '==>' Building binary dsitribution for $(BACKEND_DIR) linked against libQuantis-NoHw
 	mkdir -p $(BACKEND_DIR)
 	mv $(BACKEND_BIN) $(BACKEND_DIR)
-	cat ../TRQS.m.tpl | sed s/TRQS_BACKEND/$(BACKEND_DIR)/g > TRQS.m
-	tar czf ../TRQS-$(TRQSV)-`uname -m`-Quantis-NoHw.tgz $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) TRQS.m ../TRQSTest.nb \
-	  ../README quantis_installation.pdf
+	cat ../TRQS.m.tpl | sed s/TRQS_BACKEND_NAME/$(BACKEND_NAME)/g > ../TRQS.m
+	tar czvf ../TRQS-$(TRQSV)-$(ARCH)-Quantis-NoHw.tgz \
+        $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) ../TRQS.m ../TRQSTest.nb \
+        ../README quantis_installation.pdf
 	rm -Rf $(BACKEND_DIR)
 
 % : %.tm
-	@echo Building file \'$^\'
+	@echo '==>' Building file \'$@\'
 	$(MPREP) $^ -o $^.c
 	$(CC) -I$(ML_INCDIR) -I$(BACKEND_INCDIR) -I.. $(ML_LIBS) $(BACKEND_LIB) -c -o $^.o $^.c
 	$(CXX) -L$(ML_LIBDIR) -I$(BACKEND_INCDIR) -L$(BACKEND_LIBDIR) $^.o $(ML_LIBS) $(BACKEND_LIB) -o $@ 

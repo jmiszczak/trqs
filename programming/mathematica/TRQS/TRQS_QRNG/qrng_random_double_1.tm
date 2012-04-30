@@ -1,5 +1,5 @@
 :Begin:
-:Function:	libqrng_random_double_1
+:Function:	qrng_random_double_1
 :Pattern:	TrueRandomReal[y_]
 :Arguments:	{ y }
 :ArgumentTypes:	{ Double }
@@ -9,13 +9,10 @@
 #include "libQRNG.h"
 #include "TRQS.h"
 
-double libqrng_random_double_1(double y) {
+double qrng_random_double_1(double y) {
     double rand_double;
 
-    if ( qrng_connect(LIBQRNG_USER, LIBQRNG_PASS) == QRNG_SUCCESS) {
-		qrng_get_double((double*)& rand_double);
-		rand_double = rand_double*y;
-    }
+	qrng_get_double((double*)& rand_double);
 
     return rand_double;    
 }

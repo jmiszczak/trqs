@@ -1,16 +1,17 @@
 :Begin:
-:Function:	qrng_get_lib_version
-:Pattern:	QRNGGetLibVersion[]
+:Function:	qrng_server_disconnect
+:Pattern:	QRNGServerDisconnect[]
 :Arguments:	{ }
 :ArgumentTypes:	{ }
-:ReturnType:	String
 :End:
 
 #include "libQRNG.h"
 #include "TRQS.h"
 
-char* qrng_get_lib_version(void) {
-    return qrng_libQRNG_version; 
+void qrng_server_disconnect() {
+	
+	qrng_disconnect();
+	
 }
 
 int main(int argc, char* argv[]) {

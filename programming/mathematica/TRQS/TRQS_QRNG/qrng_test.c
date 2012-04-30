@@ -1,13 +1,17 @@
 #include <stdio.h>
 #include "libQRNG.h"
+#include "TRQS.h"
 
 int main() {
 	int ret_code;
 	int int_value;
 	double double_value;
+	const char* lib_version = &qrng_libQRNG_version[9];
+
+	printf("Using QRNG library: %f\n\n", atof(lib_version));
 
     /* connect */
-	ret_code = qrng_connect("jmiszczak","alama12kota");
+	ret_code = qrng_connect(QRNG_USER, QRNG_PASS);
 
 	if (ret_code == 0 ) {
         printf ("Connection established\n");
