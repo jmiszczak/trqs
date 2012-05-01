@@ -2,6 +2,7 @@
 % v. 0.01 - 15/02/2011 - Jarek - instalation instructions written during tests on tesla
 % v. 0.02 - 23/03/2011 - Jarek - minor improvements
 % v. 0.03 - 23/04/2012 - Jarek - style and layout improvements
+% v. 0.04 - 01/05/2012 - Iza - minor spelling and grammar corrections
 
 \documentclass[a4paper,11pt]{article}
 
@@ -20,7 +21,7 @@
 \author{Jaros{\l}aw A. Miszczak\\
 Institute of Theoretical and Applied Informatics, Polish Academy of Sciences\\
 Baltycka 5, 44-100 Gliwice, Poland}
-\date{25/04/2012 (v.0.03)}
+\date{01/05/2012 (v.0.04)}
 
 \begin{document}
 
@@ -43,10 +44,10 @@ depending on the software package you are using.
     \item Unpack the Quantis software package and go to\\
     \texttt{Quantis-v11.01.12/Drivers/Unix/QuantisPci}.
     \item Compile the module\\ \texttt{make}
-    \item Install the module\\ \texttt{make install}\\ and check if the module was
+    \item Install the module\\ \texttt{make install}\\ and check if the module has been
     installed properly\\ \texttt{find /lib/modules/ -name quantis\_pci.ko}
-    \item Make sure that the drive will be loaded during the next book \\ \texttt{echo "quantis\_pci" >> /etc/modules}
-    \item Follow instructions in Section~\ref{sec:permissions}.
+    \item Make sure that the driver will be loaded during the next boot \\ \texttt{echo "quantis\_pci" >> /etc/modules}
+    \item Follow the instructions in Section~\ref{sec:permissions}.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -57,7 +58,7 @@ depending on the software package you are using.
     \texttt{apt-get install libusb-1.0-0 libusb-1.0-0-dev}
     \item Check your device with \texttt{lsusb}\\
     \texttt{lsusb -d 0aba:0102 -v} or \texttt{lsusb -v | grep Quantis}
-    \item Follow instructions in Section~\ref{sec:permissions}.
+    \item Follow the instructions in Section~\ref{sec:permissions}.
 \end{enumerate}
 
 
@@ -67,7 +68,7 @@ depending on the software package you are using.
 \begin{enumerate}
     \item Make sure that the \texttt{plugdev} group exists\\
     \texttt{cat /etc/group | grep plugdev}
-    \item Add user to the \texttt{plugdev} group\\
+    \item Add the user that will be permitted to use Quantis to the \texttt{plugdev} group\\
     \texttt{usermod -G plugdev -a LOGIN},\\ where \texttt{LOGIN} is the login name of the user
     \item Copy file \texttt{Quantis-v11.01.12/Drivers/Unix/idq-quantis.rules},\\ to \texttt{/etc/udev/rules.d/} directory and reload the UDEV rules\\
     \texttt{udevadm control --reload-rules}
@@ -83,13 +84,13 @@ depending on the software package you are using.
    \texttt{/usr/local/IDQ/Quantis}\\ \texttt{mkdir /usr/local/IDQ}\\ \texttt{tar
    xjvf QuantisRNG-2.5.0-Linux-amd64.tar.bz2}\\ \texttt{mv
    QuantisRNG-2.5.0-Linux-amd64 /usr/local/IDQ/Quantis}\\
-    After this step the \texttt{EasyQuantis} applicaiton shoul be in\\ \texttt{/usr/local/IDQ/Quantis/bin/EasyQuantis}
+    After this step the \texttt{EasyQuantis} application should be in\\ \texttt{/usr/local/IDQ/Quantis/bin/EasyQuantis}
     \item Copy {Quantis.h} and {DllMain.h} from\\
    \texttt{Quantis-v11.01.12/Libs-Apps/Quantis}\\ to\\
    \texttt{/usr/local/IQD/Quantis/include}
     \item Add \texttt{/usr/local/IDQ/Quantis/lib} (or
     \texttt{/usr/local/IDQ/Quantis/lib64}) to \\ \texttt{/etc/ld.so.config} or some
-    file which in included by this file \eg\ \\
+    file which is included by this file \eg\ \\
     \texttt{/etc/ld.so.conf.d/quantis.conf}
     \item Update the loader cache\\
     \texttt{ldconfig}

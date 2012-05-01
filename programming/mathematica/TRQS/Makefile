@@ -79,10 +79,10 @@ help:
 	@echo Available targets:
 	@echo \ src-dist - build .tgz archive with all source files
 	@echo \ quantis-bin-dist - build binary distributions based on libQuantis by IDQ
-	@echo \ quantis-nohw-bin-dist - same as above by based on libQuantis-NoHw
+	@echo \ quantis-nohw-bin-dist - same as the above but based on libQuantis-NoHw
 	@echo \ qrng-bin-dist - build binary distribution based on libQRNG by PicoQuant
 	@echo \ all - build all above targets
-	@echo \ clean - removes files created during compilation
+	@echo \ clean - remove the files created during compilation
 	@echo
 	@echo You can find more information at http://www.iitis.pl/~miszczak/trqs
 	@echo --------------------------------------------------------------------------------

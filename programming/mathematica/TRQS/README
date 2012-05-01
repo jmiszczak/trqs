@@ -1,31 +1,90 @@
-TRQS is a package for Mathematica computing system. This is a preliminary README
-file and contains only a minimal compilation and installation instructions.
+TRQS is a package for Mathematica computing system, which allows to generate
+random quantum states using truly random numbers generated according to the 
+rules of quantum mechanics. This README file contains some compilation and 
+installation instructions.
 
-(c) 2011 Jaroslaw Miszczak
+(c) 2011-2012 Jaroslaw Miszczak <miszczak(at)iitis.pl>
 
-* Configuration
-The MathLink source files must be configure prior to the compilation. Edit
-TRQS.h file to define QUANTIS_DEVICE_TYPE (QUANTIS_DEVICE_USB or
-QUANTIS_DEVICE_PCI) and QUANTIS_DEVICE_ID (eg. 0) according to your hardware
-configuration.
+== Introduction ==
 
-* Compilation
-- In order to compile *.tm source files one should note that
-  - A working Mathematica installation is required.
-  - We assume that header files are installed in /usr/local/IDQ/Quantis/include
-    and libraries in /usr/local/IDQ/Quantis/lib. Modify QUANTIS_HOME in the
-    Makefile if this is not the case.
+TRQS is a Mathematica package, which allows to utilize quantum true random number
+generators. Currently, the package supports two sources of randomness: Quantis RNG
+produced by ID Quantique S.A. and QRNG on-line service based on the generator 
+developed by Nano-Optics group at the Department of Physics of Humboldt University
+and PicoQuant GmbH.
 
-- Consult quantis_installation.pdf document in the case of problems with 
-  Quantis installation.
-- It is also possible to run the package without a Quantis device. In order 
-  to do this use Makefile.NoHw makefile to compile MathLink executables.
+== Configuration ==
 
-* Installation
-- Make sure that the dynamic loader know where to search for libQuantis (e.g. 
-  add /usr/local/IDQ/Quantis/lib to /etc/ld.so.conf).
-- Copy TRQS.m to $HOME/.Mathematica/Applications director
-- Copy compiled files to $HOME/.Mathematica/Applications/TRQS_Quantis directory.
+The MathLink source files and build scripts require some editing prior to the 
+compilation. The following files contain some important configuration options:
 
-* Examples
-- Notebook TRQSTest.nb contains some examples.
+ - TRQS.h - contains definitions of two macros QUANTIS_DEVICE_TYPE 
+	(QUANTIS_DEVICE_USB or QUANTIS_DEVICE_PCI) and QUANTIS_DEVICE_ID (eg. 0), 
+	which should be changed according to your hardware configuration. This is
+	relevant only when you use Quantis device.
+
+ - Makefile - contains variables required to locate libQRNG and/or libQuantis
+	headers and libraries. Edit variables required for the backend you are 
+	currently using.
+
+In order to compile *.tm source files one should note that
+  - a working Mathematica installation is required,
+  - one of the supported backends must be installed.
+
+Detailed instructions for compiling and running the supported backends are given 
+below.
+
+== Quantis backend ==
+
+=== Compilation ===
+
+For the purpose of compiling Mathlink sources it is assumed that the header 
+files are installed in /usr/local/IDQ/Quantis/include and libraries in 
+/usr/local/IDQ/Quantis/lib. Modify QUANTIS_HOME in the Makefile if this is 
+not the case.
+
+Consult quantis_installation.pdf document in TRQS_Quantis directory if you have
+problems with the installation of the device.
+
+It is also possible to run the TRQS package using this backend without a Quantis 
+device. In order to do this compile the sources using quantis-nohw-bin-dist target.
+
+=== Installation ===
+
+In order to run TRQS using Quantis backend you must make sure that the dynamic loader 
+knows where to search for libQuantis (e.g. add /usr/local/IDQ/Quantis/lib to /etc/ld.so.conf).
+
+The package is installed by copying TRQS.m files and TRQS_Quantis/ directory to 
+$HOME/.Mathematica/Applications directory.
+
+== QRNG backend ==
+
+=== Compilation ===
+
+For the purpose of compiling Mathlink sources it is assumed that the header 
+files are installed in /usr/local/PicoQuant/QRNG/include and libraries in 
+/usr/local/PicoQuant/QRNG/lib. Modify QRNG_HOME in the Makefile if this is 
+not the case.
+
+=== Installation ===
+
+In order to run TRQS using QRNG backend it is neccessary to register on the 
+http://qrng.physik.hu-berlin.de/ web page. User name and password given during the
+registration are required to obtain random data from the server. Registration is
+also required to download files from the web site.
+
+As QRNG backend is based on the on-line server, it is neccessary, in order to use it, 
+to have a working Internet connection. The on-line service runs on port 4499, so be
+sure that your firewall allows to use this port for the outgoing connections.
+
+The package is installed by copying TRQS.m files and TRQS_QRNG/ directory to 
+$HOME/.Mathematica/Applications director.
+
+== Examples ==
+
+Notebook TRQSTest.nb contains some examples.
+
+== Contact ==
+
+If you have any problems using TRQS package, please do not hesitate to write
+an email to miszczak (at) iitis.pl with TRQS in the subject line.

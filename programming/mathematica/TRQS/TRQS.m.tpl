@@ -7,7 +7,7 @@
 (* File: TRQS.m *)
 (* Description: Mathematica package for generating truly random quantum states using quantum random number generator *)
 (* Author: Jaroslaw Miszczak <miszczak@iitis.pl> *)
-(* Version: 0.1.1 (29/07/2011) *)
+(* Version: 0.2.2 (30/04/2012) *)
 (* License: GPLv3 *)
 
 
@@ -81,13 +81,13 @@ TrueRandomReal::usage = TrueRandomReal::usage <> "\nTrueRandomReal[] returns a r
 TrueRandomRealNormal::usage = "TrueRandomRealNormal[m,s,dims] provides a sample of random numbers distributed according to the normal distribution N[m,s] in an array of dimensions given by dims.";
 
 
-TrueGinibreMatrix::usage = "TrueGinibreMatrix[m,n] returns (m x n)-dimesional complex matrix with entries having real and complex part distributed according to the normal distribution N[0,1].";
+TrueGinibreMatrix::usage = "TrueGinibreMatrix[m,n] returns (m x n)-dimensional complex matrix with entries having real and complex parts distributed according to the normal distribution N[0,1].";
 
 
-TrueRandomSimplex::usage = "TrueRandomSimplex[n] returns distributed uniformly element of a standard n-simplex.";
+TrueRandomSimplex::usage = "TrueRandomSimplex[n] returns a uniformly distributed element of a standard n-simplex.";
 
 
-TrueRandomChoice::usage = "TrueRandomChoice[{\!\(\*SubscriptBox[\(e\), \(1\)]\),\!\(\*SubscriptBox[\(e\), \(2\)]\),\[Ellipsis],\!\(\*SubscriptBox[\(e\), \(n\)]\)}] retursn at random one of the \!\(\*SubscriptBox[\(e\), \(i\)]\).";
+TrueRandomChoice::usage = "TrueRandomChoice[{\!\(\*SubscriptBox[\(e\), \(1\)]\),\!\(\*SubscriptBox[\(e\), \(2\)]\),\[Ellipsis],\!\(\*SubscriptBox[\(e\), \(n\)]\)}] returns at random one of the \!\(\*SubscriptBox[\(e\), \(i\)]\).";
 
 
 TrueRandomGraph::usage ="TrueRandomGraph[v,e] returns a pseudorandom graph with v vertices and e edges.";
@@ -100,26 +100,26 @@ TrueRandomGraph::usage ="TrueRandomGraph[v,e] returns a pseudorandom graph with 
 TrueRandomKet::usage = "TrueRandomKet[d] returns a d-dimensional random pure state represented as a state vector.";
 
 
-TrueRandomProductKet::usage = "TrueRandomProductKet[{d1,d2,...,dn}] returns a random  pure state, which is an element of space with the tensor product structure.";
+TrueRandomProductKet::usage = "TrueRandomProductKet[{d1,d2,...,dn}] returns a random pure state, which is an element of a space with the tensor product structure.";
 
 
 TrueRandomUnitary::usage = "TrueRandomUnitary[d] returns d-dimensional random unitary matrix.";
 
 
-TrueRandomLocalUnitary::usage = "TrueRandomLocalUnitary[{d1,d2,...,dn}] returns a random unitary matrix, which acts on the elements of space with the tensor product structure.";
+TrueRandomLocalUnitary::usage = "TrueRandomLocalUnitary[{d1,d2,...,dn}] returns a random unitary matrix, which acts on the elements of a space with the tensor product structure.";
 
 
 (* ::Subsection::Closed:: *)
 (*Mixed states*)
 
 
-TrueRandomStateHS::usage = "TrueRandomStateHS[d] random state of dimension d, generated uniformly with respect to the Hilbert-Schmidt measure. This is equivalent to TrueRandomStateInduced[d,d].";
+TrueRandomStateHS::usage = "TrueRandomStateHS[d] returns a random state of dimension d, generated uniformly with respect to the Hilbert-Schmidt measure. This is equivalent to TrueRandomStateInduced[d,d].";
 
 
-TrueRandomStateBures::usage = "TrueRandomStateBures[d] random state of dimension d, generated uniformly with respect to the Bures measure.";
+TrueRandomStateBures::usage = "TrueRandomStateBures[d] returns a random state of dimension d, generated uniformly with respect to the Bures measure.";
 
 
-TrueRandomStateInduced::usage = "TrueRandomStateInduced[d,exK] random state of dimension d, generated uniformly with respect to the induced measure with the external system of dimension exK.";
+TrueRandomStateInduced::usage = "TrueRandomStateInduced[d,exK] returns a random state of dimension d, generated uniformly with respect to the induced measure with the external system of dimension exK.";
 
 
 TrueRandomProductState::usage = "TrueRandomProductState[] returns a product random density matrix acting on the space with the tensor product structure and with each local component generated according to measure \[Mu], where \[Mu] can be set to \"HS\", \"Bures\" or some integer K describing an induced measure.";
@@ -129,7 +129,7 @@ TrueRandomProductState::usage = "TrueRandomProductState[] returns a product rand
 (*Channels*)
 
 
-TrueRandomDynamicalMatrix::usage="TrueRandomDynamicalMatrix[n,k] returns a dynamical matrix acting on n-dimensional states with k evigenvalues equal to 0.";
+TrueRandomDynamicalMatrix::usage="TrueRandomDynamicalMatrix[n,k] returns a dynamical matrix acting on n-dimensional states with k eigenvalues equal to 0.";
 
 
 (* ::Subsection::Closed:: *)
@@ -139,7 +139,7 @@ TrueRandomDynamicalMatrix::usage="TrueRandomDynamicalMatrix[n,k] returns a dynam
 QuantisGetLibVersion::usage = "QuantisGetLibVersion[] returns a version number of an installed libQuantis library.";
 
 
-QuantisGetSerialNumber::usage = "QuantisGetSerialNumber[] returns a serial number of the Quantis device used as an backed.";
+QuantisGetSerialNumber::usage = "QuantisGetSerialNumber[] returns a serial number of the Quantis device used as a backend.";
 
 
 QuantisGetDeviceId::usage = "QuantisGetDeviceId[] returns an id number of the used Quantis device.";
@@ -203,8 +203,8 @@ TrueRandomGraph[{v_,e_},form_:"Graph"]:=Block[{maxE=1/2 (-v+v^2),edges={},newEdg
 	]
 ];
 
-TrueRandomGraph::argerr = "Invailid paramaters `1` (vertices) and `2` (edges) in TrueRandomGraph function call.";
-TrueRandomGraph::formerr = "Invailid output form. Please choose Graph or List (default)";
+TrueRandomGraph::argerr = "Invalid parameters `1` (vertices) and `2` (edges) in TrueRandomGraph function call.";
+TrueRandomGraph::formerr = "Invalid output form. Please choose Graph or List (default)";
 
 
 (* ::Subsection::Closed:: *)
