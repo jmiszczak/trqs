@@ -23,7 +23,7 @@ export QUANTIS_INCDIR = $(QUANTIS_HOME)/include
 ###############################################################################
 # general configuration options
 ###############################################################################
-export TRQSV = 0.2.2
+export TRQSV = 0.1.8
 
 ###############################################################################
 # MathLink variables used during the compilation

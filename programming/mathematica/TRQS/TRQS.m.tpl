@@ -7,7 +7,7 @@
 (* File: TRQS.m *)
 (* Description: Mathematica package for generating truly random quantum states using quantum random number generator *)
 (* Author: Jaroslaw Miszczak <miszczak@iitis.pl> *)
-(* Version: 0.2.2 (30/04/2012) *)
+(* Version: 0.1.8 (02/05/2012) *)
 (* License: GPLv3 *)
 
 
@@ -27,9 +27,10 @@ trqsHistory = {
 	{"0.0.9", "27/07/2011", "Jarek", "TrueRandomChoice function added."},
 	{"0.1.0", "28/07/2011", "Jarek", "TrueRandomDynamicalMatrix function added."},
 	{"0.1.1", "28/07/2011", "Jarek", "TrueRandomGraph function added."},
-	{"0.2.0", "24/04/2012", "Jarek", "Build system for the backend files improved."},
-	{"0.2.1", "27/04/2012", "Jarek", "Build system for the backend files improved."},
-	{"0.2.2", "30/04/2012", "Jarek", "Documentation improvements and simple backend sanity check."}
+	{"0.1.5", "24/04/2012", "Jarek", "Preliminary support for QRNG service."},
+	{"0.1.6", "27/04/2012", "Jarek", "Build system for the backend files improved."},
+	{"0.1.7", "30/04/2012", "Jarek", "Documentation improvements and simple backend sanity check."},
+	{"0.1.8", "02/05/2012", "Jarek", "Method for sharing login data for the QRNG backend"}
 };
 
 trqsVersion = Last[trqsHistory][[1]];
@@ -135,17 +136,19 @@ TrueRandomDynamicalMatrix::usage="TrueRandomDynamicalMatrix[n,k] returns a dynam
 (* ::Subsection::Closed:: *)
 (*Configuration related functions*)
 
+Switch[ trqsBackendName, 
+	"Quantis",
+		QuantisGetLibVersion::usage = "QuantisGetLibVersion[] returns a version number of an installed libQuantis library.";
+		QuantisGetSerialNumber::usage = "QuantisGetSerialNumber[] returns a serial number of the Quantis device used as a backend.";
+		QuantisGetDeviceId::usage = "QuantisGetDeviceId[] returns an id number of the used Quantis device.";
+		QuantisGetDeviceType::usage = "QuantisGetDeviceType[] returns a type of the used Quantis device.",
+	"QRNG",
+		QRNGGetLibVersion::usage = "QuantisGetLibVersion[] returns a version number of an installed libQRNG library.";
+		QRNGSetCredentials::usage = "QRNGSetCredentials[user, pass] sets the username and the password used for connecting with the QRNG service. This function must be used prior of using any functionality of the QRNG backend.";
+		QRNGTestConnection::usage = "QRNGTestConnection[] tests if the QRNG service is available for use. In the case of a failure, it report its casuse.";
+]
 
-QuantisGetLibVersion::usage = "QuantisGetLibVersion[] returns a version number of an installed libQuantis library.";
 
-
-QuantisGetSerialNumber::usage = "QuantisGetSerialNumber[] returns a serial number of the Quantis device used as a backend.";
-
-
-QuantisGetDeviceId::usage = "QuantisGetDeviceId[] returns an id number of the used Quantis device.";
-
-
-QuantisGetDeviceType::usage = "QuantisGetDeviceType[] returns a type of the used Quantis device.";
 
 
 (* ::Section:: *)
@@ -302,8 +305,8 @@ Switch[ trqsBackendName,
 		Install[trqsBinaries<>"/quantis_get_device_type"],
 	"QRNG", 
 		Install[trqsBinaries<>"/qrng_get_lib_version"];
-		Install[trqsBinaries<>"/qrng_server_connect"];
-		Install[trqsBinaries<>"/qrng_server_disconnect"];
+		Install[trqsBinaries<>"/qrng_set_credentials"];
+		Install[trqsBinaries<>"/qrng_test_connection"];
 ]
 
 
