@@ -1,0 +1,123 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      3519,        114]
+NotebookOptionsPosition[      2839,         84]
+NotebookOutlinePosition[      3195,        100]
+CellTagsIndexPosition[      3152,         97]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Quit", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.544965870520641*^9, 3.544965871571203*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"<<", "TRQS`"}]], "Input",
+ CellChangeTimes->{{3.544965813417714*^9, 3.544965815616445*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Package TRQS version \"\>", 
+   "\[InvisibleSpace]", "\<\"0.1.8\"\>", 
+   "\[InvisibleSpace]", "\<\" (last modification: \"\>", 
+   "\[InvisibleSpace]", "\<\"02/05/2012\"\>", 
+   "\[InvisibleSpace]", "\<\").\"\>"}],
+  SequenceForm[
+  "Package TRQS version ", "0.1.8", " (last modification: ", "02/05/2012", 
+   ")."],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.544965857151876*^9, 3.54496588314241*^9}, 
+   3.544965926207217*^9, 3.544966069148173*^9, 3.544966319911525*^9, 
+   3.544966495154168*^9, 3.54496677113808*^9, 3.544967004736075*^9, 
+   3.544967046134174*^9, 3.544967655127435*^9, 3.544967704196326*^9}],
+
+Cell[BoxData["\<\"Using QRNG as a source of randomness.\"\>"], "Print",
+ CellChangeTimes->{{3.544965857151876*^9, 3.54496588314241*^9}, 
+   3.544965926207217*^9, 3.544966069148173*^9, 3.544966319911525*^9, 
+   3.544966495154168*^9, 3.54496677113808*^9, 3.544967004736075*^9, 
+   3.544967046134174*^9, 3.544967655127435*^9, 3.544967704256212*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"QRNGSetCredentials", "[", 
+  RowBox[{"\"\<?????\>\"", ",", "\"\<?????\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.544965927946081*^9, 3.544965944986555*^9}, 
+   3.544967030876394*^9, {3.544967061762356*^9, 3.544967075155519*^9}, {
+   3.544967647966449*^9, 3.544967650161869*^9}, {3.544967734983838*^9, 
+   3.544967765223267*^9}}],
+
+Cell[BoxData["\<\"User name and password for using QRNG service set!\"\>"], \
+"Print",
+ CellChangeTimes->{{3.544967706753257*^9, 3.544967742784148*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"QRNGTestConnection", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.544965948217828*^9, 3.544965952094051*^9}}],
+
+Cell[BoxData["\<\"QRNG_SUCCESS\"\>"], "Output",
+ CellChangeTimes->{{3.544967723498788*^9, 3.544967743548013*^9}}]
+}, Open  ]],
+
+Cell[BoxData["TRQS`Private`QRNGPassword"], "Input",
+ CellChangeTimes->{{3.544966787237657*^9, 3.544966800158213*^9}}]
+},
+WindowSize->{1280, 718},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+FrontEndVersion->"8.0 for Linux x86 (32-bit) (October 10, 2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 118, 2, 30, "Input"],
+Cell[CellGroupData[{
+Cell[700, 26, 115, 2, 30, "Input"],
+Cell[CellGroupData[{
+Cell[840, 32, 670, 14, 23, "Print"],
+Cell[1513, 48, 345, 4, 23, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1907, 58, 356, 6, 30, "Input"],
+Cell[2266, 66, 152, 2, 23, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2455, 73, 132, 2, 30, "Input"],
+Cell[2590, 77, 113, 1, 30, "Output"]
+}, Open  ]],
+Cell[2718, 81, 117, 1, 30, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

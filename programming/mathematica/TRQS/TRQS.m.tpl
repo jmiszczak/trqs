@@ -39,7 +39,7 @@ trqsLastModification = Last[trqsHistory][[2]];
 
 trqsNames = Names["TRQS`*"]
 
-trqsHomeDirectory = DirectoryName[FindFile["TRQS.m"]];
+trqsHomeDir = DirectoryName[FindFile["TRQS.m"]];
 
 trqsBackendName = "TRQS_BACKEND_NAME";
 
@@ -47,7 +47,7 @@ trqsBackendDir = "TRQS_" <> trqsBackendName;
 
 trqsBackendBinPrefix = ToLowerCase[trqsBackendName];
 
-trqsBinaries = ToString[trqsHomeDirectory <> trqsBackendDir];
+trqsBinaries = ToString[trqsHomeDir <> trqsBackendDir];
 
 
 End[];
@@ -133,10 +133,11 @@ TrueRandomProductState::usage = "TrueRandomProductState[] returns a product rand
 TrueRandomDynamicalMatrix::usage="TrueRandomDynamicalMatrix[n,k] returns a dynamical matrix acting on n-dimensional states with k eigenvalues equal to 0.";
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Configuration related functions*)
 
-Switch[ trqsBackendName, 
+
+Switch[ TRQS`Private`trqsBackendName, 
 	"Quantis",
 		QuantisGetLibVersion::usage = "QuantisGetLibVersion[] returns a version number of an installed libQuantis library.";
 		QuantisGetSerialNumber::usage = "QuantisGetSerialNumber[] returns a serial number of the Quantis device used as a backend.";
@@ -160,6 +161,7 @@ Begin["`Private`"];
 
 (* ::Subsection:: *)
 (*Basic functions*)
+
 
 Install[trqsBinaries <> "/" <> trqsBackendBinPrefix  <> "_random_integer"];
 Install[trqsBinaries <> "/" <> trqsBackendBinPrefix  <> "_random_integer_1"];
@@ -294,10 +296,11 @@ TrueRandomDynamicalMatrix[n_,k_:0]:=Block[{mX=TrueGinibreMatrix[n^2,n^2-k],mY,di
 ];
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Configuration related functions*)
 
-Switch[ trqsBackendName, 
+
+Switch[ TRQS`Private`trqsBackendName, 
 	"Quantis",
 		Install[trqsBinaries<>"/quantis_get_lib_version"];
 		Install[trqsBinaries<>"/quantis_get_serial_number"];
@@ -305,9 +308,13 @@ Switch[ trqsBackendName,
 		Install[trqsBinaries<>"/quantis_get_device_type"],
 	"QRNG", 
 		Install[trqsBinaries<>"/qrng_get_lib_version"];
-		Install[trqsBinaries<>"/qrng_set_credentials"];
 		Install[trqsBinaries<>"/qrng_test_connection"];
-]
+		QRNGSetCredentials[user_, pass_] := Block[{},
+			TRQS`Private`QRNGUsername = user;
+			TRQS`Private`QRNGPassword = pass; 
+			Print["User name and password for using QRNG service set!"];
+		]
+];
 
 
 End[];

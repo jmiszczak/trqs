@@ -9,19 +9,33 @@
 #include "libQRNG.h"
 #include "TRQS.h"
 
-char* qrng_test_conection() {
+const char* qrng_test_connection() {
 	int ret_code;
-	
 	const char* user;
 	const char* pass;
 
-	MLPuySymbol(stdlink, "TRQS`Private`QRNGUsername
-	MLGetString(stdlink, user)
-	
+	// get the user name
+	MLPutFunction(stdlink, "EvaluatePacket", 1); 
+    MLPutSymbol(stdlink, "TRQS`Private`QRNGUsername");
+    MLEndPacket(stdlink);
+    while (MLNextPacket(stdlink) != RETURNPKT) {
+        MLNewPacket(stdlink);
+	}
+    MLGetString(stdlink, &user);
 
-//	ret_code = qrng_connect(user, pass);
-	ret_code = 0;
-	
+	// get the password
+	MLPutFunction(stdlink, "EvaluatePacket", 1); 
+    MLPutSymbol(stdlink, "TRQS`Private`QRNGPassword");
+    MLEndPacket(stdlink);
+    while (MLNextPacket(stdlink) != RETURNPKT) {
+        MLNewPacket(stdlink);
+	}
+    MLGetString(stdlink, &pass);
+
+	// try to connect
+	ret_code = qrng_connect(user, pass);
+
+	// retport the result	
 	return qrng_error_strings[ret_code];
 }
 
