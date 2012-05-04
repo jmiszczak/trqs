@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      3519,        114]
-NotebookOptionsPosition[      2839,         84]
-NotebookOutlinePosition[      3195,        100]
-CellTagsIndexPosition[      3152,         97]
+NotebookDataLength[      9658,        251]
+NotebookOptionsPosition[      8158,        193]
+NotebookOutlinePosition[      8814,        219]
+CellTagsIndexPosition[      8690,        213]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -26,96 +26,233 @@ Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"<<", "TRQS`"}]], "Input",
- CellChangeTimes->{{3.544965813417714*^9, 3.544965815616445*^9}}],
+ CellChangeTimes->{{3.544965813417714*^9, 3.544965815616445*^9}, {
+  3.5451180423841963`*^9, 3.5451180431606827`*^9}}],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Package TRQS version \"\>", 
-   "\[InvisibleSpace]", "\<\"0.1.8\"\>", 
+   "\[InvisibleSpace]", "\<\"0.1.9\"\>", 
    "\[InvisibleSpace]", "\<\" (last modification: \"\>", 
-   "\[InvisibleSpace]", "\<\"02/05/2012\"\>", 
+   "\[InvisibleSpace]", "\<\"04/05/2012\"\>", 
    "\[InvisibleSpace]", "\<\").\"\>"}],
   SequenceForm[
-  "Package TRQS version ", "0.1.8", " (last modification: ", "02/05/2012", 
+  "Package TRQS version ", "0.1.9", " (last modification: ", "04/05/2012", 
    ")."],
   Editable->False]], "Print",
  CellChangeTimes->{{3.544965857151876*^9, 3.54496588314241*^9}, 
    3.544965926207217*^9, 3.544966069148173*^9, 3.544966319911525*^9, 
    3.544966495154168*^9, 3.54496677113808*^9, 3.544967004736075*^9, 
-   3.544967046134174*^9, 3.544967655127435*^9, 3.544967704196326*^9}],
+   3.544967046134174*^9, 3.544967655127435*^9, 3.544967704196326*^9, {
+   3.5451162056920223`*^9, 3.545116279298525*^9}, 3.54511662614959*^9, 
+   3.545116664208358*^9, 3.54511714890084*^9, 3.545117340503661*^9, 
+   3.545117371945314*^9, {3.545117690774384*^9, 3.5451177150889*^9}, 
+   3.54511775076703*^9, 3.5451177922679787`*^9, 3.545117835177627*^9, 
+   3.545117907996695*^9, {3.54511799841256*^9, 3.545118009241126*^9}, 
+   3.545118044257571*^9, 3.5451181312253923`*^9}],
 
-Cell[BoxData["\<\"Using QRNG as a source of randomness.\"\>"], "Print",
+Cell[BoxData["\<\"Using QRNG (https://qrng.physik.hu-berlin.de/) as a source \
+of randomness.\"\>"], "Print",
  CellChangeTimes->{{3.544965857151876*^9, 3.54496588314241*^9}, 
    3.544965926207217*^9, 3.544966069148173*^9, 3.544966319911525*^9, 
    3.544966495154168*^9, 3.54496677113808*^9, 3.544967004736075*^9, 
-   3.544967046134174*^9, 3.544967655127435*^9, 3.544967704256212*^9}]
+   3.544967046134174*^9, 3.544967655127435*^9, 3.544967704196326*^9, {
+   3.5451162056920223`*^9, 3.545116279298525*^9}, 3.54511662614959*^9, 
+   3.545116664208358*^9, 3.54511714890084*^9, 3.545117340503661*^9, 
+   3.545117371945314*^9, {3.545117690774384*^9, 3.5451177150889*^9}, 
+   3.54511775076703*^9, 3.5451177922679787`*^9, 3.545117835177627*^9, 
+   3.545117907996695*^9, {3.54511799841256*^9, 3.545118009241126*^9}, 
+   3.545118044257571*^9, 3.545118131227069*^9}],
+
+Cell[BoxData["\<\"\\!\\(\\*\\nStyleBox[\\\"Note\\\",\\nFontWeight->\\\"Bold\\\
+\"]\\)\\!\\(\\*\\nStyleBox[\\\":\\\",\\nFontWeight->\\\"Bold\\\"]\\) You have \
+to use \\!\\(\\*\\nStyleBox[\\\"QRNGSetCredentials\\\",\\nFontWeight->\\\"\
+Bold\\\"]\\) function to provide login information required to use this \
+backend.\"\>"], "Print",
+ CellChangeTimes->{{3.544965857151876*^9, 3.54496588314241*^9}, 
+   3.544965926207217*^9, 3.544966069148173*^9, 3.544966319911525*^9, 
+   3.544966495154168*^9, 3.54496677113808*^9, 3.544967004736075*^9, 
+   3.544967046134174*^9, 3.544967655127435*^9, 3.544967704196326*^9, {
+   3.5451162056920223`*^9, 3.545116279298525*^9}, 3.54511662614959*^9, 
+   3.545116664208358*^9, 3.54511714890084*^9, 3.545117340503661*^9, 
+   3.545117371945314*^9, {3.545117690774384*^9, 3.5451177150889*^9}, 
+   3.54511775076703*^9, 3.5451177922679787`*^9, 3.545117835177627*^9, 
+   3.545117907996695*^9, {3.54511799841256*^9, 3.545118009241126*^9}, 
+   3.545118044257571*^9, 3.545118131228459*^9}]
 }, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
- RowBox[{"QRNGSetCredentials", "[", 
-  RowBox[{"\"\<?????\>\"", ",", "\"\<?????\>\""}], "]"}]], "Input",
+ RowBox[{"?", "QRNGSetCredentials"}]], "Input",
+ CellChangeTimes->{{3.545118132778996*^9, 3.545118132895228*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"QRNGSetCredentials[user, pass] sets the username and the \
+password used for connecting with the QRNG service \
+(https://qrng.physik.hu-berlin.de/). This function must be used prior of \
+using any functionality of the QRNG backend.\"\>", "MSG"]], "Print", \
+"PrintUsage",
+ CellChangeTimes->{3.545118133248973*^9},
+ CellTags->"Info3545125333-2639125"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "QRNGTestConnection"}]], "Input",
+ CellChangeTimes->{{3.54511814448843*^9, 3.5451181446031647`*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"QRNGTestConnection[] tests if the QRNG service is available \
+for use. In the case of a failure, it report its casuse.\"\>", 
+  "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.545118144944921*^9},
+ CellTags->"Info3545125344-2639125"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"QRNGSetCredentials", "[", 
+   RowBox[{"\"\<????????\>\"", ",", "\"\<????????\>\""}], "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "get", " ", "username", " ", "and", " ", "password", " ", "at", " ", 
+     RowBox[{"https", ":"}]}], "//", 
+    RowBox[{
+     RowBox[{"qrng", ".", "physik", ".", "hu"}], "-", 
+     RowBox[{
+      RowBox[{"berlin", ".", "de"}], "/"}]}]}], " ", "*)"}]}]], "Input",
  CellChangeTimes->{{3.544965927946081*^9, 3.544965944986555*^9}, 
    3.544967030876394*^9, {3.544967061762356*^9, 3.544967075155519*^9}, {
    3.544967647966449*^9, 3.544967650161869*^9}, {3.544967734983838*^9, 
-   3.544967765223267*^9}}],
+   3.544967765223267*^9}, {3.545116257608315*^9, 3.545116263399309*^9}, {
+   3.545116317490739*^9, 3.545116317808426*^9}, {3.545116408945204*^9, 
+   3.545116424627108*^9}, {3.5451166509954853`*^9, 3.545116670978341*^9}, {
+   3.5451171597789516`*^9, 3.545117176328416*^9}, 3.545117344537702*^9, {
+   3.545117376594686*^9, 3.545117397522787*^9}, {3.545117508298744*^9, 
+   3.545117513148019*^9}, {3.5451178046900682`*^9, 3.545117823507873*^9}, {
+   3.54511805974557*^9, 3.5451180740879297`*^9}}],
 
 Cell[BoxData["\<\"User name and password for using QRNG service set!\"\>"], \
 "Print",
- CellChangeTimes->{{3.544967706753257*^9, 3.544967742784148*^9}}]
+ CellChangeTimes->{{3.544967706753257*^9, 3.544967742784148*^9}, {
+   3.545116263917691*^9, 3.5451162801599913`*^9}, 3.545116317976755*^9, {
+   3.545116409811747*^9, 3.5451164253079157`*^9}, {3.545116626937558*^9, 
+   3.5451166910576572`*^9}, 3.545116765582584*^9, 3.5451170450426073`*^9, {
+   3.5451171242381887`*^9, 3.545117176764328*^9}, {3.545117340713389*^9, 
+   3.545117398110304*^9}, {3.545117798388755*^9, 3.545117835347928*^9}, 
+   3.5451180507130947`*^9, 3.5451181352396*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["TRQS`Private`QRNGUsername"], "Input",
+ CellChangeTimes->{{3.5451163110141706`*^9, 3.545116311999137*^9}}],
+
+Cell[BoxData["\<\"????????\"\>"], "Output",
+ CellChangeTimes->{3.545116312552836*^9, 3.5451171184186563`*^9, 
+  3.5451178354370003`*^9, 3.545118051748049*^9, 3.545118136086725*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["TRQS`Private`QRNGPassword"], "Input",
+ CellChangeTimes->{{3.544966787237657*^9, 3.544966800158213*^9}}],
+
+Cell[BoxData["\<\"????????\"\>"], "Output",
+ CellChangeTimes->{{3.545116267418466*^9, 3.545116313807857*^9}, 
+   3.545117118945588*^9, 3.545117836108374*^9, 3.545118052275795*^9, 
+   3.545118136559696*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"QRNGTestConnection", "[", "]"}]], "Input",
- CellChangeTimes->{{3.544965948217828*^9, 3.544965952094051*^9}}],
+ CellChangeTimes->{{3.544965948217828*^9, 3.544965952094051*^9}, {
+  3.545116376072177*^9, 3.5451163780788183`*^9}, {3.545117094104434*^9, 
+  3.545117094543088*^9}, {3.545117153663686*^9, 3.545117154110606*^9}}],
 
-Cell[BoxData["\<\"QRNG_SUCCESS\"\>"], "Output",
- CellChangeTimes->{{3.544967723498788*^9, 3.544967743548013*^9}}]
-}, Open  ]],
-
-Cell[BoxData["TRQS`Private`QRNGPassword"], "Input",
- CellChangeTimes->{{3.544966787237657*^9, 3.544966800158213*^9}}]
+Cell[BoxData["\<\"QRNG_ERR_BAD_CREDENTIALS\"\>"], "Output",
+ CellChangeTimes->{{3.544967723498788*^9, 3.544967743548013*^9}, {
+   3.5451162653456984`*^9, 3.545116286553893*^9}, 3.545116318719879*^9, {
+   3.5451163763706284`*^9, 3.545116430625887*^9}, {3.5451166334699078`*^9, 
+   3.545116691673571*^9}, {3.5451167576582813`*^9, 3.545116766209831*^9}, {
+   3.545117043070397*^9, 3.5451170457006598`*^9}, {3.545117095012137*^9, 
+   3.545117172714621*^9}, {3.545117342500078*^9, 3.545117409020615*^9}, {
+   3.545117801052353*^9, 3.5451178370292063`*^9}, 3.54511805304496*^9, 
+   3.5451181374031687`*^9}]
+}, Open  ]]
 },
-WindowSize->{1280, 718},
+WindowSize->{1920, 1114},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
 ShowSelection->True,
-FrontEndVersion->"8.0 for Linux x86 (32-bit) (October 10, 2011)",
+FrontEndVersion->"8.0 for Linux x86 (64-bit) (October 10, 2011)",
 StyleDefinitions->"Default.nb"
 ]
 (* End of Notebook Content *)
 
 (* Internal cache information *)
 (*CellTagsOutline
-CellTagsIndex->{}
+CellTagsIndex->{
+ "Info3545125333-2639125"->{
+  Cell[3946, 92, 379, 7, 42, "Print",
+   CellTags->"Info3545125333-2639125"]},
+ "Info3545125344-2639125"->{
+  Cell[4493, 108, 267, 5, 42, "Print",
+   CellTags->"Info3545125344-2639125"]}
+ }
 *)
 (*CellTagsIndex
-CellTagsIndex->{}
+CellTagsIndex->{
+ {"Info3545125333-2639125", 8479, 204},
+ {"Info3545125344-2639125", 8587, 207}
+ }
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[557, 20, 118, 2, 30, "Input"],
+Cell[557, 20, 118, 2, 29, "Input"],
 Cell[CellGroupData[{
-Cell[700, 26, 115, 2, 30, "Input"],
+Cell[700, 26, 168, 3, 29, "Input"],
 Cell[CellGroupData[{
-Cell[840, 32, 670, 14, 23, "Print"],
-Cell[1513, 48, 345, 4, 23, "Print"]
+Cell[893, 33, 1074, 20, 22, "Print"],
+Cell[1970, 55, 785, 11, 22, "Print"],
+Cell[2758, 68, 1009, 14, 22, "Print"]
 }, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[1907, 58, 356, 6, 30, "Input"],
-Cell[2266, 66, 152, 2, 23, "Print"]
+Cell[3816, 88, 127, 2, 29, "Input"],
+Cell[3946, 92, 379, 7, 42, "Print",
+ CellTags->"Info3545125333-2639125"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2455, 73, 132, 2, 30, "Input"],
-Cell[2590, 77, 113, 1, 30, "Output"]
+Cell[4362, 104, 128, 2, 29, "Input"],
+Cell[4493, 108, 267, 5, 42, "Print",
+ CellTags->"Info3545125344-2639125"]
 }, Open  ]],
-Cell[2718, 81, 117, 1, 30, "Input"]
+Cell[CellGroupData[{
+Cell[4797, 118, 1151, 22, 29, "Input"],
+Cell[5951, 142, 572, 8, 22, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6560, 155, 119, 1, 29, "Input"],
+Cell[6682, 158, 180, 2, 29, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6899, 165, 117, 1, 29, "Input"],
+Cell[7019, 168, 205, 3, 29, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7261, 176, 278, 4, 29, "Input"],
+Cell[7542, 182, 600, 8, 29, "Output"]
+}, Open  ]]
 }
 ]
 *)

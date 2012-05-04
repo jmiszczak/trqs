@@ -30,7 +30,8 @@ trqsHistory = {
 	{"0.1.5", "24/04/2012", "Jarek", "Preliminary support for QRNG service."},
 	{"0.1.6", "27/04/2012", "Jarek", "Build system for the backend files improved."},
 	{"0.1.7", "30/04/2012", "Jarek", "Documentation improvements and simple backend sanity check."},
-	{"0.1.8", "02/05/2012", "Jarek", "Method for sharing login data for the QRNG backend"}
+	{"0.1.8", "02/05/2012", "Jarek", "Method for sharing login data for the QRNG backend"},
+	{"0.1.9", "04/05/2012", "Jarek", "Connection checking improved for the QRNG backend"}
 };
 
 trqsVersion = Last[trqsHistory][[1]];
@@ -54,7 +55,18 @@ End[];
 
 
 Print["Package TRQS version ", TRQS`Private`trqsVersion, " (last modification: ", TRQS`Private`trqsLastModification, ")."];
-Print["Using " <> TRQS`Private`trqsBackendName <> " as a source of randomness."];
+Switch[ TRQS`Private`trqsBackendName,
+"Quantis",
+	Print["Using " <> TRQS`Private`trqsBackendName <> " as a source of randomness."];
+	Print["\!\(\*
+StyleBox[\"Note\",\nFontWeight->\"Bold\"]\) You have to configure this backend by providing information required about the id and type of the used Quantis device."],
+"QRNG",
+	Print["Using " <> TRQS`Private`trqsBackendName <> " (https://qrng.physik.hu-berlin.de/) as a source of randomness."];
+	Print["\!\(\*
+StyleBox[\"Note\",\nFontWeight->\"Bold\"]\)\!\(\*
+StyleBox[\":\",\nFontWeight->\"Bold\"]\) You have to use \!\(\*
+StyleBox[\"QRNGSetCredentials\",\nFontWeight->\"Bold\"]\) function to provide login information required to use this backend."];
+];
 
 
 Unprotect@@TRQS`Private`trqsNames;
@@ -145,11 +157,9 @@ Switch[ TRQS`Private`trqsBackendName,
 		QuantisGetDeviceType::usage = "QuantisGetDeviceType[] returns a type of the used Quantis device.",
 	"QRNG",
 		QRNGGetLibVersion::usage = "QuantisGetLibVersion[] returns a version number of an installed libQRNG library.";
-		QRNGSetCredentials::usage = "QRNGSetCredentials[user, pass] sets the username and the password used for connecting with the QRNG service. This function must be used prior of using any functionality of the QRNG backend.";
+		QRNGSetCredentials::usage = "QRNGSetCredentials[user, pass] sets the username and the password used for connecting with the QRNG service (https://qrng.physik.hu-berlin.de/). This function must be used prior of using any functionality of the QRNG backend.";
 		QRNGTestConnection::usage = "QRNGTestConnection[] tests if the QRNG service is available for use. In the case of a failure, it report its casuse.";
-]
-
-
+];
 
 
 (* ::Section:: *)
@@ -313,7 +323,9 @@ Switch[ TRQS`Private`trqsBackendName,
 			TRQS`Private`QRNGUsername = user;
 			TRQS`Private`QRNGPassword = pass; 
 			Print["User name and password for using QRNG service set!"];
-		]
+			Uninstall[trqsBinaries<>"/qrng_test_connection"];
+			Install[trqsBinaries<>"/qrng_test_connection"];
+		];
 ];
 
 

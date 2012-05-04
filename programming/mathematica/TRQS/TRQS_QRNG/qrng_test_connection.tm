@@ -9,7 +9,7 @@
 #include "libQRNG.h"
 #include "TRQS.h"
 
-const char* qrng_test_connection() {
+char* qrng_test_connection() {
 	int ret_code;
 	const char* user;
 	const char* pass;
