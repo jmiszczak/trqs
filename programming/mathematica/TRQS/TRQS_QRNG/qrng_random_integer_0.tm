@@ -11,10 +11,18 @@
 
 int qrng_random_integer_0() {
 	int rand_int;
+	int qrng_status;
 
-	qrng_get_int((int*)& rand_int);
+	// try to connect
+	QRNG_ESTABLISH_CONNECTION(qrng_status);
+
+	if (qrng_status == QRNG_SUCCESS) {
+		qrng_get_int((int*)& rand_int);
+	}
+
 	rand_int = (rand_int % 2); // range is 2
-	if (rand_int < 0) {
+
+	if (rand_int < 0) { // get the positive one
 		rand_int = rand_int + 2;
 	}
 	

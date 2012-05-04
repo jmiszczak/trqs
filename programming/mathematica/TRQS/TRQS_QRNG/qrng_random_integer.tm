@@ -14,9 +14,18 @@ int qrng_random_integer(int i, int j) {
 	int range = j - i + 1; 
 	int rem;
 
-	qrng_get_int((int*)& rand_int);
+	int qrng_status;
+
+	// try to connect
+	QRNG_ESTABLISH_CONNECTION(qrng_status);
+
+	if (qrng_status == QRNG_SUCCESS) {
+		qrng_get_int((int*)& rand_int);
+	}
+
 	rem = (rand_int % range);
-	if (rem < 0) {
+
+	if (rem < 0) { // get the positive one 
 		rem = rem +range;
 	}
 	

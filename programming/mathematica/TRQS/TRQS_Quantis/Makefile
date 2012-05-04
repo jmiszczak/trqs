@@ -36,9 +36,9 @@ quantis_test:
 	$(CC) $(@:%=%.c) -o $@ -I$(BACKEND_INCDIR) -I.. -L$(BACKEND_LIBDIR) $(BACKEND_LIB) $(CCFLAGS)
 
 quantis-bin-dist: $(BACKEND_BIN)
-	@echo '==>' Building binary dsitribution for $(BACKEND_DIR)
+	@echo '==>' Building binary distribution for $(BACKEND_DIR)
 	mkdir -p $(BACKEND_DIR)
-	mv $(BACKEND_BIN) $(BACKEND_DIR)
+	cp $(BACKEND_BIN) $(BACKEND_DIR)
 	cat ../TRQS.m.tpl | sed s/TRQS_BACKEND_NAME/$(BACKEND_NAME)/g > ../TRQS.m
 	tar czvf ../TRQS-$(TRQSV)-$(ARCH)-Quantis.tgz \
         $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) ../TRQS.m ../TRQSTest.nb \
@@ -48,7 +48,7 @@ quantis-bin-dist: $(BACKEND_BIN)
 quantis-nohw-bin-dist: $(eval BACKEND_LIB = -lQuantis-NoHw) $(BACKEND_BIN)
 	@echo '==>' Building binary dsitribution for $(BACKEND_DIR) linked against libQuantis-NoHw
 	mkdir -p $(BACKEND_DIR)
-	mv $(BACKEND_BIN) $(BACKEND_DIR)
+	cp $(BACKEND_BIN) $(BACKEND_DIR)
 	cat ../TRQS.m.tpl | sed s/TRQS_BACKEND_NAME/$(BACKEND_NAME)/g > ../TRQS.m
 	tar czvf ../TRQS-$(TRQSV)-$(ARCH)-Quantis-NoHw.tgz \
         $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) ../TRQS.m ../TRQSTest.nb \

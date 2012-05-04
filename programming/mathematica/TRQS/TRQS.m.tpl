@@ -82,11 +82,13 @@ Clear@@TRQS`Private`trqsNames;
 
 
 TrueRandomInteger::usage = "TrueRandomInteger[{i_min,i_max}] returns a random integer in the range [i_min,i_max].";
+TrueRandomInteger::usage = TrueRandomInteger::usage <> "\nTrueRandomInteger[{i_min, i_max}, dim] returns a list of random integers in the range [i_min, i_max] with dim elements.";
 TrueRandomInteger::usage = TrueRandomInteger::usage <> "\nTrueRandomInteger[i] returns a random integer in the range [0,i].";
 TrueRandomInteger::usage = TrueRandomInteger::usage <> "\nTrueRandomInteger[] returns 0 or 1.";
 
 
 TrueRandomReal::usage = "TrueRandomReal[{x_min,x_max}] returns a random double in the range [x_min,x_max].";
+TrueRandomReal::usage = "TrueRandomReal::usage <> "\nTrueRandomReal[{x_min,x_max}, dim] returns a list of random double in the range [x_min,x_max] with dim elements.";
 TrueRandomReal::usage = TrueRandomReal::usage <> "\nTrueRandomReal[i] returns a random double in the range [0,x].";
 TrueRandomReal::usage = TrueRandomReal::usage <> "\nTrueRandomReal[] returns a random double in the range [0,1].";
 
@@ -176,6 +178,7 @@ Begin["`Private`"];
 Install[trqsBinaries <> "/" <> trqsBackendBinPrefix  <> "_random_integer"];
 Install[trqsBinaries <> "/" <> trqsBackendBinPrefix  <> "_random_integer_1"];
 Install[trqsBinaries <> "/" <> trqsBackendBinPrefix  <> "_random_integer_0"];
+Install[trqsBinaries <> "/" <> trqsBackendBinPrefix  <> "_random_integer_n"];
 
 Install[trqsBinaries <> "/" <> trqsBackendBinPrefix  <> "_random_double"];
 Install[trqsBinaries <> "/" <> trqsBackendBinPrefix  <> "_random_double_1"];

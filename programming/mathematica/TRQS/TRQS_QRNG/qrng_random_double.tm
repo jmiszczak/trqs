@@ -11,10 +11,15 @@
 
 double qrng_random_double(double x, double y) {
     double rand_double;
+	int qrng_status;
 
-	qrng_get_double((double*)& rand_double);
-	rand_double = rand_double*(y-x) + x;
-    
+	// try to connect
+	QRNG_ESTABLISH_CONNECTION(qrng_status);
+
+	if (qrng_status == QRNG_SUCCESS) {
+		qrng_get_double((double*)& rand_double);
+		rand_double = rand_double*(y-x) + x;
+	}
 
     return rand_double;    
 }

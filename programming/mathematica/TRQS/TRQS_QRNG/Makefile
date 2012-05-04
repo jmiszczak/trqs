@@ -32,13 +32,13 @@ BACKEND_BIN = $(BACKEND_SRC:%.tm=%)
 qrng-all: $(BACKEND_BIN) qrng_test
 
 qrng_test:
-	@echo Building files \'$@\'
+	@echo '==>' Building files \'$@\'
 	$(CC) $(@:%=%.c) -o $@ -I$(BACKEND_INCDIR) -I.. -L$(BACKEND_LIBDIR) $(BACKEND_LIB) $(CCFLAGS)
 
 qrng-bin-dist: $(BACKEND_BIN)
-	@echo Building binary dsitribution for $(BACKEND_DIR)
+	@echo '==>' Building binary distribution for $(BACKEND_DIR)
 	mkdir -p $(BACKEND_DIR)
-	mv $(BACKEND_BIN) $(BACKEND_DIR)
+	cp $(BACKEND_BIN) $(BACKEND_DIR)
 	cat ../TRQS.m.tpl | sed s/TRQS_BACKEND_NAME/$(BACKEND_NAME)/g > ../TRQS.m
 	tar czf ../TRQS-$(TRQSV)-$(ARCH)-QRNG.tgz \
         $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) ../TRQS.m ../TRQSTest.nb \
@@ -46,7 +46,7 @@ qrng-bin-dist: $(BACKEND_BIN)
 	rm -Rf $(BACKEND_DIR)
 
 % : %.tm
-	@echo Building file \'$@\'
+	@echo '==>' Building file \'$@\'
 	$(MPREP) $^ -o $^.c
 	$(CC) -I$(ML_INCDIR) -I$(BACKEND_INCDIR) -I.. $(ML_LIBS) $(BACKEND_LIB) -c -o $^.o $^.c
 	$(CXX) -L$(ML_LIBDIR) -I$(BACKEND_INCDIR) -L$(BACKEND_LIBDIR) $^.o $(ML_LIBS) $(BACKEND_LIB) -o $@ 
