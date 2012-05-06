@@ -88,7 +88,7 @@ TrueRandomInteger::usage = TrueRandomInteger::usage <> "\nTrueRandomInteger[] re
 
 
 TrueRandomReal::usage = "TrueRandomReal[{x_min,x_max}] returns a random double in the range [x_min,x_max].";
-TrueRandomReal::usage = "TrueRandomReal::usage <> "\nTrueRandomReal[{x_min,x_max}, dim] returns a list of random double in the range [x_min,x_max] with dim elements.";
+TrueRandomReal::usage = TrueRandomReal::usage <> "\nTrueRandomReal[{x_min,x_max}, dim] returns a list of random double in the range [x_min,x_max] with dim elements.";
 TrueRandomReal::usage = TrueRandomReal::usage <> "\nTrueRandomReal[i] returns a random double in the range [0,x].";
 TrueRandomReal::usage = TrueRandomReal::usage <> "\nTrueRandomReal[] returns a random double in the range [0,1].";
 
@@ -155,6 +155,8 @@ Switch[ TRQS`Private`trqsBackendName,
 	"Quantis",
 		QuantisGetLibVersion::usage = "QuantisGetLibVersion[] returns a version number of an installed libQuantis library.";
 		QuantisGetSerialNumber::usage = "QuantisGetSerialNumber[] returns a serial number of the Quantis device used as a backend.";
+		QuantisSetDeviceId::usage = "QuantisSetDeviceId[dev] sets the id number of the used Quantis device. This can be set to any positive integer.";
+		QuantisSetDeviceType::usage = "QuantisSetDeviceType[] sets the type of the user Quantis device. This can be set ot USB or PCI.";
 		QuantisGetDeviceId::usage = "QuantisGetDeviceId[] returns an id number of the used Quantis device.";
 		QuantisGetDeviceType::usage = "QuantisGetDeviceType[] returns a type of the used Quantis device.",
 	"QRNG",
@@ -183,6 +185,7 @@ Install[trqsBinaries <> "/" <> trqsBackendBinPrefix  <> "_random_integer_n"];
 Install[trqsBinaries <> "/" <> trqsBackendBinPrefix  <> "_random_double"];
 Install[trqsBinaries <> "/" <> trqsBackendBinPrefix  <> "_random_double_1"];
 Install[trqsBinaries <> "/" <> trqsBackendBinPrefix  <> "_random_double_0"];
+Install[trqsBinaries <> "/" <> trqsBackendBinPrefix  <> "_random_double_n"];
 
 
 TrueRandomRealNormal[m_,s_,dims_]:=FlattenAt[Fold[Partition[#1,#2]&,m+Sqrt[2]s InverseErf[-1+2 Table[TrueRandomReal[],{Times@@dims}]],Reverse[dims]],1];
@@ -317,8 +320,18 @@ Switch[ TRQS`Private`trqsBackendName,
 	"Quantis",
 		Install[trqsBinaries<>"/quantis_get_lib_version"];
 		Install[trqsBinaries<>"/quantis_get_serial_number"];
-		Install[trqsBinaries<>"/quantis_get_device_id"];
-		Install[trqsBinaries<>"/quantis_get_device_type"],
+		QuantisSetDeviceId[n_Integer] := Block[{},
+			TRQS`Private`QuantisDeviceId = n;
+		];
+		QuantisSetDeviceType[str_String] := Block[{},
+			If[str=="PCI" || str == "USB", 
+				TRQS`Private`QuantisDeviceType = str, 
+			Message[QuantisSetDeviceType::argerr,dist]
+			]
+		];
+		QuantisSetDeviceType::argerr = "The device type should be \"USB\" or \"PCI\". Device type \"`1`\" is not supported.";
+		QuantisGetDeviceId[] := TRQS`Private`QuantisDeviceId;
+		QuantisGetDeviceType[] := TRQS`Private`QuantisDeviceType,
 	"QRNG", 
 		Install[trqsBinaries<>"/qrng_get_lib_version"];
 		Install[trqsBinaries<>"/qrng_test_connection"];

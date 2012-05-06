@@ -13,7 +13,7 @@ char* qrng_test_connection() {
 	int qrng_status;
 
 	// try to connect
-	QRNG_ESTABLISH_CONNECTION(qrng_status)
+	QRNG_PREPARE(qrng_status)
 
 	// retport the result	
 	return qrng_error_strings[qrng_status];

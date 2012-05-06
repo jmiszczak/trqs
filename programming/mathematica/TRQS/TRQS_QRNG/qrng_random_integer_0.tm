@@ -14,7 +14,7 @@ int qrng_random_integer_0() {
 	int qrng_status;
 
 	// try to connect
-	QRNG_ESTABLISH_CONNECTION(qrng_status);
+	QRNG_PREPARE(qrng_status);
 
 	if (qrng_status == QRNG_SUCCESS) {
 		qrng_get_int((int*)& rand_int);
