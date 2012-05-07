@@ -11,7 +11,15 @@
 
 double quantis_random_double_0(void) {
     double d;
-    QuantisReadScaledDouble(QUANTIS_DEVICE_TYPE, QUANTIS_DEVICE_ID, &d, 0, 1);
+
+	QuantisDeviceType device_type;
+	int device_id;
+	int quantis_status;
+
+	// prepare and check the device
+	QUANTIS_PREPARE(device_type,device_id,quantis_status);
+
+    QuantisReadScaledDouble(device_type, device_id, &d, 0, 1);
     return d;    
 }
 

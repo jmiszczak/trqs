@@ -36,7 +36,7 @@ quantis_test:
 	$(CC) $(@:%=%.c) -o $@ -I$(BACKEND_INCDIR) -I.. -L$(BACKEND_LIBDIR) $(BACKEND_LIB) $(CCFLAGS)
 
 quantis-bin-dist: $(BACKEND_BIN)
-	@echo '==>' Building binary distribution for $(BACKEND_DIR)
+	@echo '==>' Building binary distribution for $(BACKEND_DIR) '('linked against $(BACKEND_LIB)')'
 	mkdir -p $(BACKEND_DIR)
 	cp $(BACKEND_BIN) $(BACKEND_DIR)
 	cat ../TRQS.m.tpl | sed s/TRQS_BACKEND_NAME/$(BACKEND_NAME)/g > ../TRQS.m
@@ -45,21 +45,22 @@ quantis-bin-dist: $(BACKEND_BIN)
         ../README quantis_installation.pdf
 	rm -Rf $(BACKEND_DIR)
 
-quantis-nohw-bin-dist: $(eval BACKEND_LIB = -lQuantis-NoHw) $(BACKEND_BIN)
-	@echo '==>' Building binary dsitribution for $(BACKEND_DIR) linked against libQuantis-NoHw
-	mkdir -p $(BACKEND_DIR)
-	cp $(BACKEND_BIN) $(BACKEND_DIR)
-	cat ../TRQS.m.tpl | sed s/TRQS_BACKEND_NAME/$(BACKEND_NAME)/g > ../TRQS.m
-	tar czvf ../TRQS-$(TRQSV)-$(ARCH)-Quantis-NoHw.tgz \
-        $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) ../TRQS.m ../TRQSTest.nb \
-        ../README quantis_installation.pdf
-	rm -Rf $(BACKEND_DIR)
+quantis-nohw-bin-dist:
+	$(MAKE) quantis-bin-dist BACKEND_LIB=$(BACKEND_LIB)-NoHw 
+#	mkdir -p $(BACKEND_DIR)
+#	cp $(BACKEND_BIN) $(BACKEND_DIR)
+#	cat ../TRQS.m.tpl | sed s/TRQS_BACKEND_NAME/$(BACKEND_NAME)/g > ../TRQS.m
+#	tar czvf ../TRQS-$(TRQSV)-$(ARCH)-Quantis-NoHw.tgz \
+#       $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) ../TRQS.m ../TRQSTest.nb \
+#        ../README quantis_installation.pdf
+#	rm -Rf $(BACKEND_DIR)
 
 % : %.tm
 	@echo '==>' Building file \'$@\'
 	$(MPREP) $^ -o $^.c
 	$(CC) -I$(ML_INCDIR) -I$(BACKEND_INCDIR) -I.. $(ML_LIBS) $(BACKEND_LIB) -c -o $^.o $^.c
 	$(CXX) -L$(ML_LIBDIR) -I$(BACKEND_INCDIR) -L$(BACKEND_LIBDIR) $^.o $(ML_LIBS) $(BACKEND_LIB) -o $@ 
+
 
 quantis-clean:
 	rm -rf *.tm.c *.tm.o

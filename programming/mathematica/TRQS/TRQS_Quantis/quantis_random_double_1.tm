@@ -11,7 +11,18 @@
 
 double quantis_random_double_1(double y) {
     double d;
-    QuantisReadScaledDouble(QUANTIS_DEVICE_TYPE, QUANTIS_DEVICE_ID, &d, 0, y);
+
+	QuantisDeviceType device_type;
+	int device_id;
+	int quantis_status;
+
+	// prepare and check the device
+	QUANTIS_PREPARE(device_type,device_id,quantis_status);
+
+	if (quantis_status > 0) {
+	    QuantisReadScaledDouble(device_type, device_id, &d, 0, y);
+	}
+
     return d;    
 }
 

@@ -10,7 +10,19 @@
 #include "TRQS.h"
 
 char* quantis_get_serial_number(void) {
-    return QuantisGetSerialNumber(QUANTIS_DEVICE_TYPE, QUANTIS_DEVICE_ID);
+
+	QuantisDeviceType device_type;
+	int device_id;
+	int quantis_status;
+
+	// prepare and check the device
+	QUANTIS_PREPARE(device_type,device_id,quantis_status);
+
+    if( quantis_status > 0) { 
+		return QuantisGetSerialNumber(device_type,device_id);
+	} else {
+		return "";
+	}
 }
 
 int main(int argc, char* argv[]) {

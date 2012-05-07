@@ -5,9 +5,9 @@
 
 
 (* File: TRQS.m *)
-(* Description: Mathematica package for generating truly random quantum states using quantum random number generator *)
+(* Description: Mathematica package for generating truly random quantum states using quantum random number generators. *)
 (* Author: Jaroslaw Miszczak <miszczak@iitis.pl> *)
-(* Version: 0.1.8 (02/05/2012) *)
+(* Version: 0.2.0 (07/05/2012) *)
 (* License: GPLv3 *)
 
 
@@ -31,7 +31,8 @@ trqsHistory = {
 	{"0.1.6", "27/04/2012", "Jarek", "Build system for the backend files improved."},
 	{"0.1.7", "30/04/2012", "Jarek", "Documentation improvements and simple backend sanity check."},
 	{"0.1.8", "02/05/2012", "Jarek", "Method for sharing login data for the QRNG backend"},
-	{"0.1.9", "04/05/2012", "Jarek", "Connection checking improved for the QRNG backend"}
+	{"0.1.9", "04/05/2012", "Jarek", "Connection checking improved for the QRNG backend"},
+	{"0.2.0", "07/05/2012", "Jarek", "Support for lists of random numbers. Configuration fucntions for backends added."}
 };
 
 trqsVersion = Last[trqsHistory][[1]];
@@ -57,11 +58,21 @@ End[];
 Print["Package TRQS version ", TRQS`Private`trqsVersion, " (last modification: ", TRQS`Private`trqsLastModification, ")."];
 Switch[ TRQS`Private`trqsBackendName,
 "Quantis",
-	Print["Using " <> TRQS`Private`trqsBackendName <> " as a source of randomness."];
 	Print["\!\(\*
-StyleBox[\"Note\",\nFontWeight->\"Bold\"]\) You have to configure this backend by providing information required about the id and type of the used Quantis device."],
+StyleBox[\"INFO\",\nFontWeight->\"Bold\"]\)\!\(\*
+StyleBox[\":\",\nFontWeight->\"Bold\"]\) Using " <> TRQS`Private`trqsBackendName <> " as a source of randomness."];
+	Print["\!\(\*
+StyleBox[\"Note\",\nFontWeight->\"Bold\"]\)\!\(\*
+StyleBox[\":\",\nFontWeight->\"Bold\"]\) You should configure this backend with \!\(\*
+StyleBox[\"QuantisSetDevice\",\nFontWeight->\"Bold\"]\) function by providing information about the type and id of the used Quantis device."];
+	Print["\!\(\*
+StyleBox[\"Note\",\nFontWeight->\"Bold\"]\)\!\(\*
+StyleBox[\":\",\nFontWeight->\"Bold\"]\) By default the package will use a USB Quantis device with id set to 0."],
 "QRNG",
-	Print["Using " <> TRQS`Private`trqsBackendName <> " (https://qrng.physik.hu-berlin.de/) as a source of randomness."];
+	Print["\!\(\*
+StyleBox[\"INFO\",\nFontWeight->\"Bold\"]\)\!\(\*
+StyleBox[\":\",\nFontWeight->\"Bold\"]\)\!\(\*
+StyleBox[\" \",\nFontWeight->\"Bold\"]\)Using " <> TRQS`Private`trqsBackendName <> " (https://qrng.physik.hu-berlin.de/) as a source of randomness."];
 	Print["\!\(\*
 StyleBox[\"Note\",\nFontWeight->\"Bold\"]\)\!\(\*
 StyleBox[\":\",\nFontWeight->\"Bold\"]\) You have to use \!\(\*
@@ -77,7 +88,7 @@ Clear@@TRQS`Private`trqsNames;
 (*Public interface*)
 
 
-(* ::Subsection::Closed:: *)
+(* ::Subsection:: *)
 (*Basic functions*)
 
 
@@ -155,10 +166,12 @@ Switch[ TRQS`Private`trqsBackendName,
 	"Quantis",
 		QuantisGetLibVersion::usage = "QuantisGetLibVersion[] returns a version number of an installed libQuantis library.";
 		QuantisGetSerialNumber::usage = "QuantisGetSerialNumber[] returns a serial number of the Quantis device used as a backend.";
-		QuantisSetDeviceId::usage = "QuantisSetDeviceId[dev] sets the id number of the used Quantis device. This can be set to any positive integer.";
-		QuantisSetDeviceType::usage = "QuantisSetDeviceType[] sets the type of the user Quantis device. This can be set ot USB or PCI.";
+		QuantisSetDeviceId::usage = "QuantisSetDevice[id] sets the id number of the used Quantis device. This can be set to any positive integer.";
+		QuantisSetDeviceType::usage = "QuantisSetDeviceType[type] sets the type of the user Quantis device. This can be set ot USB or PCI.";
+		QuantisSetDevice::usage = "QuantisSetDevice[type, id] sets the type and the id of the used Quantis device. See also: QuantisSetDeviceType and QuantisSetDeviceId.";
 		QuantisGetDeviceId::usage = "QuantisGetDeviceId[] returns an id number of the used Quantis device.";
-		QuantisGetDeviceType::usage = "QuantisGetDeviceType[] returns a type of the used Quantis device.",
+		QuantisGetDeviceType::usage = "QuantisGetDeviceType[] returns a type of the used Quantis device.";
+		QuantisGetDevice::usage = "QuantisGetDevice[] reports the curentlly used Quantis device. See also: QuantisGetDeviceType and QuantisGetDeviceId.",
 	"QRNG",
 		QRNGGetLibVersion::usage = "QuantisGetLibVersion[] returns a version number of an installed libQRNG library.";
 		QRNGSetCredentials::usage = "QRNGSetCredentials[user, pass] sets the username and the password used for connecting with the QRNG service (https://qrng.physik.hu-berlin.de/). This function must be used prior of using any functionality of the QRNG backend.";
@@ -188,14 +201,13 @@ Install[trqsBinaries <> "/" <> trqsBackendBinPrefix  <> "_random_double_0"];
 Install[trqsBinaries <> "/" <> trqsBackendBinPrefix  <> "_random_double_n"];
 
 
-TrueRandomRealNormal[m_,s_,dims_]:=FlattenAt[Fold[Partition[#1,#2]&,m+Sqrt[2]s InverseErf[-1+2 Table[TrueRandomReal[],{Times@@dims}]],Reverse[dims]],1];
-
+TrueRandomRealNormal[m_,s_,dims_]:=FlattenAt[Fold[Partition[#1,#2]&,m+Sqrt[2]s InverseErf[-1+2 TrueRandomReal[{0,1},Times@@dims]],Reverse[dims]],1];
 
 TrueGinibreMatrix[m_,n_]:=TrueRandomRealNormal[0,1,{m,n}] + I TrueRandomRealNormal[0,1,{m,n}];
 
 
 TrueRandomSimplex[d_]:=Block[{r,r1,r2},
-	r=Sort[Table[TrueRandomReal[{0,1}],{i,1,d-1}]];
+	r=Sort[TrueRandomReal[{0,1},d-1]];
 	r1=Append[r,1];
     r2=Prepend[r,0];r1-r2
 ];
@@ -312,7 +324,7 @@ TrueRandomDynamicalMatrix[n_,k_:0]:=Block[{mX=TrueGinibreMatrix[n^2,n^2-k],mY,di
 ];
 
 
-(* ::Subsection:: *)
+(* ::Subsection::Closed:: *)
 (*Configuration related functions*)
 
 
@@ -320,6 +332,8 @@ Switch[ TRQS`Private`trqsBackendName,
 	"Quantis",
 		Install[trqsBinaries<>"/quantis_get_lib_version"];
 		Install[trqsBinaries<>"/quantis_get_serial_number"];
+		TRQS`Private`QuantisDeviceId = 0; (* default configuration *)
+		TRQS`Private`QuantisDeviceType = "USB"; (* default configuration *)
 		QuantisSetDeviceId[n_Integer] := Block[{},
 			TRQS`Private`QuantisDeviceId = n;
 		];
@@ -330,8 +344,10 @@ Switch[ TRQS`Private`trqsBackendName,
 			]
 		];
 		QuantisSetDeviceType::argerr = "The device type should be \"USB\" or \"PCI\". Device type \"`1`\" is not supported.";
+		QuantisSetDevice[str_String, id_Integer] := Block[{}, QuantisSetDeviceType[str];QuantisSetDeviceId[id];Print["Using Quantis device: type=" <> str <> ", id=" <> ToString[id]]];
 		QuantisGetDeviceId[] := TRQS`Private`QuantisDeviceId;
-		QuantisGetDeviceType[] := TRQS`Private`QuantisDeviceType,
+		QuantisGetDeviceType[] := TRQS`Private`QuantisDeviceType;
+		QuantisGetDevice[] := Block[{type=QuantisGetDeviceType[], id = QuantisGetDeviceId[]}, Print["Using Quantis device: type=" <> ToString[type] <> ", id=" <> ToString[id]]],
 	"QRNG", 
 		Install[trqsBinaries<>"/qrng_get_lib_version"];
 		Install[trqsBinaries<>"/qrng_test_connection"];

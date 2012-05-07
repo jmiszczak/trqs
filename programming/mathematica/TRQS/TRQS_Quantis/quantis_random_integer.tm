@@ -11,7 +11,18 @@
 
 int quantis_random_integer(int i, int j) {
     int n;
-    QuantisReadScaledInt(QUANTIS_DEVICE_TYPE, QUANTIS_DEVICE_ID, &n, i, j);
+
+	QuantisDeviceType device_type;
+	int device_id;
+	int quantis_status;
+
+	// prepare and check the device
+	QUANTIS_PREPARE(device_type,device_id,quantis_status);
+
+	if (quantis_status > 0) {
+    	QuantisReadScaledInt(device_type, device_id, &n, i, j);
+	}
+
     return n;    
 }
 

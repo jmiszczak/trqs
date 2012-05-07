@@ -18,7 +18,9 @@ double quantis_random_double(double x, double y) {
 
 	QUANTIS_PREPARE(device_type,device_id,quantis_status);
 
-    QuantisReadScaledDouble(device_type, device_id, &d, x, y);
+	if (quantis_status > 0) {
+	    QuantisReadScaledDouble(device_type, device_id, &d, x, y);
+	}
 
     return d;    
 }
