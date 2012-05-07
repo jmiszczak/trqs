@@ -40,13 +40,13 @@ quantis-bin-dist: $(BACKEND_BIN)
 	mkdir -p $(BACKEND_DIR)
 	cp $(BACKEND_BIN) $(BACKEND_DIR)
 	cat ../TRQS.m.tpl | sed s/TRQS_BACKEND_NAME/$(BACKEND_NAME)/g > ../TRQS.m
-	tar czvf ../TRQS-$(TRQSV)-$(ARCH)-Quantis.tgz \
+	tar czvf ../TRQS-$(TRQSV)-$(ARCH)-Quantis$(VARIANT).tgz \
         $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) ../TRQS.m ../TRQSTest.nb \
         ../README quantis_installation.pdf
 	rm -Rf $(BACKEND_DIR)
 
 quantis-nohw-bin-dist:
-	$(MAKE) quantis-bin-dist BACKEND_LIB=$(BACKEND_LIB)-NoHw 
+	$(MAKE) quantis-bin-dist VARIANT=-NoHw BACKEND_LIB=$(BACKEND_LIB)$(VARIANT)
 #	mkdir -p $(BACKEND_DIR)
 #	cp $(BACKEND_BIN) $(BACKEND_DIR)
 #	cat ../TRQS.m.tpl | sed s/TRQS_BACKEND_NAME/$(BACKEND_NAME)/g > ../TRQS.m
