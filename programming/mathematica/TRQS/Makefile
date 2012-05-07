@@ -93,7 +93,7 @@ src-dist:
 		$(foreach dir,$(BACKEND_DIRS),$(wildcard $(dir)/*.mk)) \
 		$(foreach dir,$(BACKEND_DIRS),$(wildcard $(dir)/*.pdf)) \
 		Makefile $(foreach dir,$(BACKEND_DIRS),$(dir)/Makefile) \
-		TRQS.h TRQS.m.tpl TRQSTest.nb README
+		TRQS.h TRQS.m.tpl TRQSTest_QRNG.nb TRQSTest_Quantis.nb README
 
 clean: 
 	$(MAKE) -C $(QUANTIS_BACKEND_DIR) quantis-clean 
