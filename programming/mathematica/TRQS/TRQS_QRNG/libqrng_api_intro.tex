@@ -1,5 +1,6 @@
 \pdfoutput=1
-% v. 0.01 - 23/04/2012 - initial version
+% v. 0.01 - 23/04/2012 - initial version prepared during preliminary tests 
+% v. 0.02 - 07/05/2012 - some functions described, language corrections
 
 \documentclass[a4paper,11pt]{article}
 
@@ -21,20 +22,23 @@
 \author{Jaros{\l}aw A. Miszczak\\
 Institute of Theoretical and Applied Informatics, Polish Academy of Sciences\\
 Baltycka 5, 44-100 Gliwice, Poland}
-\date{23/04/2012 (v. 0.01)}
+\date{07/05/2012 (v. 0.02)}
 
 \begin{document}
 
 \maketitle
 
+\textbf{\underline{Note}}: Functions provided by \lstinline{libQRNG} are
+described in \lstinline{libQRNG.h} header file.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Establising connection with the QRGN server}
+\section{Establishing the connection with the QRGN server}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In order to retrive data from the QRNG service provided by the PicoQuant and the
-Department of Physics of Humboldt University, it is necessary to register on the
-service web page~\cite{qrng-www}. In order to establish a connection with the server one can use
-one of the function
+In order to retrieve data from the QRNG service provided by the PicoQuant and
+the Department of Physics of Humboldt University, it is necessary to register on
+the service web page~\cite{qrng-www}. In order to establish a connection with
+the server one can use one of the functions
 \begin{itemize}
     \item \lstinline{qrng_connect(qrng_username, qrng_password)} -- establish a
       connection with the QRNG service (qrng.physik.hu-berlin.de:4499),
@@ -42,18 +46,50 @@ one of the function
     \item \lstinline{qrng_connect_SSL(qrng_username, qrng_password)} --
       establish a secure connection with the QRNG service using SSL.
 \end{itemize}
-Both functions require username and password provided during the registration.
-The connection is closed using \lstinline{qrng_disconnect()} function.
+Both functions require a username and a password provided during the
+registration. The connection is closed using \lstinline{qrng_disconnect()}
+function.
 \begin{itemize}
 	\item \lstinline{qrng_disconnect()} -- close the connection with the QRNG
 	server.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Retriving random data}
+\section{Retrieving random data}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-QRNG service allows to retrive random data in the form of integer number, double precision numbers or byte
+QRNG service allows to retrieve random data in the form of integer numbers,
+double precision numbers or bytes. Integer and double precision numbers can be
+retrieved in form of single values or arrays, while bytes can be retrieved only
+in arrays.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Base functions}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The following two functions allow to retrieve single numbers of type
+\lstinline{int} or \lstinline{double}:
+\begin{itemize}
+    \item \lstinline{int qrng_get_int(int *val)} -- get single \lstinline{int}
+    and put at \lstinline{val},
+    \item \lstinline{int qrng_get_double(double *val)} -- get single
+    \lstinline{double} and put at \lstinline{val}.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Functions for operating on arrays}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The following functions allow to retrieve arrays of numbers of type
+\lstinline{int} or \lstinline{double}.
+
+\begin{itemize}
+    \item \lstinline{int qrng_get_int_array(int *arr, int dim, int *ac)} -- get
+    \lstinline{dim} integer numbers and put them into \lstinline{arr} array
+    \item \lstinline{int qrng_get_double_array(double *arr, int dim, int *ac)}
+    -- get \lstinline{dim} double precision numbers and put them into
+    \lstinline{arr} array
+\end{itemize}
+
+The above functions report the actual number of retrieved numbers and put this
+information in~\lstinline{ac}.
 
 \begin{thebibliography}{2}
     \bibitem{qrng-www} QRNG Service, \url{http://qrng.physik.hu-berlin.de}

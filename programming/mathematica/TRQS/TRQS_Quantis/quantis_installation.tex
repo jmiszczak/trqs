@@ -44,9 +44,11 @@ depending on the software package you are using.
     \item Unpack the Quantis software package and go to\\
     \texttt{Quantis-v11.01.12/Drivers/Unix/QuantisPci}.
     \item Compile the module\\ \texttt{make}
-    \item Install the module\\ \texttt{make install}\\ and check if the module has been
-    installed properly\\ \texttt{find /lib/modules/ -name quantis\_pci.ko}
-    \item Make sure that the driver will be loaded during the next boot \\ \texttt{echo "quantis\_pci" >> /etc/modules}
+    \item Install the module\\ \texttt{make install}\\ and check if the module
+    has been installed properly\\ \texttt{find /lib/modules/ -name
+    quantis\_pci.ko}
+    \item Make sure that the driver will be loaded during the next boot \\
+    \texttt{echo "quantis\_pci" >> /etc/modules}
     \item Follow the instructions in Section~\ref{sec:permissions}.
 \end{enumerate}
 
@@ -68,9 +70,11 @@ depending on the software package you are using.
 \begin{enumerate}
     \item Make sure that the \texttt{plugdev} group exists\\
     \texttt{cat /etc/group | grep plugdev}
-    \item Add the user that will be permitted to use Quantis to the \texttt{plugdev} group\\
-    \texttt{usermod -G plugdev -a LOGIN},\\ where \texttt{LOGIN} is the login name of the user
-    \item Copy file \texttt{Quantis-v11.01.12/Drivers/Unix/idq-quantis.rules},\\ to \texttt{/etc/udev/rules.d/} directory and reload the UDEV rules\\
+    \item Add the user that will be permitted to use Quantis to the
+    \texttt{plugdev} group\\ \texttt{usermod -G plugdev -a LOGIN},\\ where
+    \texttt{LOGIN} is the login name of the user
+    \item Copy file \texttt{Quantis-v11.01.12/Drivers/Unix/idq-quantis.rules},\\
+    to \texttt{/etc/udev/rules.d/} directory and reload the UDEV rules\\
     \texttt{udevadm control --reload-rules}
 \end{enumerate}
 
@@ -80,17 +84,18 @@ depending on the software package you are using.
 
 \begin{enumerate}
     \item Unpack distribution files from
-   \texttt{Quantis-v11.01.12/Packages/Linux} to a selected directory, \eg\
-   \texttt{/usr/local/IDQ/Quantis}\\ \texttt{mkdir /usr/local/IDQ}\\ \texttt{tar
-   xjvf QuantisRNG-2.5.0-Linux-amd64.tar.bz2}\\ \texttt{mv
-   QuantisRNG-2.5.0-Linux-amd64 /usr/local/IDQ/Quantis}\\
-    After this step the \texttt{EasyQuantis} application should be in\\ \texttt{/usr/local/IDQ/Quantis/bin/EasyQuantis}
+    \texttt{Quantis-v11.01.12/Packages/Linux} to a selected directory, \eg\
+    \texttt{/usr/local/IDQ/Quantis}\\ \texttt{mkdir /usr/local/IDQ}\\
+    \texttt{tar xjvf QuantisRNG-2.5.0-Linux-amd64.tar.bz2}\\ \texttt{mv
+    QuantisRNG-2.5.0-Linux-amd64 /usr/local/IDQ/Quantis}\\ After this step the
+    \texttt{EasyQuantis} application should be in\\
+    \texttt{/usr/local/IDQ/Quantis/bin/EasyQuantis}
     \item Copy {Quantis.h} and {DllMain.h} from\\
-   \texttt{Quantis-v11.01.12/Libs-Apps/Quantis}\\ to\\
-   \texttt{/usr/local/IQD/Quantis/include}
+    \texttt{Quantis-v11.01.12/Libs-Apps/Quantis}\\ to\\
+    \texttt{/usr/local/IQD/Quantis/include}
     \item Add \texttt{/usr/local/IDQ/Quantis/lib} (or
-    \texttt{/usr/local/IDQ/Quantis/lib64}) to \\ \texttt{/etc/ld.so.config} or some
-    file which is included by this file \eg\ \\
+    \texttt{/usr/local/IDQ/Quantis/lib64}) to \\ \texttt{/etc/ld.so.config} or
+    some file which is included by this file \eg\ \\
     \texttt{/etc/ld.so.conf.d/quantis.conf}
     \item Update the loader cache\\
     \texttt{ldconfig}

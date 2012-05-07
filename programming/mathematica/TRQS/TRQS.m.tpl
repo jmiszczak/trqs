@@ -32,7 +32,7 @@ trqsHistory = {
 	{"0.1.7", "30/04/2012", "Jarek", "Documentation improvements and simple backend sanity check."},
 	{"0.1.8", "02/05/2012", "Jarek", "Method for sharing login data for the QRNG backend"},
 	{"0.1.9", "04/05/2012", "Jarek", "Connection checking improved for the QRNG backend"},
-	{"0.2.0", "07/05/2012", "Jarek", "Support for lists of random numbers. Configuration fucntions for backends added."}
+	{"0.2.0", "07/05/2012", "Jarek", "Support for lists of random numbers. Configuration functions for backends added."}
 };
 
 trqsVersion = Last[trqsHistory][[1]];
@@ -167,15 +167,15 @@ Switch[ TRQS`Private`trqsBackendName,
 		QuantisGetLibVersion::usage = "QuantisGetLibVersion[] returns a version number of an installed libQuantis library.";
 		QuantisGetSerialNumber::usage = "QuantisGetSerialNumber[] returns a serial number of the Quantis device used as a backend.";
 		QuantisSetDeviceId::usage = "QuantisSetDevice[id] sets the id number of the used Quantis device. This can be set to any positive integer.";
-		QuantisSetDeviceType::usage = "QuantisSetDeviceType[type] sets the type of the user Quantis device. This can be set ot USB or PCI.";
+		QuantisSetDeviceType::usage = "QuantisSetDeviceType[type] sets the type of the used Quantis device. This can be set to USB or PCI.";
 		QuantisSetDevice::usage = "QuantisSetDevice[type, id] sets the type and the id of the used Quantis device. See also: QuantisSetDeviceType and QuantisSetDeviceId.";
 		QuantisGetDeviceId::usage = "QuantisGetDeviceId[] returns an id number of the used Quantis device.";
 		QuantisGetDeviceType::usage = "QuantisGetDeviceType[] returns a type of the used Quantis device.";
-		QuantisGetDevice::usage = "QuantisGetDevice[] reports the curentlly used Quantis device. See also: QuantisGetDeviceType and QuantisGetDeviceId.",
+		QuantisGetDevice::usage = "QuantisGetDevice[] reports the currently used Quantis device. See also: QuantisGetDeviceType and QuantisGetDeviceId.",
 	"QRNG",
 		QRNGGetLibVersion::usage = "QuantisGetLibVersion[] returns a version number of an installed libQRNG library.";
-		QRNGSetCredentials::usage = "QRNGSetCredentials[user, pass] sets the username and the password used for connecting with the QRNG service (https://qrng.physik.hu-berlin.de/). This function must be used prior of using any functionality of the QRNG backend.";
-		QRNGTestConnection::usage = "QRNGTestConnection[] tests if the QRNG service is available for use. In the case of a failure, it report its casuse.";
+		QRNGSetCredentials::usage = "QRNGSetCredentials[user, pass] sets the username and the password used for connecting with the QRNG service (https://qrng.physik.hu-berlin.de/). This function must be used prior to using any functionality of the QRNG backend.";
+		QRNGTestConnection::usage = "QRNGTestConnection[] tests if the QRNG service is available for use. In the case of a failure, it reports its cause.";
 ];
 
 
