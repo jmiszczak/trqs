@@ -30,7 +30,7 @@ BACKEND_BIN = $(BACKEND_SRC:%.tm=%)
 ###############################################################################
 
 default:
-	@echo Please use the math Makefile located in the parent directory
+	@echo '==>' Please use the main Makefile located in the parent directory
 
 qrng-all: $(BACKEND_BIN) qrng_test
 
@@ -44,7 +44,7 @@ qrng-bin-dist: $(BACKEND_BIN)
 	cp $(BACKEND_BIN) $(BACKEND_DIR)
 	cat ../TRQS.m.tpl | sed s/TRQS_BACKEND_NAME/$(BACKEND_NAME)/g > ../TRQS.m
 	tar czf ../TRQS-$(TRQSV)-$(ARCH)-QRNG.tgz \
-        $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) ../TRQS.m ../TRQSTest.nb \
+        $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) ../TRQS.m ../TRQSTest_QRNG.nb \
         ../README libqrng_api_intro.pdf
 	rm -Rf $(BACKEND_DIR)
 

@@ -7,57 +7,69 @@ installation instructions.
 
 == Introduction ==
 
-TRQS is a Mathematica package, which allows to utilize quantum true random number
-generators. Currently, the package supports two sources of randomness: Quantis RNG
-produced by ID Quantique S.A. and QRNG on-line service based on the generator 
-developed by Nano-Optics group at the Department of Physics of Humboldt University
-and PicoQuant GmbH.
+TRQS is a Mathematica package, which allows to utilize quantum true random
+number generators. Currently, the package supports two sources of randomness:
+Quantis RNG produced by ID Quantique S.A. and QRNG on-line service based on the
+generator developed by Nano-Optics group at the Department of Physics of
+Humboldt University and PicoQuant GmbH.
 
-== Configuration ==
+== Compilation ==
 
-The MathLink source files and build scripts require some editing prior to the 
-compilation. The following files contain some important configuration options:
+The MathLink source files and build scripts require some editing prior to the
+compilation. The Makefile in the main directory contains variables required to
+locate libQRNG and/or libQuantis headers and libraries. Edit variables required
+for the backend you are currently using. Note, that you should note edit the
+Makefiles in the backends' directories
 
- - TRQS.h - contains definitions of two macros QUANTIS_DEVICE_TYPE 
-	(QUANTIS_DEVICE_USB or QUANTIS_DEVICE_PCI) and QUANTIS_DEVICE_ID (eg. 0), 
-	which should be changed according to your hardware configuration. This is
-	relevant only when you use Quantis device.
-
- - Makefile - contains variables required to locate libQRNG and/or libQuantis
-	headers and libraries. Edit variables required for the backend you are 
-	currently using.
-
-In order to compile *.tm source files one should note that
+In order to compile *.tm source files one should note that:
   - a working Mathematica installation is required,
   - one of the supported backends must be installed.
 
 Detailed instructions for compiling and running the supported backends are given 
 below.
 
-== Quantis backend ==
+== Installation ==
+
+After compiling the source files, a file name
+TRQS-$(TRQS_VERSION)-$(BACKEND_NAME).tgz will be created. It contains MatheLink
+executables, TRQS.m package files, this README file, some information about the
+backend in PDF format and a Mathematica notebook with some example.
+
+In order to use the package you need to copy TRQS.m file and TRQS_$(BACKEND_NAME)
+to some directory where Mathematica can find them.
+
+Note the in the case of Quantis backend there are two variants of the package,
+one of which has -NoHw prefix denotain that it is based on the fake Quantis
+device provided by libQuantis-NoHw library. This backen does not provide a true
+random numbers and it is provided for the testing purpose only.
+
+
+== Quantis backend - detailed information ==
 
 === Compilation ===
 
-For the purpose of compiling Mathlink sources it is assumed that the header 
-files are installed in /usr/local/IDQ/Quantis/include and libraries in 
-/usr/local/IDQ/Quantis/lib. Modify QUANTIS_HOME in the Makefile if this is 
-not the case.
+For the purpose of compiling Mathlink sources it is assumed that the header
+files are installed in /usr/local/IDQ/Quantis/include and libraries in
+/usr/local/IDQ/Quantis/lib. Modify QUANTIS_HOME in the Makefile if this is not
+the case.
 
 Consult quantis_installation.pdf document in TRQS_Quantis directory if you have
 problems with the installation of the device.
 
-It is also possible to run the TRQS package using this backend without a Quantis 
-device. In order to do this compile the sources using quantis-nohw-bin-dist target.
+It is also possible to run the TRQS package using this backend without a Quantis
+device. In order to do this compile the sources using quantis-nohw-bin-dist
+target.
 
 === Installation ===
 
-In order to run TRQS using Quantis backend you must make sure that the dynamic loader 
-knows where to search for libQuantis (e.g. add /usr/local/IDQ/Quantis/lib to /etc/ld.so.conf).
+In order to run TRQS using Quantis backend you must make sure that the dynamic
+loader knows where to search for libQuantis (e.g. add /usr/local/IDQ/Quantis/lib
+to /etc/ld.so.conf).
 
 The package is installed by copying TRQS.m files and TRQS_Quantis/ directory to 
 $HOME/.Mathematica/Applications directory.
 
-== QRNG backend ==
+== QRNG backend - detailed information ==
 
 === Compilation ===
 
@@ -68,16 +80,17 @@ not the case.
 
 === Installation ===
 
-In order to run TRQS using QRNG backend it is neccessary to register on the 
-http://qrng.physik.hu-berlin.de/ web page. User name and password given during the
-registration are required to obtain random data from the server. Registration is
-also required to download files from the web site.
+In order to run TRQS using QRNG backend it is neccessary to register on the
+http://qrng.physik.hu-berlin.de/ web page. User name and password given during
+the registration are required to obtain random data from the server.
+Registration is also required to download files from the web site.
 
-As QRNG backend is based on the on-line server, it is neccessary, in order to use it, 
-to have a working Internet connection. The on-line service runs on port 4499, so be
-sure that your firewall allows to use this port for the outgoing connections.
+As QRNG backend is based on the on-line server, it is neccessary, in order to
+use it, to have a working Internet connection. The on-line service runs on port
+4499, so be sure that your firewall allows to use this port for the outgoing
+connections.
 
-The package is installed by copying TRQS.m files and TRQS_QRNG/ directory to 
+The package is installed by copying TRQS.m files and TRQS_QRNG/ directory to
 $HOME/.Mathematica/Applications director.
 
 == Examples ==
@@ -86,5 +99,5 @@ Notebook TRQSTest.nb contains some examples.
 
 == Contact ==
 
-If you have any problems using TRQS package, please do not hesitate to write
-an email to miszczak (at) iitis.pl with TRQS in the subject line.
+If you have any problems using TRQS package, please do not hesitate to write an
+email to miszczak (at) iitis.pl with TRQS in the subject line.

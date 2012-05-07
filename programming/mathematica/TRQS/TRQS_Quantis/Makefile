@@ -30,7 +30,7 @@ BACKEND_BIN = $(BACKEND_SRC:%.tm=%)
 ###############################################################################
 
 default:
-	@echo Please use the math Makefile located in the parent directory
+	@echo '==>' Please use the main Makefile located in the parent directory
 
 quantis-all: $(BACKEND_BIN) quantis_test
 
@@ -44,7 +44,7 @@ quantis-bin-dist: $(BACKEND_BIN)
 	cp $(BACKEND_BIN) $(BACKEND_DIR)
 	cat ../TRQS.m.tpl | sed s/TRQS_BACKEND_NAME/$(BACKEND_NAME)/g > ../TRQS.m
 	tar czvf ../TRQS-$(TRQSV)-$(ARCH)-Quantis$(VARIANT).tgz \
-        $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) ../TRQS.m ../TRQSTest.nb \
+        $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) ../TRQS.m ../TRQSTest_Quantis.nb \
         ../README quantis_installation.pdf
 	rm -Rf $(BACKEND_DIR)
 
