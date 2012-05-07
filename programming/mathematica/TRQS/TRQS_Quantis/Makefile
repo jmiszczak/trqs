@@ -29,6 +29,9 @@ BACKEND_SRC := $(wildcard quantis_*.tm)
 BACKEND_BIN = $(BACKEND_SRC:%.tm=%)
 ###############################################################################
 
+default:
+	@echo Please use the math Makefile located in the parent directory
+
 quantis-all: $(BACKEND_BIN) quantis_test
 
 quantis_test:
@@ -47,13 +50,6 @@ quantis-bin-dist: $(BACKEND_BIN)
 
 quantis-nohw-bin-dist:
 	$(MAKE) quantis-bin-dist VARIANT=-NoHw BACKEND_LIB=$(BACKEND_LIB)$(VARIANT)
-#	mkdir -p $(BACKEND_DIR)
-#	cp $(BACKEND_BIN) $(BACKEND_DIR)
-#	cat ../TRQS.m.tpl | sed s/TRQS_BACKEND_NAME/$(BACKEND_NAME)/g > ../TRQS.m
-#	tar czvf ../TRQS-$(TRQSV)-$(ARCH)-Quantis-NoHw.tgz \
-#       $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) ../TRQS.m ../TRQSTest.nb \
-#        ../README quantis_installation.pdf
-#	rm -Rf $(BACKEND_DIR)
 
 % : %.tm
 	@echo '==>' Building file \'$@\'
@@ -63,6 +59,7 @@ quantis-nohw-bin-dist:
 
 
 quantis-clean:
+	rm -rf $(BACKEND_BIN)
 	rm -rf *.tm.c *.tm.o
 	rm -rf quantis_test
 

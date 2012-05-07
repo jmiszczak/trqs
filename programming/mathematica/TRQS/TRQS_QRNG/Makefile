@@ -29,6 +29,9 @@ BACKEND_SRC := $(wildcard qrng_*.tm)
 BACKEND_BIN = $(BACKEND_SRC:%.tm=%)
 ###############################################################################
 
+default:
+	@echo Please use the math Makefile located in the parent directory
+
 qrng-all: $(BACKEND_BIN) qrng_test
 
 qrng_test:
@@ -52,6 +55,7 @@ qrng-bin-dist: $(BACKEND_BIN)
 	$(CXX) -L$(ML_LIBDIR) -I$(BACKEND_INCDIR) -L$(BACKEND_LIBDIR) $^.o $(ML_LIBS) $(BACKEND_LIB) -o $@ 
 
 qrng-clean:
+	rm -rf $(BACKEND_BIN)
 	rm -rf *.tm.c *.tm.o
 	rm -rf qrng_test
 
