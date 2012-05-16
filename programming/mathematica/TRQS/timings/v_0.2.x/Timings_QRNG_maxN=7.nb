@@ -1,0 +1,155 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      4562,        146]
+NotebookOptionsPosition[      3823,        115]
+NotebookOutlinePosition[      4159,        130]
+CellTagsIndexPosition[      4116,        127]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"<<", "TRQS`"}]], "Input",
+ CellChangeTimes->{{3.5209171481215878`*^9, 3.520917148122685*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Package TRQS version \"\>", 
+   "\[InvisibleSpace]", "\<\"0.2.0\"\>", 
+   "\[InvisibleSpace]", "\<\" (last modification: \"\>", 
+   "\[InvisibleSpace]", "\<\"07/05/2012\"\>", 
+   "\[InvisibleSpace]", "\<\").\"\>"}],
+  SequenceForm[
+  "Package TRQS version ", "0.2.0", " (last modification: ", "07/05/2012", 
+   ")."],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.5209171490687532`*^9, 3.520933183362052*^9, 
+  3.546156923796097*^9}],
+
+Cell[BoxData["\<\"\\!\\(\\*\\nStyleBox[\\\"INFO\\\",\\nFontWeight->\\\"Bold\\\
+\"]\\)\\!\\(\\*\\nStyleBox[\\\":\\\",\\nFontWeight->\\\"Bold\\\"]\\)\\!\\(\\*\
+\\nStyleBox[\\\" \\\",\\nFontWeight->\\\"Bold\\\"]\\)Using QRNG \
+(https://qrng.physik.hu-berlin.de/) as a source of randomness.\"\>"], "Print",\
+
+ CellChangeTimes->{3.5209171490687532`*^9, 3.520933183362052*^9, 
+  3.546156923805315*^9}],
+
+Cell[BoxData["\<\"\\!\\(\\*\\nStyleBox[\\\"Note\\\",\\nFontWeight->\\\"Bold\\\
+\"]\\)\\!\\(\\*\\nStyleBox[\\\":\\\",\\nFontWeight->\\\"Bold\\\"]\\) You have \
+to use \\!\\(\\*\\nStyleBox[\\\"QRNGSetCredentials\\\",\\nFontWeight->\\\"\
+Bold\\\"]\\) function to provide login information required to use this \
+backend.\"\>"], "Print",
+ CellChangeTimes->{3.5209171490687532`*^9, 3.520933183362052*^9, 
+  3.546156923807144*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData["QRNG"], "Input",
+ CellChangeTimes->{{3.5461569259608383`*^9, 3.546156926622395*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"maxN", "=", "7"}], ";"}]], "Input",
+ CellChangeTimes->{{3.520917158947781*^9, 3.5209171604479628`*^9}, {
+  3.520933150596724*^9, 3.520933151444715*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"SetDirectory", "[", 
+  RowBox[{"NotebookDirectory", "[", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.5209171841377773`*^9, 3.520917184138712*^9}}],
+
+Cell[BoxData["\<\"/home/jam/Kuweta/notatki/programming/mathematica/TRQS\"\>"],\
+ "Output",
+ CellChangeTimes->{3.520917225976308*^9, 3.520933185676551*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"quantis7", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"ii", ",", 
+      RowBox[{
+       RowBox[{"AbsoluteTiming", "[", 
+        RowBox[{
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"TrueRandomReal", "[", "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"10", "^", "ii"}], "}"}]}], "]"}], ";"}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"ii", ",", "7", ",", "maxN"}], "}"}]}], "]"}]}], "\n", 
+ RowBox[{"Export", "[", 
+  RowBox[{"\"\<quantis_maxN=7.dat\>\"", ",", "quantis7"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.520917205667886*^9, 3.520917222235057*^9}, {
+  3.52093314834439*^9, 3.520933193942172*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{"7", ",", "771.11413`9.33866365476482"}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{3.520928360315987*^9, 3.5209339673618317`*^9}],
+
+Cell[BoxData["\<\"quantis_maxN=7.dat\"\>"], "Output",
+ CellChangeTimes->{3.520928360315987*^9, 3.5209339673917913`*^9}]
+}, Open  ]]
+},
+WindowSize->{740, 867},
+WindowMargins->{{145, Automatic}, {Automatic, 3}},
+FrontEndVersion->"8.0 for Linux x86 (64-bit) (October 10, 2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 117, 2, 29, "Input"],
+Cell[CellGroupData[{
+Cell[721, 28, 487, 12, 22, "Print"],
+Cell[1211, 42, 395, 6, 41, "Print"],
+Cell[1609, 50, 424, 6, 41, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[2060, 60, 98, 1, 29, "Input"],
+Cell[2161, 63, 187, 4, 29, "Input"],
+Cell[CellGroupData[{
+Cell[2373, 71, 172, 3, 29, "Input"],
+Cell[2548, 76, 154, 2, 29, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2739, 83, 755, 20, 66, "Input"],
+Cell[3497, 105, 188, 4, 29, "Output"],
+Cell[3688, 111, 119, 1, 29, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
