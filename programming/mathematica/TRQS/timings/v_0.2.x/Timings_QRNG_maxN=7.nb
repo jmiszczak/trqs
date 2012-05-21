@@ -10,19 +10,24 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      4562,        146]
-NotebookOptionsPosition[      3823,        115]
-NotebookOutlinePosition[      4159,        130]
-CellTagsIndexPosition[      4116,        127]
+NotebookDataLength[      8469,        262]
+NotebookOptionsPosition[      7231,        212]
+NotebookOutlinePosition[      7588,        228]
+CellTagsIndexPosition[      7545,        225]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
+Cell[BoxData[
+ RowBox[{"Quit", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.546241354465242*^9, 3.546241355210259*^9}, {
+  3.546241427854322*^9, 3.546241428628851*^9}}],
 
 Cell[CellGroupData[{
+
 Cell[BoxData[
  RowBox[{"<<", "TRQS`"}]], "Input",
- CellChangeTimes->{{3.5209171481215878`*^9, 3.520917148122685*^9}}],
+ CellChangeTimes->{{3.5462410749665003`*^9, 3.546241076203306*^9}}],
 
 Cell[CellGroupData[{
 
@@ -37,84 +42,177 @@ Cell[BoxData[
   "Package TRQS version ", "0.2.0", " (last modification: ", "07/05/2012", 
    ")."],
   Editable->False]], "Print",
- CellChangeTimes->{3.5209171490687532`*^9, 3.520933183362052*^9, 
-  3.546156923796097*^9}],
+ CellChangeTimes->{
+  3.546241077144203*^9, 3.546241150211979*^9, 3.5462413149661818`*^9, 
+   3.5462413575772038`*^9, {3.546241407777452*^9, 3.546241430631291*^9}, 
+   3.546241504500635*^9}],
 
 Cell[BoxData["\<\"\\!\\(\\*\\nStyleBox[\\\"INFO\\\",\\nFontWeight->\\\"Bold\\\
 \"]\\)\\!\\(\\*\\nStyleBox[\\\":\\\",\\nFontWeight->\\\"Bold\\\"]\\)\\!\\(\\*\
 \\nStyleBox[\\\" \\\",\\nFontWeight->\\\"Bold\\\"]\\)Using QRNG \
 (https://qrng.physik.hu-berlin.de/) as a source of randomness.\"\>"], "Print",\
 
- CellChangeTimes->{3.5209171490687532`*^9, 3.520933183362052*^9, 
-  3.546156923805315*^9}],
+ CellChangeTimes->{
+  3.546241077144203*^9, 3.546241150211979*^9, 3.5462413149661818`*^9, 
+   3.5462413575772038`*^9, {3.546241407777452*^9, 3.546241430631291*^9}, 
+   3.546241504502317*^9}],
 
 Cell[BoxData["\<\"\\!\\(\\*\\nStyleBox[\\\"Note\\\",\\nFontWeight->\\\"Bold\\\
 \"]\\)\\!\\(\\*\\nStyleBox[\\\":\\\",\\nFontWeight->\\\"Bold\\\"]\\) You have \
 to use \\!\\(\\*\\nStyleBox[\\\"QRNGSetCredentials\\\",\\nFontWeight->\\\"\
 Bold\\\"]\\) function to provide login information required to use this \
 backend.\"\>"], "Print",
- CellChangeTimes->{3.5209171490687532`*^9, 3.520933183362052*^9, 
-  3.546156923807144*^9}]
+ CellChangeTimes->{
+  3.546241077144203*^9, 3.546241150211979*^9, 3.5462413149661818`*^9, 
+   3.5462413575772038`*^9, {3.546241407777452*^9, 3.546241430631291*^9}, 
+   3.546241504503725*^9}]
 }, Open  ]]
 }, Open  ]],
 
-Cell[BoxData["QRNG"], "Input",
- CellChangeTimes->{{3.5461569259608383`*^9, 3.546156926622395*^9}}],
+Cell[CellGroupData[{
+
+Cell["QRNG tests", "Subsubtitle",
+ CellChangeTimes->{{3.5462413723502398`*^9, 3.54624137560491*^9}}],
+
+Cell[CellGroupData[{
 
 Cell[BoxData[
+ RowBox[{"QRNGSetCredentials", "[", 
+  RowBox[{"\"\<jmiszczak\>\"", ",", "\"\<alama12kota\>\""}], "]"}]], "Input",
+ CellChangeTimes->{{3.546241376974028*^9, 3.5462413862394133`*^9}}],
+
+Cell[BoxData["\<\"User name and password for using QRNG service set!\"\>"], \
+"Print",
+ CellChangeTimes->{{3.546241386774088*^9, 3.546241420948658*^9}, 
+   3.546241505195098*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"QRNGTestConnection", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.546241522384616*^9, 3.546241525354878*^9}}],
+
+Cell[BoxData["\<\"QRNG_SUCCESS\"\>"], "Output",
+ CellChangeTimes->{3.5462415259642477`*^9}]
+}, Open  ]],
+
+Cell[BoxData[{
  RowBox[{
-  RowBox[{"maxN", "=", "7"}], ";"}]], "Input",
- CellChangeTimes->{{3.520917158947781*^9, 3.5209171604479628`*^9}, {
-  3.520933150596724*^9, 3.520933151444715*^9}}],
+  RowBox[{"maxN", "=", "7"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"qrngListTimings", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{"0", ",", 
+     RowBox[{"{", "maxN", "}"}]}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.546241534458845*^9, 3.546241558933598*^9}, {
+  3.546241625893791*^9, 3.5462416977122087`*^9}, {3.5462419053923283`*^9, 
+  3.5462419498541822`*^9}, {3.546242036806284*^9, 3.546242036872099*^9}, {
+  3.546242119120163*^9, 3.5462421313436413`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"qrngListTimings", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"ii", ",", 
+      RowBox[{"Mean", "[", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"AbsoluteTiming", "[", 
+           RowBox[{"TrueRandomReal", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"0", ",", "1"}], "}"}], ",", 
+             RowBox[{"10", "^", "ii"}]}], "]"}], "]"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}], ",", 
+         RowBox[{"{", "10", "}"}]}], "]"}], "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"ii", ",", "1", ",", "maxN"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.546241577564391*^9, 3.54624167285782*^9}, {
+  3.546241887042737*^9, 3.546241902892766*^9}, {3.546241964021546*^9, 
+  3.546241981061327*^9}, {3.5462421126696444`*^9, 3.546242116444088*^9}, {
+  3.546242660110285*^9, 3.546242666901663*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0.0522877`5.169944532260473"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "0.0525319`5.171968102362908"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "0.0525263`5.171921803281053"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"4", ",", "0.1096526`5.4915639272958"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"5", ",", "0.2458085`5.842141890106906"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"6", ",", "1.2017818`6.531370616189153"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"7", ",", "10.2716819`7.463186554920333"}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.5462419890381413`*^9, 3.546242076715599*^9, 
+  3.5462422836541033`*^9, 3.546242790863246*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", "qrngTimings", "]"}]], "Input",
+ CellChangeTimes->{{3.546241664425605*^9, 3.546241693893643*^9}, {
+  3.546241935725032*^9, 3.546241939092884*^9}, {3.546242017556438*^9, 
+  3.546242033901939*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{}, {}, 
+   {Hue[0.67, 0.6, 0.6], 
+    LineBox[{{1., 0.0525601}, {2., 0.0524508}, {3., 0.1630354}, {4., 
+     0.1392426}, {5., 0.531555}, {6., 2.952334}}]}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 0},
+  PlotRange->{{0, 6.}, {0., 2.952334}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], 
+    Scaled[0.02]}]], "Output",
+ CellChangeTimes->{{3.546241915805436*^9, 3.546242034222887*^9}, 
+   3.54624207676685*^9, 3.546242283701433*^9, 3.546242829206408*^9}]
+}, Open  ]],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{"SetDirectory", "[", 
   RowBox[{"NotebookDirectory", "[", "]"}], "]"}]], "Input",
- CellChangeTimes->{{3.5209171841377773`*^9, 3.520917184138712*^9}}],
+ CellChangeTimes->{{3.546242180559325*^9, 3.546242188574778*^9}}],
 
-Cell[BoxData["\<\"/home/jam/Kuweta/notatki/programming/mathematica/TRQS\"\>"],\
- "Output",
- CellChangeTimes->{3.520917225976308*^9, 3.520933185676551*^9}]
+Cell[BoxData["\<\"/home/jam/Kuweta/notatki/programming/mathematica/TRQS/\
+timings/v_0.2.x\"\>"], "Output",
+ CellChangeTimes->{3.5462422837374496`*^9, 3.546242830987767*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
 
-Cell[BoxData[{
- RowBox[{"quantis7", "=", 
-  RowBox[{"Table", "[", 
-   RowBox[{
-    RowBox[{"{", 
-     RowBox[{"ii", ",", 
-      RowBox[{
-       RowBox[{"AbsoluteTiming", "[", 
-        RowBox[{
-         RowBox[{"Table", "[", 
-          RowBox[{
-           RowBox[{"TrueRandomReal", "[", "]"}], ",", 
-           RowBox[{"{", 
-            RowBox[{"10", "^", "ii"}], "}"}]}], "]"}], ";"}], "]"}], "[", 
-       RowBox[{"[", "1", "]"}], "]"}]}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{"ii", ",", "7", ",", "maxN"}], "}"}]}], "]"}]}], "\n", 
- RowBox[{"Export", "[", 
-  RowBox[{"\"\<quantis_maxN=7.dat\>\"", ",", "quantis7"}], "]"}]}], "Input",
- CellChangeTimes->{{3.520917205667886*^9, 3.520917222235057*^9}, {
-  3.52093314834439*^9, 3.520933193942172*^9}}],
-
 Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{"{", 
-   RowBox[{"7", ",", "771.11413`9.33866365476482"}], "}"}], "}"}]], "Output",
- CellChangeTimes->{3.520928360315987*^9, 3.5209339673618317`*^9}],
+ RowBox[{"Export", "[", 
+  RowBox[{"\"\<qrng_list_maxN=7_avg_of_10.dat\>\"", ",", "qrngListTimings"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.546242104927071*^9, 3.546242122982991*^9}, {
+  3.546242163606017*^9, 3.546242173959532*^9}}],
 
-Cell[BoxData["\<\"quantis_maxN=7.dat\"\>"], "Output",
- CellChangeTimes->{3.520928360315987*^9, 3.5209339673917913`*^9}]
+Cell[BoxData["\<\"qrng_list_maxN=7_avg_of_10.dat\"\>"], "Output",
+ CellChangeTimes->{3.5462422837942467`*^9, 3.546242831563253*^9}]
+}, Open  ]]
 }, Open  ]]
 },
-WindowSize->{740, 867},
-WindowMargins->{{145, Automatic}, {Automatic, 3}},
+WindowSize->{1920, 1114},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
 FrontEndVersion->"8.0 for Linux x86 (64-bit) (October 10, 2011)",
 StyleDefinitions->"Default.nb"
 ]
@@ -129,24 +227,42 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
+Cell[557, 20, 167, 3, 29, "Input"],
 Cell[CellGroupData[{
-Cell[579, 22, 117, 2, 29, "Input"],
+Cell[749, 27, 117, 2, 29, "Input"],
 Cell[CellGroupData[{
-Cell[721, 28, 487, 12, 22, "Print"],
-Cell[1211, 42, 395, 6, 41, "Print"],
-Cell[1609, 50, 424, 6, 41, "Print"]
+Cell[891, 33, 587, 14, 22, "Print"],
+Cell[1481, 49, 495, 8, 22, "Print"],
+Cell[1979, 59, 524, 8, 22, "Print"]
 }, Open  ]]
 }, Open  ]],
-Cell[2060, 60, 98, 1, 29, "Input"],
-Cell[2161, 63, 187, 4, 29, "Input"],
 Cell[CellGroupData[{
-Cell[2373, 71, 172, 3, 29, "Input"],
-Cell[2548, 76, 154, 2, 29, "Output"]
+Cell[2552, 73, 100, 1, 30, "Subsubtitle"],
+Cell[CellGroupData[{
+Cell[2677, 78, 196, 3, 29, "Input"],
+Cell[2876, 83, 178, 3, 22, "Print"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[2739, 83, 755, 20, 66, "Input"],
-Cell[3497, 105, 188, 4, 29, "Output"],
-Cell[3688, 111, 119, 1, 29, "Output"]
+Cell[3091, 91, 132, 2, 29, "Input"],
+Cell[3226, 95, 91, 1, 29, "Output"]
+}, Open  ]],
+Cell[3332, 99, 508, 11, 48, "Input"],
+Cell[CellGroupData[{
+Cell[3865, 114, 931, 23, 29, "Input"],
+Cell[4799, 139, 765, 19, 29, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5601, 163, 239, 4, 29, "Input"],
+Cell[5843, 169, 556, 14, 247, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6436, 188, 170, 3, 29, "Input"],
+Cell[6609, 193, 172, 2, 29, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6818, 200, 251, 5, 29, "Input"],
+Cell[7072, 207, 131, 1, 29, "Output"]
+}, Open  ]]
 }, Open  ]]
 }
 ]

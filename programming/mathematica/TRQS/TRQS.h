@@ -1,10 +1,14 @@
-// macros for using with Quantis (libQuantis) backend
-#define QUANTIS_DEVICE_TYPE QUANTIS_DEVICE_USB
-#define QUANTIS_DEVICE_ID 0
-
 #include <stdlib.h>
 #include "mathlink.h"
 
+// macros used for building test programs using libQuantis library
+#define QUANTIS_DEVICE_TYPE QUANTIS_DEVICE_USB
+#define QUANTIS_DEVICE_ID 0
+
+
+// macros for using configuration options set by Mathematica functions
+
+// read type and id of the used device
 #define QUANTIS_PREPARE(device_type,device_id,quantis_status) { \
 	const char* device_type_var; \
   	const char* device_id_var; \
@@ -31,6 +35,7 @@
   	quantis_status = QuantisGetModulesStatus(device_type, device_id); \
 }
 
+// read user name and password used for downloading data from qrng service
 #define QRNG_PREPARE(qrng_status) { \
 	const char* user; \
 	const char* pass; \

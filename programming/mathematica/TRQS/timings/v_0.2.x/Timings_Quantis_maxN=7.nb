@@ -1,0 +1,229 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      8513,        220]
+NotebookOptionsPosition[      7634,        184]
+NotebookOutlinePosition[      7989,        200]
+CellTagsIndexPosition[      7946,        197]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"<<", "TRQS`"}]], "Input",
+ CellChangeTimes->{{3.5462410749665003`*^9, 3.546241076203306*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Package TRQS version \"\>", 
+   "\[InvisibleSpace]", "\<\"0.2.0\"\>", 
+   "\[InvisibleSpace]", "\<\" (last modification: \"\>", 
+   "\[InvisibleSpace]", "\<\"07/05/2012\"\>", 
+   "\[InvisibleSpace]", "\<\").\"\>"}],
+  SequenceForm[
+  "Package TRQS version ", "0.2.0", " (last modification: ", "07/05/2012", 
+   ")."],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.546241077144203*^9, 3.546241150211979*^9, 3.5462413149661818`*^9, 
+   3.5462413575772038`*^9, {3.546241407777452*^9, 3.546241430631291*^9}, 
+   3.546241504500635*^9, 3.5462430927482157`*^9, {3.5462437705552397`*^9, 
+   3.546243774639975*^9}, 3.5462440080278893`*^9, 3.546244078221676*^9, 
+   3.5462443946323013`*^9, 3.546244571961722*^9, 3.5462446266411533`*^9, 
+   3.546244959029483*^9, 3.5465786305076313`*^9, 3.54657877948405*^9}],
+
+Cell[BoxData["\<\"\\!\\(\\*\\nStyleBox[\\\"INFO\\\",\\nFontWeight->\\\"Bold\\\
+\"]\\)\\!\\(\\*\\nStyleBox[\\\":\\\",\\nFontWeight->\\\"Bold\\\"]\\) Using \
+Quantis as a source of randomness.\"\>"], "Print",
+ CellChangeTimes->{
+  3.546241077144203*^9, 3.546241150211979*^9, 3.5462413149661818`*^9, 
+   3.5462413575772038`*^9, {3.546241407777452*^9, 3.546241430631291*^9}, 
+   3.546241504500635*^9, 3.5462430927482157`*^9, {3.5462437705552397`*^9, 
+   3.546243774639975*^9}, 3.5462440080278893`*^9, 3.546244078221676*^9, 
+   3.5462443946323013`*^9, 3.546244571961722*^9, 3.5462446266411533`*^9, 
+   3.546244959029483*^9, 3.5465786305076313`*^9, 3.546578779485461*^9}],
+
+Cell[BoxData["\<\"\\!\\(\\*\\nStyleBox[\\\"Note\\\",\\nFontWeight->\\\"Bold\\\
+\"]\\)\\!\\(\\*\\nStyleBox[\\\":\\\",\\nFontWeight->\\\"Bold\\\"]\\) You \
+should configure this backend with \
+\\!\\(\\*\\nStyleBox[\\\"QuantisSetDevice\\\",\\nFontWeight->\\\"Bold\\\"]\\) \
+function by providing information about the type and id of the used Quantis \
+device.\"\>"], "Print",
+ CellChangeTimes->{
+  3.546241077144203*^9, 3.546241150211979*^9, 3.5462413149661818`*^9, 
+   3.5462413575772038`*^9, {3.546241407777452*^9, 3.546241430631291*^9}, 
+   3.546241504500635*^9, 3.5462430927482157`*^9, {3.5462437705552397`*^9, 
+   3.546243774639975*^9}, 3.5462440080278893`*^9, 3.546244078221676*^9, 
+   3.5462443946323013`*^9, 3.546244571961722*^9, 3.5462446266411533`*^9, 
+   3.546244959029483*^9, 3.5465786305076313`*^9, 3.546578779487341*^9}],
+
+Cell[BoxData["\<\"\\!\\(\\*\\nStyleBox[\\\"Note\\\",\\nFontWeight->\\\"Bold\\\
+\"]\\)\\!\\(\\*\\nStyleBox[\\\":\\\",\\nFontWeight->\\\"Bold\\\"]\\) By \
+default the package will use a USB Quantis device with id set to 0.\"\>"], \
+"Print",
+ CellChangeTimes->{
+  3.546241077144203*^9, 3.546241150211979*^9, 3.5462413149661818`*^9, 
+   3.5462413575772038`*^9, {3.546241407777452*^9, 3.546241430631291*^9}, 
+   3.546241504500635*^9, 3.5462430927482157`*^9, {3.5462437705552397`*^9, 
+   3.546243774639975*^9}, 3.5462440080278893`*^9, 3.546244078221676*^9, 
+   3.5462443946323013`*^9, 3.546244571961722*^9, 3.5462446266411533`*^9, 
+   3.546244959029483*^9, 3.5465786305076313`*^9, 3.546578779488824*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Quantis tests", "Subsubtitle",
+ CellChangeTimes->{{3.5462413723502398`*^9, 3.54624137560491*^9}, {
+  3.546578436292861*^9, 3.546578437330855*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox["QuantisSetDevice",
+   FontWeight->"Bold"], "[", 
+  RowBox[{"\"\<USB\>\"", ",", "0"}], "]"}]], "Input",
+ CellChangeTimes->{{3.546241376974028*^9, 3.5462413862394133`*^9}, {
+  3.546243097061385*^9, 3.546243105996479*^9}, {3.546244019417328*^9, 
+  3.54624401949583*^9}, {3.546244116294158*^9, 3.546244116566801*^9}}],
+
+Cell[BoxData["\<\"Using Quantis device: type=USB, id=0\"\>"], "Print",
+ CellChangeTimes->{3.5462449608383913`*^9, 3.546578632997654*^9, 
+  3.546578782122554*^9}]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"maxN", "=", "7"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"quantisListTimings", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"-", "1.0"}], ",", 
+     RowBox[{"{", "maxN", "}"}]}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.546241534458845*^9, 3.546241558933598*^9}, {
+   3.546241625893791*^9, 3.5462416977122087`*^9}, {3.5462419053923283`*^9, 
+   3.5462419498541822`*^9}, {3.546242036806284*^9, 3.546242036872099*^9}, {
+   3.546242119120163*^9, 3.5462421313436413`*^9}, {3.5462431185339746`*^9, 
+   3.546243119399385*^9}, {3.54624377809403*^9, 3.546243812256486*^9}, {
+   3.546244092447461*^9, 3.546244092623314*^9}, {3.546244125821598*^9, 
+   3.546244125999753*^9}, {3.5462444028301973`*^9, 3.546244403120009*^9}, 
+   3.546244579188414*^9, {3.5462453958631277`*^9, 3.546245396176612*^9}, {
+   3.546578658405102*^9, 3.5465786602268677`*^9}, {3.546578728987545*^9, 
+   3.546578729979085*^9}, {3.546578783947637*^9, 3.546578798241194*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"quantisListTimings", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"ii", ",", 
+       RowBox[{
+        RowBox[{"AbsoluteTiming", "[", 
+         RowBox[{"TrueRandomReal", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"0", ",", "1"}], "}"}], ",", 
+           RowBox[{"10", "^", "ii"}]}], "]"}], "]"}], "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"ii", ",", "1", ",", "maxN"}], "}"}]}], "]"}]}], ";"}]], "Input",\
+
+ CellChangeTimes->{{3.546241577564391*^9, 3.54624167285782*^9}, {
+   3.546241887042737*^9, 3.546241902892766*^9}, {3.546241964021546*^9, 
+   3.546241981061327*^9}, {3.5462421126696444`*^9, 3.546242116444088*^9}, {
+   3.546242660110285*^9, 3.546242666901663*^9}, 3.5462431229753437`*^9, {
+   3.546243787134984*^9, 3.546243839613927*^9}, {3.546244083014126*^9, 
+   3.546244090075719*^9}, {3.546244454739999*^9, 3.546244479445195*^9}, {
+   3.546244644909153*^9, 3.546244654804369*^9}, {3.546578679269128*^9, 
+   3.5465787201114273`*^9}, 3.546578789538892*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0.057787`5.213375142240525"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "0.531863`6.177344772395702"}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.546578721218277*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"ListLinePlot", "[", "quantisListTimings", "]"}]], "Input",
+ CellChangeTimes->{{3.546241664425605*^9, 3.546241693893643*^9}, {
+   3.546241935725032*^9, 3.546241939092884*^9}, {3.546242017556438*^9, 
+   3.546242033901939*^9}, 3.546243152284244*^9}],
+
+Cell[BoxData[
+ RowBox[{"Export", "[", 
+  RowBox[{"\"\<quantis_list_maxN=7.dat\>\"", ",", "quantisListTimings"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.546242104927071*^9, 3.546242122982991*^9}, {
+  3.546242163606017*^9, 3.546242173959532*^9}, {3.5462431277343397`*^9, 
+  3.546243131758753*^9}, {3.546244525089362*^9, 3.546244530134144*^9}, {
+  3.546245398918249*^9, 3.54624539914959*^9}}]
+}, Open  ]]
+},
+WindowSize->{827, 558},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+FrontEndVersion->"8.0 for Linux x86 (64-bit) (October 10, 2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 117, 2, 29, "Input"],
+Cell[CellGroupData[{
+Cell[721, 28, 854, 17, 22, "Print"],
+Cell[1578, 47, 665, 9, 22, "Print"],
+Cell[2246, 58, 831, 12, 41, "Print"],
+Cell[3080, 72, 697, 10, 22, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3826, 88, 152, 2, 30, "Subsubtitle"],
+Cell[CellGroupData[{
+Cell[4003, 94, 349, 7, 29, "Input"],
+Cell[4355, 103, 161, 2, 22, "Print"]
+}, Open  ]],
+Cell[4531, 108, 1004, 18, 48, "Input"],
+Cell[CellGroupData[{
+Cell[5560, 130, 1109, 25, 48, "Input"],
+Cell[6672, 157, 266, 8, 29, "Output"]
+}, Open  ]],
+Cell[6953, 168, 270, 4, 29, "Input"],
+Cell[7226, 174, 392, 7, 29, "Input"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
