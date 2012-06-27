@@ -28,6 +28,14 @@ In order to compile *.tm source files one should note that:
 Detailed instructions for compiling and running the supported backends are given 
 below.
 
+Please note, that gcc and g++ compilers are used during the compilation process. 
+You can chaned this by redefining CC and CXX variable in the main Makefile or calling
+make as
+
+ make CC=icc
+
+in order to use a diffrent C compiler
+
 == Installation ==
 
 After compiling the source files, a file name

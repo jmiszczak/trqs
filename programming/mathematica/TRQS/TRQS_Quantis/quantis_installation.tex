@@ -1,8 +1,9 @@
 \pdfoutput=1
-% v. 0.01 - 15/02/2011 - Jarek - instalation instructions written during tests on tesla
+% v. 0.01 - 15/02/2011 - Jarek - installation instructions written during tests
 % v. 0.02 - 23/03/2011 - Jarek - minor improvements
 % v. 0.03 - 23/04/2012 - Jarek - style and layout improvements
 % v. 0.04 - 01/05/2012 - Iza - minor spelling and grammar corrections
+% v. 0.05 - 27/06/2012 - Jarek - remarks concerning RedHad/Fedora-based systems
 
 \documentclass[a4paper,11pt]{article}
 
@@ -21,35 +22,61 @@
 \author{Jaros{\l}aw A. Miszczak\\
 Institute of Theoretical and Applied Informatics, Polish Academy of Sciences\\
 Baltycka 5, 44-100 Gliwice, Poland}
-\date{01/05/2012 (v.0.04)}
+\date{27/06/2012 (v.0.05)}
+
+\providecommand{\note}[1]{\noindent\textbf{\underline{Note}}: #1\vspace{6pt}}
+\newcommand{\QuantisDistVersion}{Quantis-v11.12.13}
 
 \begin{document}
 
 \maketitle
 
+\begin{abstract}
+The following instructions provide an overview of the installation procedure for
+device drivers and libraries required to use Quantis quantum random number
+generator on Linux-based systems. Please consult the documentation provided with
+the Quantis software package for more information.
+\end{abstract}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Device drivers}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\textbf{\underline{Note}}: In the following instructions
-\texttt{Quantis-v11.01.12} should be replaced by the appropriate directory
-depending on the software package you are using.
+In the following instructions \texttt{\QuantisDistVersion } should be replaced
+by the appropriate directory depending on the version of Quantis software
+package you are using during the installation.
+
+One should also note that most of the command issued during the installations
+process require super-user (root) privileges. On most modern Linux systems
+this can be achieved using \texttt{sudo} or \texttt{su} commands.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{PCI and PCI-express version}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{enumerate}
-    \item Install module-assistant package\\ \texttt{apt-get install
-    module-assistant} 
+    \item Install module-assistant package\\
+    \texttt{apt-get install module-assistant}
+    \note{On RedHat/Fedora-based systems you need to install
+    \texttt{kernel-devel} package and collection of development tools}\\ 
+    \texttt{yum install kernel-devel} \\
+    \texttt{yum groupinstall "Development Tools"}
+
     \item Prepare your system for module compilation\\ \texttt{m-a prepare}
+
     \item Unpack the Quantis software package and go to\\
-    \texttt{Quantis-v11.01.12/Drivers/Unix/QuantisPci}.
+    \texttt{\QuantisDistVersion /Drivers/Unix/QuantisPci}.
+
     \item Compile the module\\ \texttt{make}
+
     \item Install the module\\ \texttt{make install}\\ and check if the module
     has been installed properly\\ \texttt{find /lib/modules/ -name
     quantis\_pci.ko}
+
     \item Make sure that the driver will be loaded during the next boot \\
     \texttt{echo "quantis\_pci" >> /etc/modules}
+
     \item Follow the instructions in Section~\ref{sec:permissions}.
+
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -58,8 +85,10 @@ depending on the software package you are using.
 \begin{enumerate}
     \item Install \texttt{libusb} and \texttt{libusb-dev} packages\\ 
     \texttt{apt-get install libusb-1.0-0 libusb-1.0-0-dev}
+
     \item Check your device with \texttt{lsusb}\\
     \texttt{lsusb -d 0aba:0102 -v} or \texttt{lsusb -v | grep Quantis}
+
     \item Follow the instructions in Section~\ref{sec:permissions}.
 \end{enumerate}
 
@@ -73,9 +102,9 @@ depending on the software package you are using.
     \item Add the user that will be permitted to use Quantis to the
     \texttt{plugdev} group\\ \texttt{usermod -G plugdev -a LOGIN},\\ where
     \texttt{LOGIN} is the login name of the user
-    \item Copy file \texttt{Quantis-v11.01.12/Drivers/Unix/idq-quantis.rules},\\
-    to \texttt{/etc/udev/rules.d/} directory and reload the UDEV rules\\
-    \texttt{udevadm control --reload-rules}
+    \item Copy file \texttt{\QuantisDistVersion
+    /Drivers/Unix/idq-quantis.rules},\\ to \texttt{/etc/udev/rules.d/} directory
+    and reload the UDEV rules\\ \texttt{udevadm control --reload-rules}
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -84,14 +113,14 @@ depending on the software package you are using.
 
 \begin{enumerate}
     \item Unpack distribution files from
-    \texttt{Quantis-v11.01.12/Packages/Linux} to a selected directory, \eg\
+    \texttt{\QuantisDistVersion /Packages/Linux} to a selected directory, \eg\
     \texttt{/usr/local/IDQ/Quantis}\\ \texttt{mkdir /usr/local/IDQ}\\
     \texttt{tar xjvf QuantisRNG-2.5.0-Linux-amd64.tar.bz2}\\ \texttt{mv
     QuantisRNG-2.5.0-Linux-amd64 /usr/local/IDQ/Quantis}\\ After this step the
     \texttt{EasyQuantis} application should be in\\
     \texttt{/usr/local/IDQ/Quantis/bin/EasyQuantis}
     \item Copy {Quantis.h} and {DllMain.h} from\\
-    \texttt{Quantis-v11.01.12/Libs-Apps/Quantis}\\ to\\
+    \texttt{\QuantisDistVersion /Libs-Apps/Quantis}\\ to\\
     \texttt{/usr/local/IQD/Quantis/include}
     \item Add \texttt{/usr/local/IDQ/Quantis/lib} (or
     \texttt{/usr/local/IDQ/Quantis/lib64}) to \\ \texttt{/etc/ld.so.config} or
