@@ -8,7 +8,7 @@
 # we are using the default compilers
 ###############################################################################
 export CC = gcc
-export CXX = gooo
+export CXX = g++
 
 ###############################################################################
 # libQRNG configuration (alter according to your setup)
