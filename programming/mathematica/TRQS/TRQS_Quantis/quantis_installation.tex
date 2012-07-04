@@ -42,23 +42,22 @@ the Quantis software package for more information.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Device drivers}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 In the following instructions \texttt{\QuantisDistVersion } should be replaced
 by the appropriate directory depending on the version of Quantis software
-package you are using during the installation. Provided compilation and
-installation instructions should work on any systems running Debian GNU/Linux
-distribution. The difference between Debian and Fedora/RedHat-based system in
-pointed during some steps.
+package you are using during the installation. The provided compilation and
+installation instructions should work on any system running Debian GNU/Linux
+distribution. The difference between Debian and Fedora/RedHat-based systems is
+pointed out during some steps.
 
 One should also note that most of the command issued during the installations
 process require super-user (root) privileges. On most modern Linux systems
 this can be achieved using \texttt{sudo} or \texttt{su} commands.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{PCI and PCI-express version}
+\subsection{PCI and PCI-express versions}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-PCI driver for the Quantis is required only for using PCI or PCI-express version
-of the device. If you are suing USB version, please consult installation
+PCI driver for Quantis is required only for using PCI or PCI-express versions of
+the device. If you are using USB version, please consult installation
 instructions in Sections~\ref{sec:usb-version} and \ref{sec:permissions}.
 
 \note{According to information obtained from the Quantis developers, as of July
@@ -98,8 +97,8 @@ summer 2012.}
     \texttt{/etc/rc.modules} file in order to load the driver automatically
     during the boot}\\ \texttt{echo modprobe quantis\_pci >> /etc/rd.modules}
 
-    \item Follow the instructions concerning in Section~\ref{sec:permissions} to
-    set the required permissions for using Quantis device.
+    \item Follow the instructions in Section~\ref{sec:permissions} to set the
+    required permissions for using Quantis device.
 
 \end{enumerate}
 
@@ -116,8 +115,9 @@ summer 2012.}
     \item Check your device with \texttt{lsusb}\\
     \texttt{lsusb -d 0aba:0102 -v}\\ or\\ \texttt{lsusb -v | grep Quantis}
 
-    \item Follow the instructions concerning in Section~\ref{sec:permissions} to
-    set the required permissions for using Quantis device.
+    \item Follow the instructions in Section~\ref{sec:permissions} to set the
+    required permissions for using Quantis device.
+
 \end{enumerate}
 
 
