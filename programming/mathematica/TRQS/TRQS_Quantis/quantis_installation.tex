@@ -110,8 +110,11 @@ summer 2012.}
     \item Install \texttt{libusb} and \texttt{libusb-dev} packages\\ 
     \texttt{apt-get install libusb-1.0-0 libusb-1.0-0-dev}
 
+    \note{On RedHat/Fedora-based systems you need to run}\\
+    \texttt{yum install libusb libusb-dev}
+
     \item Check your device with \texttt{lsusb}\\
-    \texttt{lsusb -d 0aba:0102 -v} or \texttt{lsusb -v | grep Quantis}
+    \texttt{lsusb -d 0aba:0102 -v}\\ or\\ \texttt{lsusb -v | grep Quantis}
 
     \item Follow the instructions concerning in Section~\ref{sec:permissions} to
     set the required permissions for using Quantis device.
@@ -124,11 +127,14 @@ summer 2012.}
 \begin{enumerate}
     \item Make sure that the \texttt{plugdev} group exists\\
     \texttt{cat /etc/group | grep plugdev}
+    \item If it does not exits, run\\ 
+    \texttt{groupadd --gid 46 plugdev}\\
+    as root.
     \item Add the user that will be permitted to use Quantis to the
     \texttt{plugdev} group\\ \texttt{usermod -G plugdev -a LOGIN},\\ where
     \texttt{LOGIN} is the login name of the user
     \item Copy file \texttt{\QuantisDistVersion
-    /Drivers/Unix/idq-quantis.rules},\\ to \texttt{/etc/udev/rules.d/} directory
+    /Drivers/Unix/idq-quantis.rules},\\ to\\ \texttt{/etc/udev/rules.d/}\\ directory
     and reload the UDEV rules\\ \texttt{udevadm control --reload-rules}
 \end{enumerate}
 
