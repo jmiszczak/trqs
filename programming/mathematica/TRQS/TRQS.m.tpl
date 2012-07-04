@@ -32,7 +32,8 @@ trqsHistory = {
 	{"0.1.7", "30/04/2012", "Jarek", "Documentation improvements and simple backend sanity check."},
 	{"0.1.8", "02/05/2012", "Jarek", "Method for sharing login data for the QRNG backend"},
 	{"0.1.9", "04/05/2012", "Jarek", "Connection checking improved for the QRNG backend"},
-	{"0.2.0", "07/05/2012", "Jarek", "Support for lists of random numbers. Configuration functions for backends added."}
+	{"0.2.0", "07/05/2012", "Jarek", "Support for lists of random numbers. Configuration functions for backends added."},
+	{"0.2.1", "04/07/2012", "Jarek", "Minor chnages in the main Makefile. Documentation updated."}
 };
 
 trqsVersion = Last[trqsHistory][[1]];

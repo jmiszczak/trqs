@@ -1,50 +1,54 @@
+* 0.2.1 (04/07/2012)
+	- Minor chnages in the main Makefile. 
+	- Documentation updated.
+
 * 0.2.0 (07/05/2012)
-    - Support for lists of random numbers. 
-    - Configuration functions for backends added.
+	- Support for lists of random numbers. 
+	- Configuration functions for backends added.
 
 * 0.1.9 (04/05/2012)
-    - Connection checking improved for the QRNG backend.
+	 Connection checking improved for the QRNG backend.
 
 * 0.1.8 (02/05/2012)
-    - Method for sharing login data for the QRNG backend.
+	- Method for sharing login data for the QRNG backend.
 
 * 0.1.7 (30/04/2012)
-    - Documentation improvements.
-    - Simple backend sanity check.
+	- Documentation improvements.
+	- Simple backend sanity check.
 
 * 0.1.6 (27/04/2012) 
-    - Build system for the backend files improved.
+	- Build system for the backend files improved.
 
 * 0.1.5 (24/04/2012)
-    - Preliminary support for QRNG service.
+	- Preliminary support for QRNG service.
 
 * 0.1.1 (28/07/2011)
-    - TrueRandomGraph function added.
+	- TrueRandomGraph function added.
 
 * 0.1.0 (28/07/2011)
-    - TrueRandomDynamicalMatrix function added.
+	- TrueRandomDynamicalMatrix function added.
 
 * 0.0.9 (27/07/2011) 
-    - TrueRandomChoice function added.
+	- TrueRandomChoice function added.
 
 * 0.0.7 (15/02/2011)
-    - Help messages updated.
+	- Help messages updated.
 
 * 0.0.6 (14/02/2011)
-    - Induced measures.
+	- Induced measures.
 
 * 0.0.5 (13/02/2011)
-    - Some configuration related functions.
+	- Some configuration related functions.
 
 * 0.0.4 (07/02/2011)
-    - External functions for double numbers. 
-    - Normal distribution implemented.
+	- External functions for double numbers. 
+	- Normal distribution implemented.
 
 * 0.0.3 (06/02/2011)
-    - External functions for integer numbers.
+	- External functions for integer numbers.
 
 * 0.0.2 (31/01/2011)
-    - Some cleanups.
+	- Some cleanups.
 
 * 0.0.1 (10/01/2011)
-    - Initial version.
+	- Initial version.
