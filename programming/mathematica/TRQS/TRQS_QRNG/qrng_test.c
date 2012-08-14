@@ -2,6 +2,9 @@
 #include "libQRNG.h"
 #include "TRQS.h"
 
+#define QRNG_USER "my_user_name"
+#define QRNG_PASS "my_pass"
+
 int main() {
 	int ret_code;
 	int int_value;

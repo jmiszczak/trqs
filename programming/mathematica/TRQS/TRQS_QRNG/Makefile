@@ -36,7 +36,7 @@ qrng-all: $(BACKEND_BIN) qrng_test
 
 qrng_test:
 	@echo '==>' Building files \'$@\'
-	$(CC) $(@:%=%.c) -o $@ -I$(BACKEND_INCDIR) -I.. -L$(BACKEND_LIBDIR) $(BACKEND_LIB) $(CCFLAGS)
+	$(CC) $(@:%=%.c) -o $@ -I$(BACKEND_INCDIR) -I.. -I$(ML_INCDIR) -L$(BACKEND_LIBDIR) $(BACKEND_LIB)
 
 qrng-bin-dist: $(BACKEND_BIN)
 	@echo '==>' Building binary distribution for $(BACKEND_DIR)

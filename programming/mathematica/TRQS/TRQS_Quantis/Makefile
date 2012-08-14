@@ -36,7 +36,7 @@ quantis-all: $(BACKEND_BIN) quantis_test
 
 quantis_test:
 	@echo '==>' Building file \'$@\'
-	$(CC) $(@:%=%.c) -o $@ -I$(BACKEND_INCDIR) -I.. -L$(BACKEND_LIBDIR) $(BACKEND_LIB) $(CCFLAGS)
+	$(CC) $(@:%=%.c) -o $@ -I$(BACKEND_INCDIR) -I.. -I$(ML_INCDIR) -L$(BACKEND_LIBDIR) $(BACKEND_LIB)
 
 quantis-bin-dist: $(BACKEND_BIN)
 	@echo '==>' Building binary distribution for $(BACKEND_DIR) '('linked against $(BACKEND_LIB)')'
