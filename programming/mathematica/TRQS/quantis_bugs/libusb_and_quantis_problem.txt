@@ -1,0 +1,43 @@
+jam@trusia:~/Kuweta/notatki/quantum/trqs_v_2/TRQS
+$ export LD_LIBRARY_PATH=
+jam@trusia:~/Kuweta/notatki/quantum/trqs_v_2/TRQS
+$ ldd ./TRQS_Quantis/quantis_test 
+	linux-gate.so.1 =>  (0x002f6000)
+	libQuantis.so.2 => /usr/local/IDQ/Quantis/lib/libQuantis.so.2 (0x0060f000)
+	libpthread.so.0 => /lib/i386-linux-gnu/libpthread.so.0 (0x00398000)
+	libc.so.6 => /lib/i386-linux-gnu/libc.so.6 (0x00df1000)
+	libusb-1.0.so.0 => /lib/i386-linux-gnu/libusb-1.0.so.0 (0x00566000)
+	librt.so.1 => /lib/i386-linux-gnu/librt.so.1 (0x00110000)
+	libstdc++.so.6 => /usr/lib/i386-linux-gnu/libstdc++.so.6 (0x00119000)
+	libm.so.6 => /lib/i386-linux-gnu/libm.so.6 (0x001fe000)
+	libgcc_s.so.1 => /lib/i386-linux-gnu/libgcc_s.so.1 (0x00dad000)
+	/lib/ld-linux.so.2 (0x007f6000)
+jam@trusia:~/Kuweta/notatki/quantum/trqs_v_2/TRQS
+$ ./TRQS_Quantis/quantis_test 
+DBL_MIN=2.225074e-308
+DBL_MAX=1.797693e+308
+2.900000
+Segmentation fault (core dumped)
+jam@trusia:~/Kuweta/notatki/quantum/trqs_v_2/TRQS
+$ export LD_LIBRARY_PATH=/usr/local/LibUSB/lib
+jam@trusia:~/Kuweta/notatki/quantum/trqs_v_2/TRQS
+$ ldd ./TRQS_Quantis/quantis_test 
+	linux-gate.so.1 =>  (0x00775000)
+	libQuantis.so.2 => /usr/local/IDQ/Quantis/lib/libQuantis.so.2 (0x00e1b000)
+	libpthread.so.0 => /lib/i386-linux-gnu/libpthread.so.0 (0x00246000)
+	libc.so.6 => /lib/i386-linux-gnu/libc.so.6 (0x00261000)
+	libusb-1.0.so.0 => /usr/local/LibUSB/lib/libusb-1.0.so.0 (0x004b0000)
+	librt.so.1 => /lib/i386-linux-gnu/librt.so.1 (0x00654000)
+	libstdc++.so.6 => /usr/lib/i386-linux-gnu/libstdc++.so.6 (0x00110000)
+	libm.so.6 => /lib/i386-linux-gnu/libm.so.6 (0x00a1f000)
+	libgcc_s.so.1 => /lib/i386-linux-gnu/libgcc_s.so.1 (0x00cbc000)
+	/lib/ld-linux.so.2 (0x00c3c000)
+jam@trusia:~/Kuweta/notatki/quantum/trqs_v_2/TRQS
+$ ./TRQS_Quantis/quantis_test 
+DBL_MIN=2.225074e-308
+DBL_MAX=1.797693e+308
+2.900000
+080259A410
+Random double: 1.124008e-01
+Number of USB devices: 1
+Number of PCI devices: 0
