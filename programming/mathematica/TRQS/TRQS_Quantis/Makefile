@@ -34,23 +34,24 @@ default:
 
 quantis_test:
 	@echo '==>' Building file \'$@\'
-	$(CC) quantis_test.c -o $@ -I$(BACKEND_INCDIR) -I.. -I$(ML_INCDIR) -L$(BACKEND_LIBDIR) $(BACKEND_LIB)
+	$(CC) -pthread quantis_test.c -o $@ -I$(BACKEND_INCDIR) -I.. -I$(ML_INCDIR) -L$(BACKEND_LIBDIR) $(BACKEND_LIB)
 
-quantis-bin-dist: $(BACKEND_BIN)
+quantis-bin-dist: quantis_test $(BACKEND_BIN)
 	@echo '==>' Building binary distribution for $(BACKEND_DIR) '('linked against $(BACKEND_LIB)')'
 	mkdir -p $(BACKEND_DIR)
 	cp $(BACKEND_BIN) $(BACKEND_DIR)
 	cat ../TRQS.m.tpl | sed s/TRQS_BACKEND_NAME/$(BACKEND_NAME)/g > ../TRQS.m
 	tar czvf ../TRQS-$(TRQSV)-$(ARCH)-Quantis$(VARIANT).tgz \
-        $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) ../TRQS.m ../TRQSTest_Quantis.nb \
-        ../README quantis_installation.pdf
+        $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) quantis_test \
+		../TRQS.m ../TRQSTest_Quantis.nb \
+		../README quantis_installation.pdf
 	rm -Rf $(BACKEND_DIR)
 
 quantis-nohw_test:
-	$(MAKE) quantis_test BACKEND_LIB=$(BACKEND_LIB)-NoHw
+	$(MAKE) quantis_test VARIANT=-NoHw BACKEND_LIB=$(BACKEND_LIB)$(VARIANT)
 
 quantis-nohw-bin-dist:
-	$(MAKE) quantis-bin-dist BACKEND_LIB=$(BACKEND_LIB)-NoHw
+	$(MAKE) quantis-bin-dist VARIANT=-NoHw BACKEND_LIB=$(BACKEND_LIB)$(VARIANT)
 
 % : %.tm
 	@echo '==>' Building file \'$@\'
