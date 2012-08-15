@@ -32,11 +32,9 @@ BACKEND_BIN = $(BACKEND_SRC:%.tm=%)
 default:
 	@echo '==>' Please use the main Makefile located in the parent directory
 
-quantis-all: $(BACKEND_BIN) quantis_test
-
 quantis_test:
 	@echo '==>' Building file \'$@\'
-	$(CC) $(@:%=%.c) -o $@ -I$(BACKEND_INCDIR) -I.. -I$(ML_INCDIR) -L$(BACKEND_LIBDIR) $(BACKEND_LIB)
+	$(CC) quantis_test.c -o $@ -I$(BACKEND_INCDIR) -I.. -I$(ML_INCDIR) -L$(BACKEND_LIBDIR) $(BACKEND_LIB)
 
 quantis-bin-dist: $(BACKEND_BIN)
 	@echo '==>' Building binary distribution for $(BACKEND_DIR) '('linked against $(BACKEND_LIB)')'
@@ -48,15 +46,17 @@ quantis-bin-dist: $(BACKEND_BIN)
         ../README quantis_installation.pdf
 	rm -Rf $(BACKEND_DIR)
 
+quantis-nohw_test:
+	$(MAKE) quantis_test BACKEND_LIB=$(BACKEND_LIB)-NoHw
+
 quantis-nohw-bin-dist:
-	$(MAKE) quantis-bin-dist VARIANT=-NoHw BACKEND_LIB=$(BACKEND_LIB)$(VARIANT)
+	$(MAKE) quantis-bin-dist BACKEND_LIB=$(BACKEND_LIB)-NoHw
 
 % : %.tm
 	@echo '==>' Building file \'$@\'
 	$(MPREP) $^ -o $^.c
 	$(CC) -I$(ML_INCDIR) -I$(BACKEND_INCDIR) -I.. $(ML_LIBS) $(BACKEND_LIB) -c -o $^.o $^.c
 	$(CXX) -L$(ML_LIBDIR) -I$(BACKEND_INCDIR) -L$(BACKEND_LIBDIR) $^.o $(ML_LIBS) $(BACKEND_LIB) -o $@ 
-
 
 quantis-clean:
 	rm -rf $(BACKEND_BIN)

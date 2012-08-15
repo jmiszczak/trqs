@@ -122,20 +122,18 @@ quantis-bin-dist:
 quantis-nohw-bin-dist:
 	$(MAKE) -C $(QUANTIS_BACKEND_DIR) $@
 
-quantis-all:
-	$(MAKE) -C $(QUANTIS_BACKEND_DIR) $@
-
 quantis_test:
 	$(MAKE) -C $(QUANTIS_BACKEND_DIR) $@
+
+quantis-nohw_test:
+	$(MAKE) -C $(QUANTIS_BACKEND_DIR) $@
+
 
 ################################################################################
 # QRNG
 ################################################################################
 
 qrng-bin-dist:
-	$(MAKE) -C $(QRNG_BACKEND_DIR) $@
-
-qrng-all:
 	$(MAKE) -C $(QRNG_BACKEND_DIR) $@
 
 qrng_test:
