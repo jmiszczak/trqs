@@ -1,0 +1,31 @@
+1) Download libusb in version 1.0.8 from
+http://sourceforge.net/projects/libusb/files/libusb-1.0/libusb-1.0.8/libusb-1.0.8.tar.bz2
+
+2) Open the terminal emulator window and Unpack the archive
+
+  tar xjf libusb-1.0.8.tar.bz2
+
+3) Go to the source directory
+
+  cd libusb-1.0.8/
+
+3) Configure the library with some custom installation prefix
+
+  ./configure --prefix=/usr/local/LibUSB
+
+4) Build and install the library
+
+  make install
+
+This will create lib and include subdirectories in /usr/local/LibUSB
+
+5) Instruct the loader to use the custom version of libusb by 
+modifying LD_LIBRARY_PATH environment variable
+
+  export LD_LIBRARY_PATH=/usr/local/LibUSB/lib
+
+6) Run mathematica from the shell with modified environment
+
+  mathematica
+
+7) The TRQS package should now use libusb located in /usr/local/LibUSB/lib
