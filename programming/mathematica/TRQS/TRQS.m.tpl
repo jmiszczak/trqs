@@ -7,7 +7,7 @@
 (* File: TRQS.m *)
 (* Description: Mathematica package for generating truly random quantum states using quantum random number generators. *)
 (* Author: Jaroslaw Miszczak <miszczak@iitis.pl> *)
-(* Version: 0.2.0 (07/05/2012) *)
+(* Version: 0.2.2 (19/08/2012) *)
 (* License: GPLv3 *)
 
 
@@ -33,7 +33,8 @@ trqsHistory = {
 	{"0.1.8", "02/05/2012", "Jarek", "Method for sharing login data for the QRNG backend"},
 	{"0.1.9", "04/05/2012", "Jarek", "Connection checking improved for the QRNG backend"},
 	{"0.2.0", "07/05/2012", "Jarek", "Support for lists of random numbers. Configuration functions for backends added."},
-	{"0.2.1", "04/07/2012", "Jarek", "Minor chnages in the main Makefile. Documentation updated."}
+	{"0.2.1", "04/07/2012", "Jarek", "Minor chnages in the main Makefile. Documentation updated."},
+	{"0.2.2", "19/08/2012", "Jarek", "Fixed problems with building tests and added description of libusb problem in Ubuntu 12.04"}
 };
 
 trqsVersion = Last[trqsHistory][[1]];

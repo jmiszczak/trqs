@@ -5,9 +5,23 @@ installation instructions.
 
 (c) 2011-2012 Jaroslaw Miszczak <miszczak(at)iitis.pl>
 
+* Introduction
+* Compilation
+* Installation
+* Quantis backend - detailed information
+** Compilation
+** Installation
+** Known problems
+*** LibQuantis 2.9 and Ubuntu 12.04
+* QRNG backend - detailed information
+** Compilation
+** Installation
+* Example
+* Contact
+
 == Introduction ==
 
-TRQS is a Mathematica package, which allows to utilize quantum true random
+TRQS is a Mathematica package, which allows to utilise quantum true random
 number generators. Currently, the package supports two sources of randomness:
 Quantis RNG produced by ID Quantique S.A. and QRNG on-line service based on the
 generator developed by Nano-Optics group at the Department of Physics of
@@ -28,9 +42,9 @@ In order to compile *.tm source files one should note that:
 Detailed instructions for compiling and running the supported backends are given 
 below.
 
-Please note, that gcc and g++ compilers are used during the compilation process. 
-You can chaned this by redefining CC and CXX variable in the main Makefile or calling
-make as
+Please note, that gcc and g++ compilers are used during the compilation process.
+You can chaned this by redefining CC and CXX variable in the main Makefile or
+calling make as
 
  make CC=icc
 
@@ -43,14 +57,13 @@ TRQS-$(TRQS_VERSION)-$(BACKEND_NAME).tgz will be created. It contains MatheLink
 executables, TRQS.m package files, this README file, some information about the
 backend in PDF format and a Mathematica notebook with some example.
 
-In order to use the package you need to copy TRQS.m file and TRQS_$(BACKEND_NAME)
-to some directory where Mathematica can find them.
+In order to use the package you need to copy TRQS.m file and
+TRQS_$(BACKEND_NAME) to some directory where Mathematica can find them.
 
 Note the in the case of Quantis backend there are two variants of the package,
 one of which has -NoHw prefix denotain that it is based on the fake Quantis
 device provided by libQuantis-NoHw library. This backen does not provide a true
 random numbers and it is provided for the testing purpose only.
-
 
 == Quantis backend - detailed information ==
 
@@ -77,6 +90,14 @@ to /etc/ld.so.conf).
 The package is installed by copying TRQS.m files and TRQS_Quantis/ directory to 
 $HOME/.Mathematica/Applications directory.
 
+=== Known problems ===
+
+==== LibQuantis 2.9 and Ubuntu 12.04 ====
+
+LibQuantis in version 2.9 or earlier does not work on Ubuntu 12.04 or any Linux 
+distribution with libusb-1.0.9 or higher. See quantis_libusb_problem.txt file 
+in TRQS_Quantis directory for the possible solution.
+
 == QRNG backend - detailed information ==
 
 === Compilation ===
@@ -88,13 +109,13 @@ not the case.
 
 === Installation ===
 
-In order to run TRQS using QRNG backend it is neccessary to register on the
+In order to run TRQS using QRNG backend it is necessary to register on the
 http://qrng.physik.hu-berlin.de/ web page. User name and password given during
 the registration are required to obtain random data from the server.
 Registration is also required to download files from the web site.
 
-As QRNG backend is based on the on-line server, it is neccessary, in order to
-use it, to have a working Internet connection. The on-line service runs on port
+As QRNG backend is based on the on-line server, it is necessary, in order to use
+it, to have a working Internet connection. The on-line service runs on port
 4499, so be sure that your firewall allows to use this port for the outgoing
 connections.
 
@@ -103,7 +124,8 @@ $HOME/.Mathematica/Applications director.
 
 == Examples ==
 
-Notebook TRQSTest.nb contains some examples.
+Mathematica notebooks TRQSTest_QRNG.nb and TRQSTest_Quantis.nb contains some 
+examples. Note that they include some functions specific for the backends.
 
 == Contact ==
 

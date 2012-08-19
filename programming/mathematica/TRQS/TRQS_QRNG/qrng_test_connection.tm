@@ -11,12 +11,14 @@
 
 char* qrng_test_connection() {
 	int qrng_status;
+	char* qrng_error_string;
 
 	// try to connect
 	QRNG_PREPARE(qrng_status)
 
 	// retport the result	
-	return qrng_error_strings[qrng_status];
+	qrng_error_string = qrng_error_strings[qrng_status];
+	return qrng_error_string;
 }
 
 int main(int argc, char* argv[]) {

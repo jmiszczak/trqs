@@ -1,3 +1,7 @@
+* 0.2.2 (19/08/2012)
+	- Fixed problems with building tests
+	- Added description of libusb problem in Ubuntu 12.04
+
 * 0.2.1 (04/07/2012)
 	- Minor chnages in the main Makefile. 
 	- Documentation updated.
@@ -7,7 +11,7 @@
 	- Configuration functions for backends added.
 
 * 0.1.9 (04/05/2012)
-	 Connection checking improved for the QRNG backend.
+	- Connection checking improved for the QRNG backend.
 
 * 0.1.8 (02/05/2012)
 	- Method for sharing login data for the QRNG backend.

@@ -98,6 +98,7 @@ src-dist:
 		$(foreach dir,$(BACKEND_DIRS),$(wildcard $(dir)/*.tm)) \
 		$(foreach dir,$(BACKEND_DIRS),$(wildcard $(dir)/*.mk)) \
 		$(foreach dir,$(BACKEND_DIRS),$(wildcard $(dir)/*.pdf)) \
+		$(foreach dir,$(BACKEND_DIRS),$(wildcard $(dir)/*.txt)) \
 		Makefile $(foreach dir,$(BACKEND_DIRS),$(dir)/Makefile) \
 		TRQS.h TRQS.m.tpl TRQSTest_QRNG.nb TRQSTest_Quantis.nb README changelog.txt
 
@@ -110,7 +111,7 @@ clean:
 # back-end target definitions
 ################################################################################
 
-all: quantis-bin-dist quantis-nohw-bin-dist qrng-bin-dist
+all: quantis-bin-dist quantis-nohw-bin-dist qrng-bin-dist src-dist
 
 ################################################################################
 # Quantis

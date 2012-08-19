@@ -37,14 +37,14 @@ quantis_test:
 	$(CC) -pthread quantis_test.c -o $@ -I$(BACKEND_INCDIR) -I.. -I$(ML_INCDIR) -L$(BACKEND_LIBDIR) $(BACKEND_LIB)
 
 quantis-bin-dist: quantis_test $(BACKEND_BIN)
-	@echo '==>' Building binary distribution for $(BACKEND_DIR) '('linked against $(BACKEND_LIB)')'
+	@echo '==>' Building binary distribution for $(BACKEND_DIR) '('linked against $(BACKEND_LIB)$(VARIANT)')'
 	mkdir -p $(BACKEND_DIR)
 	cp $(BACKEND_BIN) $(BACKEND_DIR)
 	cat ../TRQS.m.tpl | sed s/TRQS_BACKEND_NAME/$(BACKEND_NAME)/g > ../TRQS.m
-	tar czvf ../TRQS-$(TRQSV)-$(ARCH)-Quantis$(VARIANT).tgz \
+	tar czf ../TRQS-$(TRQSV)-$(ARCH)-Quantis$(VARIANT).tgz \
         $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) quantis_test \
 		../TRQS.m ../TRQSTest_Quantis.nb \
-		../README quantis_installation.pdf
+		../README quantis_installation.pdf quantis_libusb_problem.txt
 	rm -Rf $(BACKEND_DIR)
 
 quantis-nohw_test:

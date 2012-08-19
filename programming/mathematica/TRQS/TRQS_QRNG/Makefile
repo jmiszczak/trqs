@@ -38,13 +38,14 @@ qrng_test:
 	@echo '==>' Building files \'$@\'
 	$(CC) $(@:%=%.c) -o $@ -I$(BACKEND_INCDIR) -I.. -I$(ML_INCDIR) -L$(BACKEND_LIBDIR) $(BACKEND_LIB)
 
-qrng-bin-dist: $(BACKEND_BIN)
-	@echo '==>' Building binary distribution for $(BACKEND_DIR)
+qrng-bin-dist: qrng_test $(BACKEND_BIN)
+	@echo '==>' Building binary distribution for $(BACKEND_DIR) '('linked against $(BACKEND_LIB)$(VARIANT)')'
 	mkdir -p $(BACKEND_DIR)
 	cp $(BACKEND_BIN) $(BACKEND_DIR)
 	cat ../TRQS.m.tpl | sed s/TRQS_BACKEND_NAME/$(BACKEND_NAME)/g > ../TRQS.m
 	tar czf ../TRQS-$(TRQSV)-$(ARCH)-QRNG.tgz \
-        $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) ../TRQS.m ../TRQSTest_QRNG.nb \
+        $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) qrng_test\
+		../TRQS.m ../TRQSTest_QRNG.nb \
         ../README libqrng_api_intro.pdf
 	rm -Rf $(BACKEND_DIR)
 

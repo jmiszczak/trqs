@@ -1,0 +1,47 @@
+The quantis library in version 2.9 or earlier is not compatible with the
+recent version of the libusb library (version 1.0.9 or higher). To be more
+specific, libQuantis 2.9 (package quantis-v11.12.13.zip) does not work with
+libusb-1.0.9 installed on Ubuntu 12.04. However, the quantis library works with
+libusb-1.0.8 installed on Ubuntu 11.10. 
+
+According to Quantis developers, the new version of the quantis library, fixing
+this problem, will be released in September 2012. Meanwhile, one can use a
+simple solution which allows running the package or any application using
+libQuantis. In order to do this one needs to execute the following 
+
+1) Download libusb in version 1.0.8 from
+
+  http://sourceforge.net/projects/libusb/files/libusb-1.0/libusb-1.0.8/libusb-1.0.8.tar.bz2
+
+2) Open the terminal emulator window and unpack the archive
+
+  tar xjf libusb-1.0.8.tar.bz2
+
+3) Go to the source directory
+
+  cd libusb-1.0.8/
+
+3) Configure the library with some custom installation prefix
+
+  ./configure --prefix=/usr/local/LibUSB
+  
+Note that it is also possible to use custom prefix in $HOME directory like
+
+  ./configure --prefix=~/Apps/LibUSB
+
+4) Build and install (as root) the library
+
+  sudo make install
+
+This will create lib and include sub-directories in /usr/local/LibUSB
+
+5) Instruct the loader to use the custom version of libusb by 
+modifying LD_LIBRARY_PATH environment variable
+
+  export LD_LIBRARY_PATH=/usr/local/LibUSB/lib
+
+6) Run Mathematica from the shell with the modified environment
+
+  mathematica
+
+7) The TRQS package should now use libusb located in /usr/local/LibUSB/lib
