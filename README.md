@@ -5,19 +5,19 @@ installation instructions.
 
 (c) 2011-2012 Jaroslaw Miszczak <miszczak(at)iitis.pl>
 
-* Introduction
-* Compilation
-* Installation
-* Quantis backend - detailed information
-** Compilation
-** Installation
-** Known problems
-*** LibQuantis 2.9 and Ubuntu 12.04
-* QRNG backend - detailed information
-** Compilation
-** Installation
-* Example
-* Contact
+- Introduction
+- Compilation
+- Installation
+- Quantis backend - detailed information
+  -- Compilation
+  -- Installation
+  -- Known problems
+-  QRNG backend - detailed information
+-- Compilation
+-- Installation
+- Publications
+- Examples
+- Contact
 
 # Introduction
 
@@ -127,14 +127,13 @@ $HOME/.Mathematica/Applications director.
 Mathematica notebooks TRQSTest_QRNG.nb and TRQSTest_Quantis.nb contains some 
 examples. Note that they include some functions specific for the backends.
 
-## Publication
+## Publications
 
 The package has been described in
 
   - J.A. Miszczak, *Generating and using truly random quantum states in Mathematica*, Comput. Phys. Commun., Vol. 183, No. 1 (2012), pp. 118-124. arXiv:<a href="http://arxiv.org/abs/1102.4598">1102.4598</a> DOI:<a href="http://doi.org/10.1016/j.cpc.2011.08.002">10.1016/j.cpc.2011.08.002</a> <a href="https://miszczak.eu/files/papers/miszczak12generating.pdf">[PDF]</a>
 
   - J.A. Miszczak, *Employing online quantum random number generators for generating truly random quantum states in Mathematica*, Comput. Phys. Commun., Vol. 184, No. 1 (2013), pp. 257–258. arXiv:<a href="http://arxiv.org/abs/1208.3970">1208.3970</a> DOI:<a href="http://doi.org/10.1016/j.cpc.2012.08.012">10.1016/j.cpc.2012.08.012</a> <a href="https://miszczak.eu/files/papers/miszczak13employing.pdf">[PDF]</a>
-
 
 
 ## Contact
