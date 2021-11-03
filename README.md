@@ -19,7 +19,7 @@ installation instructions.
 * Example
 * Contact
 
-== Introduction ==
+# Introduction
 
 TRQS is a Mathematica package, which allows to utilise quantum true random
 number generators. Currently, the package supports two sources of randomness:
@@ -27,7 +27,7 @@ Quantis RNG produced by ID Quantique S.A. and QRNG on-line service based on the
 generator developed by Nano-Optics group at the Department of Physics of
 Humboldt University and PicoQuant GmbH.
 
-== Compilation ==
+# Compilation
 
 The MathLink source files and build scripts require some editing prior to the
 compilation. The Makefile in the main directory contains variables required to
@@ -46,11 +46,11 @@ Please note, that gcc and g++ compilers are used during the compilation process.
 You can chaned this by redefining CC and CXX variable in the main Makefile or
 calling make as
 
- make CC=icc
+  make CC=icc
 
 in order to use a diffrent C compiler
 
-== Installation ==
+# Installation
 
 After compiling the source files, a file name
 TRQS-$(TRQS_VERSION)-$(BACKEND_NAME).tgz will be created. It contains MatheLink
@@ -65,9 +65,9 @@ one of which has -NoHw prefix denotain that it is based on the fake Quantis
 device provided by libQuantis-NoHw library. This backen does not provide a true
 random numbers and it is provided for the testing purpose only.
 
-== Quantis backend - detailed information ==
+## Quantis backend - details
 
-=== Compilation ===
+### Compilation
 
 For the purpose of compiling Mathlink sources it is assumed that the header
 files are installed in /usr/local/IDQ/Quantis/include and libraries in
@@ -81,7 +81,7 @@ It is also possible to run the TRQS package using this backend without a Quantis
 device. In order to do this compile the sources using quantis-nohw-bin-dist
 target.
 
-=== Installation ===
+### Installation
 
 In order to run TRQS using Quantis backend you must make sure that the dynamic
 loader knows where to search for libQuantis (e.g. add /usr/local/IDQ/Quantis/lib
@@ -90,24 +90,24 @@ to /etc/ld.so.conf).
 The package is installed by copying TRQS.m files and TRQS_Quantis/ directory to 
 $HOME/.Mathematica/Applications directory.
 
-=== Known problems ===
+### Known problems
 
-==== LibQuantis 2.9 and Ubuntu 12.04 ====
+#### LibQuantis 2.9 and Ubuntu 12.04
 
 LibQuantis in version 2.9 or earlier does not work on Ubuntu 12.04 or any Linux 
 distribution with libusb-1.0.9 or higher. See quantis_libusb_problem.txt file 
 in TRQS_Quantis directory for the possible solution.
 
-== QRNG backend - detailed information ==
+## QRNG backend - details
 
-=== Compilation ===
+### Compilation
 
 For the purpose of compiling Mathlink sources it is assumed that the header 
 files are installed in /usr/local/PicoQuant/QRNG/include and libraries in 
 /usr/local/PicoQuant/QRNG/lib. Modify QRNG_HOME in the Makefile if this is 
 not the case.
 
-=== Installation ===
+### Installation
 
 In order to run TRQS using QRNG backend it is necessary to register on the
 http://qrng.physik.hu-berlin.de/ web page. User name and password given during
@@ -122,12 +122,22 @@ connections.
 The package is installed by copying TRQS.m files and TRQS_QRNG/ directory to
 $HOME/.Mathematica/Applications director.
 
-== Examples ==
+## Examples
 
 Mathematica notebooks TRQSTest_QRNG.nb and TRQSTest_Quantis.nb contains some 
 examples. Note that they include some functions specific for the backends.
 
-== Contact ==
+## Publication
+
+The package has been described in
+
+  - J.A. Miszczak, *Generating and using truly random quantum states in Mathematica*, Comput. Phys. Commun., Vol. 183, No. 1 (2012), pp. 118-124. arXiv:<a href="http://arxiv.org/abs/1102.4598">1102.4598</a> DOI:<a href="http://doi.org/10.1016/j.cpc.2011.08.002">10.1016/j.cpc.2011.08.002</a> <a href="https://miszczak.eu/files/papers/miszczak12generating.pdf">[PDF]</a>
+
+  - J.A. Miszczak, *Employing online quantum random number generators for generating truly random quantum states in Mathematica*, Comput. Phys. Commun., Vol. 184, No. 1 (2013), pp. 257–258. arXiv:<a href="http://arxiv.org/abs/1208.3970">1208.3970</a> DOI:<a href="http://doi.org/10.1016/j.cpc.2012.08.012">10.1016/j.cpc.2012.08.012</a> <a href="https://miszczak.eu/files/papers/miszczak13employing.pdf">[PDF]</a>
+
+
+
+## Contact
 
 If you have any problems using TRQS package, please do not hesitate to write an
 email to miszczak (at) iitis.pl with TRQS in the subject line.
