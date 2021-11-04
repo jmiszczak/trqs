@@ -46,7 +46,7 @@ qrng-bin-dist: qrng_test $(BACKEND_BIN)
 	tar czf ../TRQS-$(TRQSV)-$(ARCH)-QRNG.tgz \
         $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) qrng_test\
 		../TRQS.m ../TRQSTest_QRNG.nb \
-        ../README libqrng_api_intro.pdf
+        ../README.md libqrng_api_intro.pdf
 	rm -Rf $(BACKEND_DIR)
 
 % : %.tm

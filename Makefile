@@ -44,9 +44,9 @@ export MPREP = $(ML_HOME)/mprep
 ################################################################################
 export ARCH := $(shell uname -m)
 ifeq ($(ARCH),x86_64)
-  ML_LIB = -lML64i3
+  ML_LIB = -lML64i4
 else
-  ML_LIB = -lML32i3 
+  ML_LIB = -lML32i4 
 endif
 
 export ML_LIBS = $(ML_LIB) -lm -lpthread -lstdc++ -lrt 
@@ -90,7 +90,7 @@ help:
 	@echo \ all - build all above targets
 	@echo \ clean - remove the files created during compilation
 	@echo
-	@echo You can find more information at http://www.iitis.pl/~miszczak/trqs
+	@echo You can find more information at http://miszczak.eu/trqs.html
 	@echo --------------------------------------------------------------------------------
 
 src-dist:
@@ -100,7 +100,7 @@ src-dist:
 		$(foreach dir,$(BACKEND_DIRS),$(wildcard $(dir)/*.pdf)) \
 		$(foreach dir,$(BACKEND_DIRS),$(wildcard $(dir)/*.txt)) \
 		Makefile $(foreach dir,$(BACKEND_DIRS),$(dir)/Makefile) \
-		TRQS.h TRQS.m.tpl TRQSTest_QRNG.nb TRQSTest_Quantis.nb README changelog.txt
+		TRQS.h TRQS.m.tpl TRQSTest_QRNG.nb TRQSTest_Quantis.nb README.md changelog.txt
 
 clean: 
 	$(MAKE) -C $(QUANTIS_BACKEND_DIR) quantis-clean 

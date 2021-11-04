@@ -44,7 +44,7 @@ quantis-bin-dist: quantis_test $(BACKEND_BIN)
 	tar czf ../TRQS-$(TRQSV)-$(ARCH)-Quantis$(VARIANT).tgz \
         $(addprefix $(BACKEND_DIR)/, $(BACKEND_BIN)) quantis_test \
 		../TRQS.m ../TRQSTest_Quantis.nb \
-		../README quantis_installation.pdf quantis_libusb_problem.txt
+		../README.md quantis_installation.pdf quantis_libusb_problem.txt
 	rm -Rf $(BACKEND_DIR)
 
 quantis-nohw_test:
