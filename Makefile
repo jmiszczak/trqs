@@ -49,7 +49,7 @@ else
   ML_LIB = -lML32i4 
 endif
 
-export ML_LIBS = $(ML_LIB) -lm -lpthread -lstdc++ -lrt 
+export ML_LIBS = $(ML_LIB) -lm -lpthread -lstdc++ -lrt -luuid 
 
 ################################################################################
 # available backends are in separate dirs
