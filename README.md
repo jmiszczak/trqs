@@ -140,3 +140,7 @@ The package has been described in
 
 If you have any problems using TRQS package, please do not hesitate to write an
 email to miszczak (at) iitis.pl with TRQS in the subject line.
+
+## Acknowledgements
+
+This project was supported by the Polish Ministry of Science and Higher Education under the grants number IP2010 052270 and IP2011 036371. 
